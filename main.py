@@ -10,8 +10,8 @@ from starlette.responses import RedirectResponse
 from starlette.exceptions import HTTPException
 from fastapi.encoders import jsonable_encoder
 from modulos.seguridad.r_authentication import SessionData, test_session
-from modulos.seguridad import initBDSeguridad, r_authentication, r_user, r_rol, r_catalogos, r_catgrupo
-from modulos.personal import r_areas, r_empleados, r_puestos, r_grupotag, r_lugar
+from modulos.seguridad import r_authentication, r_user
+from modulos.personal import r_usuario
 from modulos.shared_defs import getAnioFiscalActual, getAreaActual2, getEmpleadoId, getPermisos, getSettingsNombreEnvActivo, is_SuperUser
 from modulos import shared_routers
 
@@ -37,6 +37,8 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.include_router(r_authentication.router)
 app.include_router(r_user.router)
+app.include_router(r_usuario.router)
+
 
 
  

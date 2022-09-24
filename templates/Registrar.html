@@ -35,28 +35,47 @@
                 <img src="logourutatec.png" width="140" height="140">
             </div>
             <div class="hr-text" id="app">
-              <h2>Bienvenido a RUTATEC</h2>
+              <h2>Registrarte a RUTATEC</h2>
             </div>
               <div class="">
                 <center>
-                  <h5>visualiza tu ruta, visualiza tu destino</h5>
+                  <h3>Visualiza tu ruta, visualiza tu destino</h3>
                 </center>
               </div>
-            <div class="alert alert-warning alert-dismissible" role="alert">
-              Por favor, <a href="#" class="alert-link">capture los datos solicitados</a>
-              <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
-            </div>
             <div class="mb-3 form-group">
-              <label class="form-label">Cuenta</label>
+              <label class="form-label">Nombre</label>
               <div class="input-icon mb-3">
                 <span class="input-icon-addon">
-                  <i class="ti ti-mail"></i>
+                  <i class="ti ti-user"></i>
                 </span>
-                <input type="email" id="username" name="username" class="form-control" value=""  placeholder="Capture su cuenta" required/>
-                <div class="invalid-feedback">Ingresa un correo, ej: example@gmail.com</div>
+                <input type="text" id="name" name="name" class="form-control" value=""  placeholder="Capture su Nombre" required/>
+                <div class="invalid-feedback">Ingrese su Nombre</div>
               </div>   
             </div>
-            
+
+
+            <div class="mb-3 form-group">
+                <label class="form-label">Apellido</label>
+                <div class="input-icon mb-3">
+                  <span class="input-icon-addon">
+                    <i class="ti ti-user"></i>
+                  </span>
+                  <input type="text" id="Apellido" name="Apellido" class="form-control" value=""  placeholder="Capture su Apellido" required/>
+                  <div class="invalid-feedback">Ingrese su Apellido</div>
+                </div>   
+              </div>
+
+              <div class="mb-3 form-group">
+                <label class="form-label">Cuenta</label>
+                <div class="input-icon mb-3">
+                  <span class="input-icon-addon">
+                    <i class="ti ti-mail"></i>
+                  </span>
+                  <input type="email" id="username" name="username" class="form-control" value=""  placeholder="Capture su cuenta" required/>
+                  <div class="invalid-feedback">Ingresa un correo, ej: example@gmail.com</div>
+                </div>   
+              </div>
+              
             <div class="mb-3 form-group">
               <label class="form-label">Password</label>
               <div class="row">
@@ -79,22 +98,9 @@
                 </div>
               </div>              
             </div>
-
-            <div class="mb-2">
-              <span class="form-label-description">
-                <a href="/forgot-password">Olvidé mi contraseña...</a>
-              </span>
-            <!--              
-              <label class="form-check">
-                <input type="checkbox" class="form-check-input"/>
-                <span class="form-check-label">Remember me on this device</span>
-              </label>
- -->
-            </div>
             <div class="form-footer">
               <div id="smsInvali"></div>
-              <button type="submit" id="btnAcceder" class="btn btn-success w-100 mb-2">Acceder al sistema</button>
-              <button type="button" id="btnAddCuenta" class="btn btn-light w-100">Crear cuenta</button>
+              <button type="submit" id="btnAcceder" class="btn btn-success w-100 mb-2">Registrate</button>
             </div>
           </div>
         </form>
