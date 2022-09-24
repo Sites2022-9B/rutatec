@@ -1,0 +1,199 @@
+<!--login.html-->
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta2
+* @link https://tabler.io
+* Copyright 2018-2021 The Tabler Authors
+* Copyright 2018-2021 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title></title>
+    <!-- CSS files -->
+    <link href="/dist/css/tabler.min.css" rel="stylesheet"/>
+    <link href="/dist/iconfont/tabler-icons.min.css" rel="stylesheet" >
+    <!-- <link href="/dist/libs/bootstrap-table/all.css" rel="stylesheet" /> -->
+
+    <style>
+      #empresa * { color: darkgreen; }
+      #app * { color: darkcyan; }
+    </style>
+  </head>
+  <body class="antialiased border-top-wide border-primary d-flex flex-column">
+    <div class="page page-center">
+      <div class="container-tight py-4">
+        
+        <form id="main-form" name="main-form" class="bg-white shadow p-3 rounded-3 needs-validation" autocomplete="off" novalidate>
+          <div class="card-body">
+            <div class="text-center mb-2" id="empresa">
+                <!-- <img src="/static/logoutselva.png" width="140" height="42" alt="logoutselva" class=""> -->
+                <img src="logourutatec.png" width="140" height="140">
+            </div>
+            <div class="hr-text" id="app">
+              <h2>Bienvenido a RUTATEC</h2>
+            </div>
+              <div class="">
+                <center>
+                  <h5>visualiza tu ruta, visualiza tu destino</h5>
+                </center>
+              </div>
+            <div class="alert alert-warning alert-dismissible" role="alert">
+              Por favor, <a href="#" class="alert-link">capture los datos solicitados</a>
+              <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
+            </div>
+            <div class="mb-3 form-group">
+              <label class="form-label">Cuenta</label>
+              <div class="input-icon mb-3">
+                <span class="input-icon-addon">
+                  <i class="ti ti-mail"></i>
+                </span>
+                <input type="email" id="username" name="username" class="form-control" value=""  placeholder="Capture su cuenta" required/>
+                <div class="invalid-feedback">Ingresa un correo, ej: example@gmail.com</div>
+              </div>   
+            </div>
+            
+            <div class="mb-3 form-group">
+              <label class="form-label">Password</label>
+              <div class="row">
+                <div class="col">
+                  <div class="input-icon">
+                    <span class="input-icon-addon">
+                      <i class="ti ti-lock"></i>
+                    </span>
+                    <input type="password" id="password" name="password" value="" class="form-control" minlength="3"  placeholder="Capture su Password" required/>
+                    <div class="invalid-feedback">Se deben de introducir mínimo 3 caracteres</div>
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <span class="input-group-text btn-show-pass bg-white">
+                    <a style="text-decoration: none;" onclick="passwordShowHidde('password')" href="#" class="link-secondary"
+                      title="Show password" data-bs-toggle="tooltip">
+                      <i id="password-eye" class="ti ti-eye"></i>
+                    </a>
+                  </span>
+                </div>
+              </div>              
+            </div>
+
+            <div class="mb-2">
+              <span class="form-label-description">
+                <a href="/forgot-password">Olvidé mi contraseña...</a>
+              </span>
+            <!--              
+              <label class="form-check">
+                <input type="checkbox" class="form-check-input"/>
+                <span class="form-check-label">Remember me on this device</span>
+              </label>
+ -->
+            </div>
+            <div class="form-footer">
+              <div id="smsInvali"></div>
+              <button type="submit" id="btnAcceder" class="btn btn-success w-100 mb-2">Acceder al sistema</button>
+              <button type="button" id="btnAddCuenta" class="btn btn-light w-100">Crear cuenta</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Libs JS -->
+    <!-- <script src="/dist/libs/jquery/jquery.min.js"></script> -->
+    <script src="/dist/libs/bootstrap/jquery.min.js"></script>
+    <script src="/dist/libs/bootstrap/popper.min.js"></script>
+    <script src="/dist/libs/bootstrap/bootstrap.min.js"></script>
+    <!-- Tabler Core -->
+    <script src="/dist/js/tabler.min.js"></script>
+    <script src="/dist/libs/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="/dist/js/scripts.js"></script>
+    <script src="/dist/js/login.js"></script>
+    <script src="/dist/js/indexbasesidebar.js"></script>
+    <script src="/dist/libs/serializejson/jquery.serializejson.js"></script>
+
+    <script>
+      $(document).ready(function(){
+        // Test de apertura de popups y mensaje para activar popups
+        resp = testPopupsAlertaNavegacion();
+      });
+
+      $("#btnAddCuenta").click(function (e) {
+        // limpiar los datos...
+        console.log("crear nuevo usuario");
+      });
+
+      $("#main-form").submit(function (e) {
+          // preventing from page reload and default actions
+          e.preventDefault();
+          $("#main-form").addClass("was-validated");
+          formDado = "main-form";
+          if (!$(this)[0].checkValidity()){
+              $('#' + formDado + ' .invalid-feedback').each(function () {
+                  if ($(this)[0].offsetParent){
+                      $(this).parent().find("select, input, textarea").first().focus();
+                      return false; // exit each
+                  }
+              });
+              return;
+          }
+          serializedData = JSON.stringify($(this).serializeJSON());
+          Swal.fire({
+            title: 'Espere un momento por favor...',
+            showCancelButton: false,
+            confirmButtonText: 'Cerrar',
+            didOpen: (resp) => {
+              Swal.showLoading();
+              $.ajax({
+                type: 'POST',
+                url: "/api/login?ret={{ret}}",
+                contentType:'application/json',
+                data: serializedData,
+                success: function (data, textStatus, jqXHR) {
+                  // limpiar los datos capturados
+                  $("#username").val("");
+                  $("#password").val("");
+                  $("#main-form").trigger('reset');
+                  $("#main-form").removeClass('was-validated');
+                  usernameArr = data.user.username.split('@');
+                  Swal.update({ icon:'success', 
+                                title : "Bienvenido..."+"<h2><center>" +  usernameArr[0] + "@" + usernameArr[1] + "</center></h2>",
+                                confirmButtonText: 'Continuar ahora...',
+                                allowEscapeKey: true, allowEnterKey: true,
+                                allowOutsideClick: true,
+                              });
+                  Swal.hideLoading();
+                  $("#btnAcceder").prop("disabled", "disabled");
+                  setTimeout(() => {
+                    // redireccionar a la página solicitada
+                    location.replace("{{ret}}");
+                  }, 1300);
+                }, error: function(jqXHR, textStatus, error) {
+                  // console.log("error"); console.log(error);
+                  // console.log("textStatus"); console.log(textStatus);
+                  // console.log(jqXHR);
+                  Swal.hideLoading();
+                  if ( jqXHR.status == 500 && textStatus == "error" ){
+                    Swal.update({icon:'error', title : "Falló la conexión con el servidor..."});
+                    Swal.showValidationMessage( `Reintente mas tarde...` );
+                  } else{
+                    // Mostrar el mensaje de error personalizado del servidor
+                    if (jqXHR.responseJSON.detail == "Invalid Credentials" ){
+                      Swal.update({icon:'error', title : "Datos incorrectos..."});
+                    } else{
+                      Swal.update({icon:'error', title : ""});
+                    }
+                    Swal.showValidationMessage( `Error: ${jqXHR.responseJSON.detail}` );
+                    // limpiar los datos capturados 
+                    $("#btnCancelar").click();
+                  }
+                }
+              });
+            }
+          });
+        });
+    </script>
+
+  </body>
+</html>

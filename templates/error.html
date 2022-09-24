@@ -1,0 +1,67 @@
+<!--error.html-->
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta2
+* @link https://tabler.io
+* Copyright 2018-2021 The Tabler Authors
+* Copyright 2018-2021 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>UTSelva - Sistema de Información Institucional Administrativa</title>
+    <!-- CSS files -->
+    <link href="/dist/css/tabler.min.css" rel="stylesheet" />
+    <!-- <link href="/dist/css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="/dist/css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="/dist/css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="/dist/css/demo.min.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="/dist/iconfont/tabler-icons.min.css">
+</head>
+
+<body class="antialiased border-top-wide border-primary d-flex flex-column">
+    <div class="page page-center">
+        <div class="container-tight py-4">
+            <div class="text-center mb-4">
+                <a href=".">
+                    <img src="/static/logoutselva.png" width="140" height="42" alt="logoutselva" class="">
+                </a>
+            </div>
+            <div class="empty bg-white shadow-sm">
+                <div class="empty-img"><img src="/static/error.png" height="128"  alt="">
+                </div>
+                {% if detail|length >0 %}
+                <p class="empty-title">Se presentó el error siguiente</p>
+                <p class="empty-subtitle text-muted">
+                    {{detail}}
+                </p>
+                {% else %}
+                <p class="empty-title">Recurso no disponible</p>
+                <p class="empty-subtitle text-muted">
+                    El recurso solicitado no existe o no tiene privilegios de acceso
+                </p>
+                {% endif %}
+            
+                <div class="empty-action">
+                    <a href="/main" class="btn btn-primary">
+                        <i class="ti ti-arrow-left"></i>
+                      Regresar
+                    </a>
+                  </div>
+              </div>
+        </div>
+    </div>
+    <!-- Libs JS -->
+    <script src="/dist/libs/jquery/jquery.min.js"></script>
+    <!-- Tabler Core -->
+    <script src="/dist/js/tabler.min.js"></script>
+
+
+</body>
+
+</html>
