@@ -11,23 +11,14 @@ from starlette.exceptions import HTTPException
 from fastapi.encoders import jsonable_encoder
 from modulos.seguridad.r_authentication import SessionData, test_session
 from modulos.seguridad import initBDSeguridad, r_authentication, r_user, r_rol, r_catalogos, r_catgrupo
-from modulos.gestion import r_procesos
-from modulos.proc_pide import r_pide, r_planes
-from modulos.proc_poainst import r_poainst, r_poainst_regautorizado
-from modulos.finanzas_ppto import r_ctabancfte, r_pptoaportipo, r_cuenta_bancaria, r_capypart, r_banco
-from modulos.proc_proy import r_pptostatus, r_proytipo, r_proyectos, r_tipoproc
 from modulos.personal import r_areas, r_empleados, r_puestos, r_grupotag, r_lugar
-from modulos.proc_comision import r_comedo, r_comtipo, r_viaticos, r_marcavehiculo, r_vehiculo, r_comisiones
-from modulos.proc_req import r_requni, r_articulos, r_requisiciones, r_proveedor, r_tramite
-from modulos.reportes import r_reportes, r_repmembretegral
-from modulos.cedulas import r_cedulas
 from modulos.shared_defs import getAnioFiscalActual, getAreaActual2, getEmpleadoId, getPermisos, getSettingsNombreEnvActivo, is_SuperUser
 from modulos import shared_routers
-from modulos.proc_pagos import r_pagos
+
 
 # Cargar en memoria todos los modelos para su creación automática
 from modulos.seguridad.models import *
-from modulos.gestion.models import *
+
 
 # Crear las tablas en BD según los modelos previamente cargados
 #Base.metadata.create_all(engine)
@@ -46,44 +37,6 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.include_router(r_authentication.router)
 app.include_router(r_user.router)
-app.include_router(r_catalogos.router)
-app.include_router(r_procesos.router)
-app.include_router(r_pide.router)
-app.include_router(r_poainst.router)
-app.include_router(r_poainst_regautorizado.router)
-app.include_router(r_areas.router)
-app.include_router(r_empleados.router)
-app.include_router(r_puestos.router)
-app.include_router(r_rol.router)
-app.include_router(r_planes.router)
-app.include_router(r_ctabancfte.router)
-app.include_router(r_banco.router)
-app.include_router(r_cuenta_bancaria.router)
-app.include_router(shared_routers.router)
-app.include_router(r_proytipo.router)
-app.include_router(r_tipoproc.router)
-app.include_router(r_comedo.router)
-app.include_router(r_viaticos.router)
-app.include_router(r_pptostatus.router)
-app.include_router(r_comtipo.router)
-app.include_router(r_requni.router)
-app.include_router(r_pptoaportipo.router)
-app.include_router(r_marcavehiculo.router)
-app.include_router(r_vehiculo.router)
-app.include_router(r_reportes.router)
-app.include_router(r_capypart.router)
-app.include_router(r_repmembretegral.router)
-app.include_router(r_articulos.router)
-app.include_router(r_requisiciones.router)
-app.include_router(r_proveedor.router)
-app.include_router(r_tramite.router)
-app.include_router(r_grupotag.router)
-app.include_router(r_proyectos.router)
-app.include_router(r_catgrupo.router)
-app.include_router(r_comisiones.router)
-app.include_router(r_cedulas.router)
-app.include_router(r_lugar.router)
-app.include_router(r_pagos.router)
 
 
  
