@@ -11,13 +11,11 @@ from sqlalchemy.orm.session import Session
 from sqlalchemy.orm.util import aliased
 from sqlalchemy.sql.elements import and_, between, or_
 from sqlalchemy.sql.functions import coalesce
-from modulos.gestion.models import Procact, Procactexec, Procexec
 from modulos.personal.models import *
 from modulos.seguridad.models import *
 # from modulos.shared_models import Settings
 # Importar losschemas del PIDE a pesar de que no se utilicen de forma directa, sino mas bien de forma indirecta por
 # la importación desde archivos de excel
-from modulos.proc_pide.schemas import PidemetaBase, PideresponsablesBase, PideMetacantxAnio,PidemetaActBase
 from db import database
 from routers.plantillas import templates
 from datetime import date, datetime
@@ -232,44 +230,6 @@ def addObservInProcexec(procexec_id, procactexec_id, user_id, db, observaciones)
     objPe.addtrans(db)
     return jsonable_encoder(objPe), listObserv
 
-
-def getConfigAct(reftramite: str, objPax:Procactexec, yaPuedeTerminarLaAct:bool=False, db: Session = Depends(database.get_db)):
-    """Dependiendo del status de la actividad en ejecución, se indica al cliente
-    cuales son las operaciones disponibles que tiene """
-    objAct = db.query(Procact.actividad,Procact.canback).filter(Procact.id == objPax.procact_id ).first()
-    operDisp = [] # Por default, no tiene permitido ninguna operación
-    esActEditable = False # Por default, no se permite realizar actualizaciones
-    # if ( not objPax.isactactual): 
-    #     esActEditable = False
-    if ( objPax.status == "1" ):
-        operDisp = ["a"] # atender
-    elif ( objPax.status == "2" ):
-        if ( yaPuedeTerminarLaAct ):
-            operDisp = ["t", "g"] # terminar y guardar
-        else:
-            operDisp = ["g"] # solo guardar
-        esActEditable = True
-    
-    tipoProcact = db.query(Procact.tipo).filter(Procact.id == Procactexec.procact_id, Procactexec.id == objPax.id ).first()
-    # configAct["tipoProcact"] = tipoProcact.tipo
-
-    regresarActUsuario = ''
-    id_actividad_anterior = ''
-    if (tipoProcact.tipo != 1):
-        regresarActUsuario = db.query(Procactexec.procexec_id).filter(Procactexec.id == objPax.id).first()
-        # print('procexec actual pue')
-        # print(regresarActUsuario.procexec_id)
-        actividad_anterior = db.query(Procactexec.id, Procactexec.procactsec_id, Procactexec.user_id).filter(Procactexec.procexec_id == regresarActUsuario.procexec_id, Procactexec.isactactual == False).order_by(Procactexec.fechaatendida.desc()).first()
-        regresarActUsuario = f'{actividad_anterior.procactsec_id}_{actividad_anterior.user_id}'
-        id_actividad_anterior = actividad_anterior.id
-        # print("usuario a quien voy a regresar")
-        # print(regresarActUsuario)
-        # print("act_id")
-        # print(actividad_anterior.id)
-    configAct = {"showbtns": operDisp, "isEditable" : esActEditable, "reftramite": reftramite
-                , "statusact": objPax.status, "statusdocto": objPax.statusdocto, "actactual": objAct.actividad, "tipoProcact": tipoProcact.tipo
-                , "regresarAct": regresarActUsuario, "procactexect_anterior_id": id_actividad_anterior,"isBack":objAct.canback}
-    return configAct
 
 
 def raiseExceptionDataErr( msgError ):

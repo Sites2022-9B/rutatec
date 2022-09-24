@@ -3,9 +3,6 @@ from db import database
 from typing import Tuple
 from fastapi import APIRouter, Request, Depends
 from modulos.personal.models import GrupoTag
-from modulos.proc_pide.models import PlanProg
-from modulos.proc_req.models import Requni, Tramite
-from modulos.proc_comision.models import Comedo, ComedommunicipioGetVw
 from modulos.seguridad.models import *
 
 from modulos.seguridad.r_authentication import SessionData, validarSessionforApis, test_session

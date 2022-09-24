@@ -8,7 +8,6 @@ from sqlalchemy import false, true
 from sqlalchemy.orm.util import aliased
 from sqlalchemy.sql.elements import or_
 from sqlalchemy.sql.functions import coalesce
-from modulos.proc_comision.models import Com
 from modulos.seguridad.r_authentication import SessionData, validarSessionforApis, test_session 
 from db import database
 from modulos.shared_defs import accessPageValidate, getEmpleadoId, getSettingsName, isDateBetween, isDateBetweenTags, isDateExtremeTags, isPeriodBetween, prepParam, prepParamBetween, raiseExceptionDataErr, raiseExceptionNoAuth, hasPermisos, raiseExceptionSinPrivilegios, savelog
