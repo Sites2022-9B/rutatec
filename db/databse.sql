@@ -1,3 +1,10 @@
+CREATE TABLE IF NOT EXISTS controlversionbd(
+	id SERIAL NOT NULL, 
+	archivo_tecnico VARCHAR (100) NOT NULL, 
+	fechaejecucion timestamp NOT NULL, 
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE IF NOT EXISTS pages (
 	id SERIAL NOT NULL,
 	nombre VARCHAR(50),
