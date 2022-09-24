@@ -1,0 +1,3 @@
+instalar librerias de requiremenst.txt
+$ pip install -r requirements.txt
+
