@@ -26,9 +26,9 @@ from modulos.seguridad.models import *
 # Ejecutar los archivos de scritps de sql de cambios sobre estructuras y datos de la base de datos
 if not createLastChangesInDB():
     print('Se presentaron errores de conexión con el servidor de base de datos y con los scripts de actualizaciones')
-else:
+#else:
     # Inicializar estructuras y datos del modulo de seguridad
-    initBDSeguridad.initBDdatos()
+ #   initBDSeguridad.initBDdatos()
 
 app = FastAPI( title="SisutsWeb")
 

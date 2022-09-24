@@ -10,7 +10,6 @@ from modulos.shared_defs import getAnioFiscalList, getFilePlantilla, getSettings
 from fastapi.responses import FileResponse
 # import xlsxwriter
 import pandas as pd
-import xlsxwriter
 
 router = APIRouter( tags=['Routers compartidos'] )
 

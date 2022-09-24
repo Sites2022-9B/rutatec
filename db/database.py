@@ -16,7 +16,7 @@ from db.base_class import Base
 # imported by Alembic
 #from modulos.seguridad.models import User, Rol, RolUser  # noqa
 
-SQLALCHEMY_DATABASE_URL = 'postgresql://sisuts:sisuts@localhost:5432/sisuts'
+SQLALCHEMY_DATABASE_URL = 'postgresql://rutatec:rutatec@localhost:5432/rutatec'
 Base = declarative_base()
 engine = create_engine(SQLALCHEMY_DATABASE_URL, pool_pre_ping=True, echo = False)
 SessionLocal = sessionmaker( bind=engine, autocommit=False, autoflush=False)
@@ -40,7 +40,7 @@ def createLastChangesInDB():
     wd = f"{wd}{os.sep}db"
     with os.scandir(wd) as ficheros:
         archsConCambiosALaBD = [fichero.name for fichero in ficheros if fichero.is_file() and \
-            fichero.name.startswith('sisuts_db_') and fichero.name.endswith('.sql')  ]
+            fichero.name.startswith('rutatecdb_') and fichero.name.endswith('.sql')  ]
     #print (archsConCambiosALaBD)
     if len(archsConCambiosALaBD) == 0:
         print ( __name__ + 'Error no se encontró ningun archivo de creación de la BD')
