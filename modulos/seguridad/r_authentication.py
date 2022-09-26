@@ -217,8 +217,8 @@ async def authenticate_User(userDado : Login, response: Response, ret: str = "/"
     #    formDado = await request.form()
     #    userDado = Login(**formDado)
     #    #print(userDado)
-    userinDB = db.query(User).filter( User.email == userDado.username ).first()
-    if (userinDB != None and userDado.username == userinDB.email and userinDB.is_active == True and Hash.verify(userinDB.password, userDado.password) ):
+    userinDB = db.query(User).filter( User.correo == userDado.username ).first()
+    if (userinDB != None and userDado.username == userinDB.correo  and Hash.verify(userinDB.contra, userDado.password) ):
         test_user = SessionData(username=userDado.username, id=userinDB.id)
         
         await test_session.start_and_set_session(test_user, response)

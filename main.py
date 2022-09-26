@@ -10,7 +10,7 @@ from starlette.responses import RedirectResponse
 from starlette.exceptions import HTTPException
 from fastapi.encoders import jsonable_encoder
 from modulos.seguridad.r_authentication import SessionData, test_session
-from modulos.seguridad import r_authentication, r_user
+from modulos.seguridad import r_authentication, r_user, initBDSeguridad
 from modulos.personal import r_usuario
 from modulos.shared_defs import getAnioFiscalActual, getAreaActual2, getEmpleadoId, getPermisos, getSettingsNombreEnvActivo, is_SuperUser
 from modulos import shared_routers
@@ -26,11 +26,11 @@ from modulos.seguridad.models import *
 # Ejecutar los archivos de scritps de sql de cambios sobre estructuras y datos de la base de datos
 if not createLastChangesInDB():
     print('Se presentaron errores de conexión con el servidor de base de datos y con los scripts de actualizaciones')
-#else:
+else:
     # Inicializar estructuras y datos del modulo de seguridad
- #   initBDSeguridad.initBDdatos()
+   initBDSeguridad.initBDdatos()
 
-app = FastAPI( title="SisutsWeb")
+app = FastAPI( title="Rutatec")
 
 app.mount("/dist", StaticFiles(directory="dist"), name="dist")
 app.mount("/static", StaticFiles(directory="static"), name="static")

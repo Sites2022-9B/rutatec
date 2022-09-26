@@ -3,15 +3,15 @@ from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 from db.database import get_db
 from typing import List, Tuple
-from modulos.seguridad.models import *
+from modulos.seguridad.models import User
 from .sec.sec_hashing import Hash
 
 from typing import Optional
 from pydantic import BaseModel, EmailStr
 
 #Inicializar la cuenta de usuario inicial
-FIRST_SUPERUSER : str = "admin@gmail.com"
-FIRST_SUPERUSER_PASSWORD : str = "123"
+FIRST_SUPERUSER : str = "pablofabianruizconstantino@gmail.com"
+FIRST_SUPERUSER_PASSWORD : str = "1234"
 userPredet : User = User()
 
 def initBDdatos():
@@ -21,9 +21,11 @@ def initBDdatos():
         db : Session = next( get_db() )
         # Encriptar el pwd de todas las cuentas de usuario que no lo estén
         queryUsers = db.query(User).filter(User.isEncrypted == False)
+        print(queryUsers)
         listUsers : List[User] = queryUsers.all()
+        print("list user",listUsers)
         for user in listUsers:
-            user.password = Hash.bcrypt(user.password)
+            user.contra = Hash.bcrypt(user.contra)
             user.isEncrypted = True
             user.update(db)
         #print ( jsonable_encoder(user) )

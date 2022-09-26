@@ -25,8 +25,10 @@ CREATE TABLE IF NOT EXISTS pages (
 CREATE TABLE IF NOT EXISTS usuario (
 	id SERIAL NOT NULL,
 	nombre VARCHAR (50),
+	Apellidos VARCHAR (50),
 	correo VARCHAR (50),
-	contra VARCHAR (30),
+	contra VARCHAR (300),
+	"isEncrypted"	BOOLEAN,
 	PRIMARY KEY (id)
 );
 
@@ -92,3 +94,9 @@ CREATE TABLE IF NOT EXISTS terminales (
 	FOREIGN KEY (munic_id) REFERENCES municipio (id)
     ON UPDATE CASCADE ON DELETE RESTRICT
 );
+
+insert into "usuario" values (1,'Pablo','Ruiz', 'pablofabianruizconstantino@gmail.com', '1234',false);
+--Usuarios de Unidades Responsables
+insert into "usuario" values (2,'Henry','Lopez', 'henry@gmail.com', '1234',false);
+insert into "usuario" values (3,'Eduardo','Gutierrez', 'quique@gmail.com', '1234',false);
+SELECT setval ('usuario_id_seq', 3, true);
