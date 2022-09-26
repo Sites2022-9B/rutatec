@@ -53,21 +53,8 @@ async def looking_Main(request: Request, ret: str = "/main"):
 
 @app.get("/main")
 async def show_Main_Index(request:Request, session: Tuple[SessionData, str] = Depends(test_session), ret: str = "/main", db: Session = Depends(database.get_db)):
-    if session is None:
-        return RedirectResponse("/login?ret=" +  ret)
-    user = is_SuperUser(session, db)
-    permisos = getPermisos(user, session, db)
-    # catgrupo = db.query(Catgrupo.id, Catgrupo.grupo, Catgrupo.posicion).all()
-    catgrupo = db.query(Catgrupo).all()
-    # Enviar el área al que pertenece el usuario, y el año fiscal anual
-    emp_id = getEmpleadoId(user.id, db)
-    area_emp = None
-    if emp_id != None:
-        area_emp = getAreaActual2(emp_id, db)
-    aniofiscalActual = getAnioFiscalActual()
-    return templates.TemplateResponse( name="index.html", context={ "request": request, "user": session[0], "full_name": user[2],
-        "is_superuser": user[1], "permisos":permisos, "ret":ret, "envname": getSettingsNombreEnvActivo(db)
-        , "emp_id":emp_id, "area":area_emp, "catgrupo":jsonable_encoder(catgrupo), "aniofiscal": aniofiscalActual })
+
+    return templates.TemplateResponse( name="index.html", context={ "request": request})
 
 @app.get("/err")
 @app.exception_handler(404)
