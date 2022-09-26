@@ -131,7 +131,6 @@ class UserEmpleado(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("user.id"))
-    users = relationship("User")
     empleado_id = Column(Integer, ForeignKey("empleados.id"))
     employers = relationship("Empleado")
 
