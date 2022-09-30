@@ -53,7 +53,8 @@ async def looking_Main(request: Request, ret: str = "/main"):
 
 @app.get("/main")
 async def show_Main_Index(request:Request, session: Tuple[SessionData, str] = Depends(test_session), ret: str = "/main", db: Session = Depends(database.get_db)):
-
+    if session is None:
+        return RedirectResponse("/login?ret=" + ret)
     return templates.TemplateResponse( name="index.html", context={ "request": request})
 
 @app.get("/err")

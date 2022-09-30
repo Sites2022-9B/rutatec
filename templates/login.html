@@ -13,7 +13,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title></title>
+    <title>RUTA-TEC Visualiza tu ruta, visualiza tu destino</title>
     <!-- CSS files -->
     <link href="/dist/css/tabler.min.css" rel="stylesheet"/>
     <link href="/dist/iconfont/tabler-icons.min.css" rel="stylesheet" >
@@ -84,6 +84,7 @@
               <span class="form-label-description">
                 <a href="/forgot-password">Olvidé mi contraseña...</a>
               </span>
+            </div>
             <!--              
               <label class="form-check">
                 <input type="checkbox" class="form-check-input"/>
@@ -94,7 +95,7 @@
             <div class="form-footer">
               <div id="smsInvali"></div>
               <button type="submit" id="btnAcceder" class="btn btn-success w-100 mb-2">Acceder al sistema</button>
-              <button type="button" id="btnAddCuenta" class="btn btn-light w-100">Crear cuenta</button>
+              <button type="button" id="btnregistrar" class="btn btn-light w-100">Crear cuenta</button>
             </div>
           </div>
         </form>
@@ -119,8 +120,9 @@
         resp = testPopupsAlertaNavegacion();
       });
 
-      $("#btnAddCuenta").click(function (e) {
+      $("#btnregistrar").click(function (e) {
         // limpiar los datos...
+        window.location.replace('/registrar')
         console.log("crear nuevo usuario");
       });
 

@@ -160,3 +160,24 @@ class CatAdd(BaseModel):
             observa += f"Posicion requerido, "
 
         return validado, observa
+
+class Addusuario(BaseModel):
+    nombre: str
+    apellidos: str
+    correo: str
+    contra: str
+
+    def isValid(self):
+        validado = True
+        observa = ""
+        if self.nombre == "":
+            validado = False
+            observa += f"Nombre requerido, "
+        if self.apellidos == "":
+            validado = False
+            observa += f"apellidos requerido, "
+        if self.contra == "":
+            validado = False
+            observa += f"Contraseña requerida, "
+        
+        return validado, observa
