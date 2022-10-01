@@ -1,4 +1,5 @@
 from typing import Tuple
+from xml.etree.ElementInclude import include
 from db.database import createLastChangesInDB
 from sqlalchemy.orm import Session
 from db import database
@@ -11,7 +12,7 @@ from starlette.exceptions import HTTPException
 from fastapi.encoders import jsonable_encoder
 from modulos.seguridad.r_authentication import SessionData, test_session
 from modulos.seguridad import r_authentication, r_user, initBDSeguridad
-from modulos.personal import r_usuario
+from modulos.personal import r_usuario, r_index
 from modulos.shared_defs import getAnioFiscalActual, getAreaActual2, getEmpleadoId, getPermisos, getSettingsNombreEnvActivo, is_SuperUser
 from modulos import shared_routers
 
@@ -38,6 +39,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 app.include_router(r_authentication.router)
 app.include_router(r_user.router)
 app.include_router(r_usuario.router)
+app.include_router(r_index.router)
 
 
 
@@ -46,7 +48,10 @@ app.include_router(r_usuario.router)
 def logoutselva():
     return RedirectResponse(url='/static/sites.png')
 
-
+@app.get('/perfil.png', include_in_schema=False)
+def perfil():
+    return RedirectResponse(url='/static/perfil.png')
+    
 @app.get("/")
 async def looking_Main(request: Request, ret: str = "/main"):
     return RedirectResponse('/main?ret='+ ret)
@@ -67,11 +72,9 @@ def page_not_found(request:Request, detail :str = "" ):
 async def show_about_us(request:Request, session: Tuple[SessionData, str] = Depends(test_session),ret: str = "/about_us", db: Session = Depends(database.get_db)):
     if session is None:
         return RedirectResponse("/login?ret=" +  ret)
-    user = is_SuperUser(session,db)
-    permisos = getPermisos(user, session, db)
     return templates.TemplateResponse( name="acerca_de.html", context={ "request": request, "user": session[0]
     , "envname": getSettingsNombreEnvActivo(db)
-    , "is_superuser": user.is_superuser,"permisos":permisos} )
+    } )
 
 @app.get("/popups")
 async def show_Main_Test_Popups():

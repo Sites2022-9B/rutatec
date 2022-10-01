@@ -1,0 +1,709 @@
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta2
+* @link https://tabler.io
+* Copyright 2018-2021 The Tabler Authors
+* Copyright 2018-2021 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="es">
+
+<head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title></title>
+    <!-- <link rel="preload" href="/dist/libs/bootstrap-table/all.css" as="style"> -->
+    <link href="/dist/css/indexbasesidebar.css" rel="stylesheet" />
+    <link href="/dist/libs/jquery-treetable-master/jquery-treetable.css" rel="stylesheet" />
+    <link href="/dist/css/indexbaseheader.css" rel="stylesheet" />
+    <link href="/dist/css/tabler.min.css" rel="stylesheet" />
+    <link href="/dist/iconfont/tabler-icons.min.css" rel="stylesheet" />
+    <link href="/dist/libs/bootstrap-table/all.css" rel="stylesheet" />
+    <link href="/dist/libs/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+    <link href="/dist/libs/select2-4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link href="/dist/libs/select2-4.0.13/css/select2-bootstrap.min.css" rel="stylesheet" />
+    <link href="/dist/libs/filepond/filepond.min.css" rel="stylesheet" />
+    <link href="/dist/libs/filepond/filepond-plugin-get-file.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/5.1.0/introjs.min.css" integrity="sha512-iaYE9B9u4GU8+KkRTOdRdZuzKdYw1X0hOAa4GwDV/uwdXgoX/ffT3ph1+HG1m4LPZD/HV+dkuHvWFLZtPviylQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+          /*Head del sidebar*/
+        .verticalText {
+          writing-mode: vertical-lr;
+          transform: rotate(180deg);
+        }
+        .sidebar-brand.head{
+          background: rgb(49, 84, 243);
+        }
+        .nav-tabs .agrupador.show .nav-link,
+        .nav-tabs .nav-link.active {
+            font-weight: bold;
+            color: black;
+        }
+        
+        .card-header,
+        .card-title {
+            font-weight: bold;
+            background: #467ae4;
+        }
+        .hr-text {
+          margin: .8rem 0;
+        }
+
+        .full_modal-dialog {
+            width: 98% !important;
+            height: 92% !important;
+            min-width: 98% !important;
+            min-height: 92% !important;
+            max-width: 98% !important;
+            max-height: 92% !important;
+            padding: 0 !important;
+        }
+        
+        .full_modal-content {
+            height: 99% !important;
+            min-height: 99% !important;
+            max-height: 99% !important;
+        }
+
+        /* FilePond Custom Styles */
+       .filepondAbilitado{
+            background-color: #2FB344;
+            color: white;
+        }
+        /* .filepond--drop-label{
+            background-color: #06D497;
+            color: white;
+        } */
+        .filepondDisabled{
+          background-color: #4e3bfd;
+          color: gray;
+          font-weight: bold;
+        }
+        .select2-search__field {
+          width: 100%!important;
+        }
+        .fotoperfil {
+            border-radius: 20px;
+            object-fit: cover;
+            object-position: center;
+            width:74%;
+            height:74%;
+            margin-left: 13%; 
+            margin-top: 2%;
+        }
+        .was-validated .custom-select:invalid + .select2 .select2-selection{
+          border-color: #dc3545!important;
+        }
+        .form-select.is-valid, .was-validated .form-select:valid{
+          background-image :none!important; 
+          /*Eliminar el ícono establecido por el cambio reciente en donde se quita la librería select2 para hacerlo de solo lectura*/
+        }
+        .was-validated .custom-select:valid + .select2 .select2-selection{
+          border-color: #28a745!important;
+        }
+        *:focus{
+          outline:0px;
+        }
+    /*Validaciones particulares para casos necesarios*/
+      .invalido{
+        border-color: #dc3545!important;
+        border-color: #dc3545!important;
+        padding-right: calc(1.5em + 0.75rem)!important;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23dc3545' viewBox='-2 -2 7 7'%3e%3cpath stroke='%23dc3545' d='M0 0l3 3m0-3L0 3'/%3e%3ccircle r='.5'/%3e%3ccircle cx='3' r='.5'/%3e%3ccircle cy='3' r='.5'/%3e%3ccircle cx='3' cy='3' r='.5'/%3e%3c/svg%3E")!important;
+        background-repeat: no-repeat!important;
+        background-position: center right calc(0.375em + 0.1875rem)!important;
+        background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem)!important;
+      }
+      /*Para disminuir los espacios entre los labels y los inputs generados por la macro rowinput*/
+      .form-label { 
+        margin-bottom: 0rem;
+      }
+      #search-by {
+        width: 180px; 
+        height: 30px; 
+        left: 40px; 
+        position: relative;
+      }
+      /*Animacion de despliegue*/
+      #root li ul{
+      	transition: all 0.5s ease-out;
+      }
+	    /*Animación de los iconos*/
+	    @keyframes swing {
+	      0%, 30%, 50%, 70%, 100% {
+	        transform: rotate(0deg);
+	      }
+	      10% {
+	        transform: rotate(10deg);
+	      }
+	      40% {
+	        transform: rotate(-10deg);
+	      }
+	      60% {
+	        transform: rotate(5deg);
+	      }
+	      80% {
+	        transform: rotate(-5deg);
+	      }
+	    }
+	    li.sidebar-dropdown a:hover i{
+	      display: inline-block;
+	      animation: swing ease-in-out 0.4s 1 alternate;
+	    }
+	    /*Icono posicion, tamaño y animacion*/
+	    #icono1{
+	      position: relative;
+	      font-size: 15px;
+        float: right;
+        font-weight: bold;        
+        -moz-transition: all 0.25s ease-out;
+        -ms-transition: all 0.25s ease-out;
+        -o-transition: all 0.25s ease-out;
+        -webkit-transition: all 0.25s ease-out;
+      }
+	    /*Animacion de la flecha*/
+	    li.nav-item:hover a #icono1 {
+	      -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+	    }
+	    /*Agrupadores color de fondo y letras*/
+	    .contenedor #agrup{
+	      font-weight: bold;
+	      color: #ffff;
+	      font-size: 14px;
+	      padding: 8px 5px;
+	      background: #0982bb;/*rgb(0, 177, 136); #00546F*/
+	    }
+	    /*Animacion para los agrupadores*/
+	    .contenedor  #agrup:hover{
+	      padding: 8px 12px;
+        background-color: #e2f01c95;
+	    }
+	    /*Cambiar de fondo a los módulos*/
+	    #root .sidebar-dropdown a {
+        /*#00546F #c6c6c6 #e2e3e7 #ffff*/
+	      color: #454546;
+	    }
+	    #root .sidebar-dropdown:hover a {
+	      background: #00B188; /*#00B188 rgb(0, 177, 136)*/
+	      color: #ffff;
+	      padding: 6px 25px;
+	    }
+	    /*Home*/
+
+
+      /*Elimina los botones del input tipo number*/
+      .ExepbtnNumber::-webkit-inner-spin-button{
+            -webkit-appearance: none;
+            margin: 0;
+      }
+      /*Estilo para el tab de archivos*/
+      .backgroundTabReporte{
+        color: #ffff!important;
+        background: #008080!important;
+      }
+      .opcionActRegresar {
+        color: #7F7C7C!important;
+      }
+      #Tour{
+        font-style: bold;
+        font-weight: 700;
+        color: #206bc4!important;
+        border-color: rgb(0, 177, 136) !important;
+      }
+      #btnproy, #btnindi, #btnres, #btnact, #btnppto, #btnProy{
+        color: #206bc4!important;
+        border-color: rgb(0, 177, 136) !important;
+      }
+      .icon{
+        color: rgb(0, 177, 136)!important;
+      }
+      #observaciones{
+        overflow: auto; 
+        margin-top: 10px;
+      }
+      #contenido{
+        background-color: white; 
+        border:none;
+      }
+      .titulo{
+        font-size: 15px; 
+        background-color: white;
+      }
+      .fecha{
+        font-size: 12px; 
+        background-color: white;
+      }
+    </style>
+    {% endblock %}
+</head>
+<body class="antialiased" style="background-color: #F4F6FA">
+    <!-- Navbar -->
+    <div id="sidebar" class="page-wrapper chiller-theme">
+        <nav class="menu-horizontal navbar navbar-expand-md navbar-light bg-white position-fixed z-index-1" style="padding: 0; margin: 0;">
+            <div class="container-fluid">
+                <h6 class="logo active text-dark">
+                  <a href="/">
+                    <img src="/logourutatec.png" width="100" height="100">
+                  </a>
+                  <div> <label></label></div>
+                  <!-- <div class="col-12">Two <input type="button" class="btn btn-outline-primary float-right" value=".float-right"></div> -->
+                </h6>
+                <form class="d-flex">
+                  <input id="search" class="form-control me-2" type="text" placeholder="Search">
+                </form>
+               <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="ti ti-line-height h1"></span>
+                </button> -->
+                <div class="navbar-nav flex-row order-md-last" id="navbarText">
+                    <div id="fotoram" name="fotoram" class="agrupador dropdown mx-2">
+                      <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown">
+                       <!-- <button type="button" class="btn border-0 dropdown-toggle" data-bs-toggle="dropdown"> -->
+                            <span id="imaqwe" class="avatar avatar-md avatar-rounded">
+                              <img src="/perfil.png">
+                            </span>
+                            <div class="d-none d-lg-block ps-2">
+                              <div><strong></strong></div>
+                              <div class="mt-1 small text-muted"></div>
+                            </div>
+                        <!-- </button> -->
+                      </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            <a class="dropdown-item" href="#" onclick="location.replace('/');">
+                                Historial
+                            </a>  
+                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-editarperfil" onclick="verMiPerfil()">
+                                Editar perfil
+                            </a>
+                            <a class="dropdown-item" href="#" onclick="location.replace('/logout');">
+                                Cerrar sesión
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <a id="show-sidebar" class="text-dark" href="#">
+            <i class="navbar-toggler-icon"></i>
+        </a>
+        <nav id="sidebar" class="sidebar-wrapper">
+          <div class="sidebar-content">
+              <div class="sidebar-brand head">
+                  <div id="close-sidebar">
+                      <i class="ti ti-x"></i>
+                  </div>
+              </div>
+              <div class="sidebar-search" >
+                  <div class="hr-text">
+                    <i class="ti ti-device-desktop"></i>
+                    Rutas
+                  </div>
+              </div>
+              <div class="sidebar-menu" id="accordion">
+                <div class="conteiner-fluid" >
+                    <input class="form-control me-2 search" id="search-by" type="text" placeholder="ruta a buscar"/>
+                    <br>
+                  </div>
+                  <ul id="ulMenuMain"></ul><br>      
+                  <ul id="root" class="contenedor">
+                    <li class="nav-item" id="clon_ruta">
+                      <input type="hidden" class="idruta" id="ruta_id" required disabled style="display:none;">
+                      <input type="text" class="form-control Ruta" id="ruta_n" required disabled style="display:none;">
+                    </li>
+                  </ul>
+              </div>
+              <!-- sidebar-menu  -->
+          </div>
+          <!-- sidebar-content  -->
+          <div class="sidebar-footer">
+              <a href="/about_us" class="text-dark" >
+                  <i class="ti ti-info-circle h2" data-bs-toggle="tooltip" data-bs-placement="top" title="Acerca de"></i>
+                  Acerca de...
+              </a>
+              <a href="/about_us" class="text-dark" >
+                <i class="ti ti-user h2" data-bs-toggle="tooltip" data-bs-placement="top" title="Tour"></i>
+                Tour
+            </a>
+              <br>
+              <br>
+          </div>
+      </nav>  
+        <!-- sidebar-wrapper  -->
+        <main class="page-content" style="height: auto; min-height: 80vh; ">
+            <div class="container-fluid">
+                <!--Google map-->
+                <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15269.35992977255!2d-92.10041546929698!3d16.908513594031643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85f2ea75bbce0497%3A0x81e00fb4c63eb002!2s29950%20Ocosingo%2C%20Chis.!5e0!3m2!1sen!2smx!4v1664251347462!5m2!1sen!2smx"></iframe>
+                </div>
+        </main>
+        <style>
+          .map-container{
+          overflow:hidden;
+          padding-bottom:56.25%;
+          position:relative;
+          height:0;
+        }
+        .map-container iframe{
+          left:0;
+          top:0;
+          height:100%;
+          width:100%;
+          position:absolute;
+        }
+        </style>
+        <!--Google Maps-->
+        <!-- page-content" -->
+        
+    <div class="modal modal-blur fade" id="modal-editarperfil" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Mi Perfil</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="card">
+              <ul class="nav nav-tabs nav-tabs-alt" data-bs-toggle="tabs">
+                <li class="agrupador">
+                <a href="#tabs-micuenta" class="nav-link active" data-bs-toggle="tab">
+                  <i class="ti ti-home h2 me-2"></i>
+                  Mi Cuenta</a>
+                </li>
+                <li class="agrupador">
+                <a href="#tabs-personal" class="nav-link" data-bs-toggle="tab">
+                  <i class="ti ti-user h2 me-2"></i>
+                  Datos Personales</a>
+                </li>
+                <li class="agrupador">
+                <a href="#tabs-laboral" class="nav-link" data-bs-toggle="tab">
+                  <i class="ti ti-briefcase h2 me-2"></i>
+                  Datos Laborales</a>
+                </li>
+              </ul>
+              <div class="card-body">
+                <div class="tab-content card-body">
+                  <!-- tab de datos de cuenta-->
+                  <div class="tab-pane show active" id="tabs-micuenta">
+                    <div class="row mb-3">
+                      <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+                       <!------------------------>
+                       <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title">Cuenta de Usuario</h3>
+                        </div>
+                        <div class="card-body">
+                          <form id="formfotoemp" enctype="multipart/form-data" method="post" >
+                            <img id="mimagen" class="fotoperfil">
+                            <div class="input-file-container">  
+                              <label for="">La importación se realizará automáticamente después de 
+                                  <b>arrastrar o seleccionar</b> su archivo:
+                              </label><br>
+                              <input class="input-files filepond" name="files" id="files" type="file">
+                            </div> 
+                            <!-- <label class="invisible">Seleccione su archivo</label><br>
+                            <input name="files" id="files" type="file">
+                            <input type="submit" value="Actualizar" class="btn btn-primary w-100" style="margin-top: 15px; margin-bottom: 1px;" />
+                          -->
+                          </form>
+                        </div>
+                      </div>
+                       <!------------------------> 
+                      </div>
+                      <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+                        <div class="card mb-3">
+                          <div class="card-header">
+                            <h3 class="card-title">Cuenta de Usuario</h3>
+                          </div>
+                          <div class="card-body">
+                            
+                          
+                          </div>
+                        </div>
+                        <div class="card mb-3">
+                          <div class="card-header">
+                            <h3 class="card-title">Actualizar contraseña</h3>
+                          </div>
+                          <form id="perfil_password" class="card-body needs-validation" autocomplete="off" novalidate>
+                           
+                            <div class="form-footer">
+                              <button id="guardar_password_1" name="guardar_password" type="submit" class="btn btn-primary w-100">
+                              Aplicar cambios
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- tab para datos personales-->
+                  <div class="tab-pane" id="tabs-personal">
+                      
+                  </div>
+                  <!-- tab para datos laborales-->
+                  <div class="tab-pane" id="tabs-laboral">
+                    <div class="card row mb-3">
+                      <div class="card-header">
+                        <h3 class="card-title">Área de adscripción actual</h3>
+                      </div>
+                      <div class="card-body table-responsive">
+                        <table class="table card-table table-vcenter text-nowrap datatable">
+                          <thead>
+                              <tr>
+                                  <th>ID</th>
+                                  <th>Código</th>
+                                  <th>Nombre</th>
+                                  <th>Fecha de Inicio</th>
+                                  <th>Fecha de Fin</th>
+                              </tr>
+                          </thead>
+                          <tbody id="t_areaact_perfil">
+
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="card row mb-3">
+                        <div class="card-header">
+                          <h3 class="card-title">Puestos actuales</h3>
+                        </div>
+                        <div class="card-body table-responsive">
+                            <table class="table card-table table-vcenter text-nowrap datatable">
+                                <thead>
+                                    <tr>
+                                        <th>Clave</th>
+                                        <th>Etiqueta</th>
+                                        <th>Nombre</th>
+                                        <th>Fecha de Inicio</th>
+                                        <th>Fecha de Fin</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="t_puestosact_perfil">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card row mb-3">
+                      <div class="card-header">
+                        <h3 class="card-title">Roles actuales</h3>
+                      </div>
+                      <div class="card-body table-responsive">
+                        <table class="table card-table table-vcenter text-nowrap datatable">
+                          <thead>
+                              <tr>
+                                  <th>Nombre</th>
+                                  <th>Fecha de Inicio</th>
+                                  <th>Fecha de Fin</th>
+                              </tr>
+                          </thead>
+                          <tbody id="t_rolesact_perfil">
+
+                          </tbody>
+                        </table>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- Modal -->
+<div class="modal fade" id="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"> Rutas</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body">
+        <nav class="nav flex-column">
+          <a class="nav-link active" href="#">Punto Inicio</a>
+          <a class="nav-link" href="#">Punto Final</a>
+        </nav>
+      </div>
+      <div class="modal-footer" id="cerrar">
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- </div> -->
+
+    <footer class="footer bg-white" style="padding: 0rem 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <center>
+                        <div class="hr-text text-primary">Versión</div>
+                        <p>V 0.0.1</p>
+                    </center>
+                </div>
+                <div class="col-lg-3">
+                    <center>
+                        <div class="hr-text text-primary">Dirección</div>
+                        <p>Entronque Toniná kilómetro 0.5, Carretera Ocosingo - Altamirano</p>
+                    </center>
+                </div>
+                <div class="col-lg-3">
+                    <center>
+                        <div class="hr-text text-primary">Contacto</div>
+                        <p>Ocosingo, Chiapas, México. C.P. 29950,2</p>
+                    </center>
+                </div>
+                <div class="col-lg-3">
+                    <center>
+                        <div class="hr-text text-primary">Redes Sociales</div>
+                        <div>
+                            <div class="form-selectgroup">
+                              <a href="#" class="btn btn-outline-primary mx-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Facebook">
+                                <i class="ti ti-brand-facebook"></i>
+                              </a>
+                              <a href="#" class="btn btn-outline-info mx-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Twitter">
+                                <i class="ti ti-brand-twitter"></i>
+                              </a>
+                              <a href="#" class="btn btn-outline-success mx-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Whatsapp"> 
+                                <i class="ti ti-brand-whatsapp"></i>
+                              </a>
+                              <a href="#" class="btn btn-outline-danger mx-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Sitio web">
+                                <i class="ti ti-world"></i>
+                              </a>
+                            </div>
+                          </div>
+                    </center>
+                </div>
+            </div>
+        </div>
+        <div class="" style="background-color: #5083e9">
+          <div class="text-center">
+              <p class="h5 text-dark">Copyright &copy; 2021 Sites Rutatec</p>
+          </div>
+        </div>
+    </footer>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    {% block jsfiles %}
+    <!--   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      -->
+    
+    <script src="/dist/libs/bootstrap/jquery.min.js"></script>
+    <script src="/dist/libs/bootstrap/popper.min.js"></script>
+    <script src="/dist/libs/bootstrap/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/5.1.0/intro.min.js" integrity="sha512-B0B1bdTGi9XHtoCINbtR6z9Vi8IYvvtImIE8KWMtqWAVUt2Wn2k69GxM7ya/3rQcz/Pgm/o1WcDU347/5k202A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- <script src="/dist/libs/jquery/jquery.min.js"></script> -->
+    <!-- <script src="/dist/libs/apexcharts/dist/apexcharts.min.js"></script> -->
+    <script src="/dist/js/tabler.min.js"></script>
+    <script src="/dist/libs/serializejson/jquery.serializejson.js"></script>
+    <script src="/dist/libs/sweetalert2/sweetalert2.all.min.js"></script>
+
+    <script src="/dist/libs/apexcharts/dist/apexcharts.min.js"></script>
+    
+    <script src="/dist/libs/d3.v5.min.js"></script>
+
+    <script src="/dist/libs/bootstrap-table/tableExport.min.js"></script>
+    <script src="/dist/libs/bootstrap-table/jspdf.min.js"></script>
+    <script src="/dist/libs/bootstrap-table/jspdf.plugin.autotable.js"></script>
+    <script src="/dist/libs/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="/dist/libs/bootstrap-table/bootstrap-table-export.min.js"></script>
+    <script src="/dist/libs/select2-4.0.13/js/select2.min.js"></script>
+    <script src="/dist/libs/select2-4.0.13/js/es.js"></script>
+
+    <script src="/dist/libs/bootstrap-table/bootstrap-table-es-MX.js"></script>
+    <script src="/dist/libs/bootpag/jquery.bootpag.min.js"></script>
+
+    <script src="/dist/libs/moment/moment-with-locales.min.js"></script>
+    <script src="/dist/libs/filepond/filepond.min.js"></script>
+    <script src="/dist/libs/filepond/filepond.jquery.js"></script>
+    <script src="/dist/libs/filepond/filepond-plugin-file-validate-type.min.js"></script>
+    <script src="/dist/libs/filepond/filepond-plugin-get-file.min.js"></script>
+    <!-- <script src="/dist/libs/filepond/filepond-plugin-image-preview.min.js"></script> -->
+    
+    <script src="/dist/js/indexbasesidebar.js"></script>
+    <script src="/dist/js/login.js"></script>
+    <script src="/dist/js/scripts.js"></script>
+    <script src="/dist/js/counter.js"></script>
+    <script src="/dist/libs/numeral-2.0.6/numeral.min.js"></script>
+    <script src="/dist/libs/jquery-treetable-master/jquery-treetable.js"></script>
+    <script>
+      $(document).ready(function(){
+        showrutas()
+      });
+
+
+      $('#search').attr('onClick','abrimodal()');
+      function abrimodal(){
+        $('#modal').modal('show');
+        showrutas();
+        
+        
+      }
+      function showrutas(){
+        $.ajax({
+          type: 'GET',
+          url: '/api/sidebar',
+          contentType: 'application/json',
+          success: function (data, textStatus, jqXHR) {
+            //console.log(data.data[0]);
+            //console.log(data.data[1]);
+          $.each(data.data, function(index, campo){
+              console.log(campo[0]);
+              //clonarrutas(campo[0]);
+              $('#root').append(`
+        <li class="mnuRaiz nav-item" id="mnuRaiz_${campo[0]}">
+          <a href="#catgrupo_id_${campo[0]}" id="agrup" class="accordion-collapse collapse" data-toggle="collapse" aria-expanded="true">
+          ${campo[1]}
+          <i id="icono1" class="ti ti-chevron-right"></i>
+          </a>
+            <ul class="subMenusRoot collapse list-unstyled"  id="catgrupo_id_${campo[2]}" data-parent="#accordion">
+              ${campo[2]}
+            </ul> 
+        </li>
+      `);
+            });
+          },
+          error: function (jqXHR, textStatus, error) {
+                console.log(jqXHR); console.log(textStatus); console.log(error);
+                if (jqXHR.status == 406) {
+                    showMsgTemporal(4000, 'warning', 'ATENCIÓN', jqXHR.responseJSON.detail);
+                }
+                else {
+                    showMsgTemporal(4000, 'error', 'ERROR', jqXHR.responseJSON.detail);
+                }
+            }
+            
+        });
+      }
+
+  function clonarrutas(id){
+    let navfila = $('#root').clone(true,true);
+    navfila.attr('id','ul_'+ id);
+    $('#root').find("ul:last").after(navfila);
+
+    navfila.find('.idruta').attr('id','ruta_id'+id);
+    navfila.find('.Ruta').attr('id','ruta_n'+id);
+    navfila.show();
+
+    $('#ul_'+id).addClass('clonado');
+
+  }
+    </script>
+    
+    
+{% endblock jsfiles %}
+</body>
+</html>
