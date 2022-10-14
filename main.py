@@ -87,9 +87,9 @@ async def show_Main_Test_Popups():
     """
     return HTMLResponse(content=html_content, status_code=200)
 
-@app.get("/forgot-password")
+@app.get("/RecuperarContraseña")
 def page_forgot_password(request:Request):
-    return templates.TemplateResponse( name="forgot-password.html", context={ "request": request } )
+    return templates.TemplateResponse( name="recuperarcon.html", context={ "request": request } )
 
 @app.get('/logoutselva.png', include_in_schema=False)
 def logoutselva():

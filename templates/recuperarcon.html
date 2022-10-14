@@ -1,0 +1,119 @@
+<!--login.html-->
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta2
+* @link https://tabler.io
+* Copyright 2018-2021 The Tabler Authors
+* Copyright 2018-2021 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>RUTA-TEC Visualiza tu ruta, visualiza tu destino</title>
+    <!-- CSS files -->
+    <link href="/dist/css/tabler.min.css" rel="stylesheet"/>
+    <link href="/dist/iconfont/tabler-icons.min.css" rel="stylesheet" >
+    <!-- <link href="/dist/libs/bootstrap-table/all.css" rel="stylesheet" /> -->
+
+    <style>
+      #empresa * { color: rgb(238, 59, 46); }
+      #app * { color: darkcyan; }
+    </style>
+  </head>
+  <body class="antialiased border-top-wide border-primary d-flex flex-column">
+    <div class="page page-center">
+      <div class="container-tight py-4">
+        
+        <form id="createform" name="main-form" class="bg-white shadow p-3 rounded-3 needs-validation" autocomplete="off" novalidate>
+          <div class="card-body">
+            <div class="text-center mb-2" id="empresa">
+                <!-- <img src="/static/logoutselva.png" width="140" height="42" alt="logoutselva" class=""> -->
+                <img src="logourutatec.png" width="140" height="140">
+            </div>
+            <div class="hr-text" id="app">
+              <h2>Recupera tu Contraseña </h2>
+            </div>
+              <div class="">
+                <center>
+                  <h4>Se enviara un corre a su cuenta con la clave de recupercación de su corre de RUTA-TEC</h4>
+                </center>
+              <div class="mb-3 form-group">
+                <label class="form-label">Correo</label>
+                <div class="input-icon mb-3">
+                  <span class="input-icon-addon">
+                    <i class="ti ti-mail"></i>
+                  </span>
+                  <input type="email" id="username" name="correo" class="form-control" value=""  placeholder="Capture su correo" required/>
+                  <div class="invalid-feedback">Ingresa un correo, ej: example@gmail.com</div>
+                </div>   
+              </div>
+            <div class="form-footer">
+              <div id="smsInvali"></div>
+              <button type="submit" id="btnAddCuenta" class="btn btn-success w-100 mb-2">Enviar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Libs JS -->
+    <!-- <script src="/dist/libs/jquery/jquery.min.js"></script> -->
+    <script src="/dist/libs/bootstrap/jquery.min.js"></script>
+    <script src="/dist/libs/bootstrap/popper.min.js"></script>
+    <script src="/dist/libs/bootstrap/bootstrap.min.js"></script>
+    <!-- Tabler Core -->
+    <script src="/dist/js/tabler.min.js"></script>
+    <script src="/dist/libs/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="/dist/js/scripts.js"></script>
+    <script src="/dist/js/login.js"></script>
+    <script src="/dist/js/indexbasesidebar.js"></script>
+    <script src="/dist/libs/serializejson/jquery.serializejson.js"></script>
+
+    <script>
+      $(document).ready(function(){
+        // Test de apertura de popups y mensaje para activar popups
+        resp = testPopupsAlertaNavegacion();
+      });
+      
+      $("#btniniciar").click(function (e) {
+        // limpiar los datos...
+        window.location.replace('/login')
+        console.log("crear nuevo usuario");
+      });
+
+      $("#createform").submit(function(e) {
+          // preventing from page reload and default actions
+          e.preventDefault();
+          $("#createform").addClass("was-validated");
+          formDado = "createform";
+          if (!$(this)[0].checkValidity()){
+              $('#' + formDado + ' .invalid-feedback').each(function () {
+                  if ($(this)[0].offsetParent){
+                      $(this).parent().find("select, input, textarea").first().focus();
+                      return false; // exit each
+                  }
+              });
+              return;
+          }
+          let referencia = "Registrar.html_createform"
+          let typeSubmit = "POST";
+          let url = "/api/usuario/registrar?ret={{ret}}";
+          let msg = "Se agregó correctamente el usuario"
+          let ret = "{{ret}}"
+
+          serializedData = JSON.stringify($(this).serializeJSON());
+          sendDatosToServer(referencia, url, typeSubmit, ret, serializedData).then((jqXHR) => {
+              showMsg(jqXHR[0], referencia, url, ret).then((result) => {
+                  if (jqXHR[0].status == 200){
+                      window.location.replace('/login');
+                  }
+                  return true;
+              });
+          });
+      })
+    </script>
+  </body>
+</html>

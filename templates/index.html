@@ -275,7 +275,7 @@
                         <!-- </button> -->
                       </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <a class="dropdown-item" href="#" onclick="location.replace('/');">
+                            <a class="dropdown-item" id="Historial" href="#" ">
                                 Historial
                             </a>  
                             <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-editarperfil" onclick="verMiPerfil()">
@@ -338,9 +338,7 @@
         <main class="page-content" style="height: auto; min-height: 80vh; ">
             <div class="container-fluid">
                 <!--Google map-->
-                <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
-                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15269.35992977255!2d-92.10041546929698!3d16.908513594031643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85f2ea75bbce0497%3A0x81e00fb4c63eb002!2s29950%20Ocosingo%2C%20Chis.!5e0!3m2!1sen!2smx!4v1664251347462!5m2!1sen!2smx"></iframe>
-                </div>
+                <div id="map" class="z-depth-1-half map-container" style="height: 500px">
         </main>
         <style>
           .map-container{
@@ -522,23 +520,24 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel"> Rutas</h5>
+        <h5 class="modal-title" id="staticBackdropLabel"> Historial de Rutas</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
         </button>
       </div>
       <div class="modal-body">
         <nav class="nav flex-column">
-          <a class="nav-link active" href="#">Punto Inicio</a>
-          <a class="nav-link" href="#">Punto Final</a>
+          <a class="nav-link active" href="#">Rutas</a>
         </nav>
       </div>
       <div class="modal-footer" id="cerrar">
-        <button type="button" class="btn btn-primary">Understood</button>
+        <button type="button" class="btn btn-primary">Actualizar</button>
       </div>
     </div>
   </div>
 </div>
 
+    <!-- </div> -->
+    
     <!-- </div> -->
 
     <footer class="footer bg-white" style="padding: 0rem 0;">
@@ -639,19 +638,18 @@
     <script src="/dist/js/counter.js"></script>
     <script src="/dist/libs/numeral-2.0.6/numeral.min.js"></script>
     <script src="/dist/libs/jquery-treetable-master/jquery-treetable.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtYfFGOjdpabTQ6Gnfktn0P6UyObPpvAs&callback=initMap"></script>
+   <script>   
+    $('#Historial').attr('onClick','abrimodal()');
+    function abrimodal(){
+      $('#modal').modal('show');    
+    }
+    </script>
+
     <script>
       $(document).ready(function(){
         showrutas()
       });
-
-
-      $('#search').attr('onClick','abrimodal()');
-      function abrimodal(){
-        $('#modal').modal('show');
-        showrutas();
-        
-        
-      }
       function showrutas(){
         $.ajax({
           type: 'GET',
@@ -702,6 +700,21 @@
 
   }
     </script>
+    <script>
+
+      function initMap() {
+  
+        var macc = {lat: 42.1382114, lng: -71.5212585};
+  
+        var map = new google.maps.Map(
+  
+            document.getElementById('map'), {zoom: 15, center: macc});
+  
+        var marker = new google.maps.Marker({position: macc, map: map});
+  
+      }
+  
+   </script>
     
     
 {% endblock jsfiles %}
