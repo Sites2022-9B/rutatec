@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+        <html lang="es">
+            <head>
+                <meta charset="utf-8">
+                <title>Sites RUETA-TEC</title>
+            </head>
+            <body style="background-color: #fff ">
+                <table style="max-width: 600px; padding: 10px; margin:0 auto; border-collapse: collapse;">
+                    <tr>
+                        <td style="background-color: #b7b7b7; text-align: left; padding: 0">
+                            <center>
+                                <img width="40%" style="display:block; margin: 1.5% 3%" src="../static/sites.png">
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #002F5C">
+                            <div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif">
+                                <center><h2 style="color: #4edaf3; margin: 0 0 7px;">Solicitud para el cambio de contraseña</h2></center>
+                                <p style="color: #ffffff; margin: 2px; font-size: 15px"> Ha solicitado el cambio de contraseña para su cuenta de la plataforma RUTA-TEC, favor de <strong>confirmar</strong> en el siguiente botón y será redireccionado a un formulario.</p>
+                                <ul style="font-size: 15px;  margin: 10px 0; list-style:none; color: #ffffff">
+                                    <li>1. Cuenta con 10 minutos de valides para su token</li>
+                                    <li>2. Si usted no realizo esta acción ignore el correo</li>
+                                </ul>
+                                    <br>
+                                    <div style="width: 100%; text-align: center">
+                                        <a href="api/resetPassword/confirm-pwd/{emailDado.email}?referencia={newPBcrypt}" style="text-decoration: none; border-radius: 5px; padding: 11px 23px; color: white; background-color: #3498db">CONFIRMAR</a>	
+                                    </div><br>
+                                <p style="color: #b3b3b3; font-size: 12px; text-align: center; margin: 30px 0 0"> RUTA-TEC</p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </body>
+        </html>

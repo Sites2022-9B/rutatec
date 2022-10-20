@@ -94,8 +94,22 @@ CREATE TABLE IF NOT EXISTS terminales (
 	FOREIGN KEY (munic_id) REFERENCES municipio (id)
     ON UPDATE CASCADE ON DELETE RESTRICT
 );
+CREATE TABLE IF NOT EXISTS "userreset" (
+	"id"	SERIAL NOT NULL,
+	"email"	VARCHAR(100) NOT NULL,
+	"referencia"	VARCHAR(100) NOT NULL,
+	"fechaini"	timestamp NOT NULL,
+	"fechafin"	timestamp,
+	"confirmacion"	BOOLEAN,
+	"activado"	BOOLEAN,
+	PRIMARY KEY("id")
+);
 
-insert into "usuario" values (1,'Pablo','Ruiz', 'pablofabianruizconstantino@gmail.com', '1234',false);
+CREATE INDEX IF NOT EXISTS ix_userreset_id ON "userreset" ("id");
+CREATE INDEX IF NOT EXISTS ix_userreset_referencia ON "userreset" ("referencia");
+
+
+insert into "usuario" values (1,'Pablo','Ruiz', 'pablo@gmail.com', '1234',false);
 --Usuarios de Unidades Responsables
 insert into "usuario" values (2,'Henry','Lopez', 'henry@gmail.com', '1234',false);
 insert into "usuario" values (3,'Eduardo','Gutierrez', 'quique@gmail.com', '1234',false);

@@ -263,11 +263,11 @@ async def update_password( request: Request, datosUpdate: UpdatePassword, respon
     if(datosUpdate.email != null and datosUpdate.referencia != null and datosUpdate.pwdNuevo != null and datosUpdate.pwdNuevoRepetir != null):
         newUpdatePWd = Hash.bcrypt(datosUpdate.pwdNuevo)
         print(newUpdatePWd)
-        user = db.query(User).filter(User.email == datosUpdate.email).first()
+        user = db.query(User).filter(User.correo == datosUpdate.email).first()
         activadoReset = db.query(UserResetPwd).filter(UserResetPwd.referencia == datosUpdate.referencia).first()
 
         if (user != None and activadoReset != None):
-            user.password = newUpdatePWd
+            user.contra = newUpdatePWd
             user.update(db)
 
             activadoReset.activado = True
@@ -285,24 +285,20 @@ async def reset_password(request: Request, emailDado: ForgotPassword, responde: 
     siExiste = ''
     mensajeRetorno = ''
 
-    userinDB = db.query(User).filter( User.email == emailDado.email ).first()
-    setting_email = db.query(Settings).filter( Settings.campo == "$EMAIL_CUENTA" ).first()
-    setting_password = db.query(Settings).filter( Settings.campo == "$EMAIL_PASSWORD").first()
+    userinDB = db.query(User).filter( User.correo == emailDado.email ).first()
+    # setting_email = db.query(Settings).filter( Settings.campo == "$EMAIL_CUENTA" ).first()
+    # setting_password = db.query(Settings).filter( Settings.campo == "$EMAIL_PASSWORD").first()
     
-    # TODO: Obtener de la tabla de settings, la variable environment para obtener cual es el entorno actualmente activo
-    # y con ello, su respectiva url
-    setting_baseUrl = db.query(Settings).filter(Settings.campo == "$BASE_URL").first()
+    # # TODO: Obtener de la tabla de settings, la variable environment para obtener cual es el entorno actualmente activo
+    # # y con ello, su respectiva url
+    # setting_baseUrl = db.query(Settings).filter(Settings.campo == "$BASE_URL").first()
 
-    setting_emailResetTimeToken = db.query(Settings).filter(Settings.campo == "$EMAIL_RESET_TIME_TOKEN").first()
-    if(setting_email == None or setting_password == None or setting_baseUrl == None):
-        #TODO: Enviar un aviso a la cuanta del administrador para que configure la tabla
-        return({"message": "Se necesita configurar una cuenta de correo institucional para usar esta funcionalidad"})
-    sys_name = "$SYS_NAME"
-    SYS_NAME        = getSettingsName(sys_name)
-    EMAIL_CUENTA    = setting_email.valor
-    EMAIL_PASSWORD  = setting_password.valor
-    BASE_URL        = setting_baseUrl.valor
-    TIME_TOKEN_RP   = setting_emailResetTimeToken.valor
+    # setting_emailResetTimeToken = db.query(Settings).filter(Settings.campo == "$EMAIL_RESET_TIME_TOKEN").first()
+    SYS_NAME        = "Sites RUTA-TEC"
+    EMAIL_CUENTA    = "sites2022gyds@gmail.com"
+    EMAIL_PASSWORD  = "pwuzuxpwgjdfhaeh"
+    BASE_URL        = "http://127.0.0.1:8000/"
+    TIME_TOKEN_RP   = "10"
 
     
     if(userinDB):
@@ -351,20 +347,20 @@ async def reset_password(request: Request, emailDado: ForgotPassword, responde: 
             <body style="background-color: #fff ">
                 <table style="max-width: 600px; padding: 10px; margin:0 auto; border-collapse: collapse;">
                     <tr>
-                        <td style="background-color: #ecf0f1; text-align: left; padding: 0">
+                        <td style="background-color: #b7b7b7; text-align: left; padding: 0">
                             <center>
-                                <img width="40%" style="display:block; margin: 1.5% 3%" src="http://www.utselva.edu.mx/imagenes/logotipo.png">
+                                <img width="40%" style="display:block; margin: 1.5% 3%" src="https://drive.google.com/file/d/1s3Yc79ZueQz7mJpvMKgHaudNYFnTnP6G/view">
                             </center>
                         </td>
                     </tr>
                     <tr>
-                        <td style="background-color: #ecf0f1">
+                        <td style="background-color: #002F5C">
                             <div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif">
-                                <center><h2 style="color: #117688; margin: 0 0 7px;">Solicitud para el cambio de contraseña</h2></center>
-                                <p style="margin: 2px; font-size: 15px"> Ha solicitado el cambio de su contraseña para su cuenta de la plataforma {SYS_NAME}, favor de <strong>confirmar</strong> en el siguiente botón y será redireccionado a un formulario.</p>
-                                <ul style="font-size: 15px;  margin: 10px 0; list-style:none; color: #34495e">
+                                <center><h2 style="color: #4edaf3; margin: 0 0 7px;">Solicitud para el cambio de contraseña</h2></center>
+                                <p style="color: #ffffff; margin: 2px; font-size: 15px"> Ha solicitado el cambio de contraseña para su cuenta de la plataforma {SYS_NAME}, favor de <strong>confirmar</strong> en el siguiente botón y será redireccionado a un formulario.</p>
+                                <ul style="font-size: 15px;  margin: 10px 0; list-style:none; color: #ffffff">
                                     <li>1. Cuenta con 10 minutos de valides para su token</li>
-                                    <li>2. Por cualquier problema no resuelto por el sistema, comuníquese con el administrador</li>
+                                    <li>2. Si usted no realizo esta acción ignore el correo</li>
                                 </ul>
                                     <br>
                                     <div style="width: 100%; text-align: center">
@@ -402,7 +398,7 @@ async def reset_password(request: Request, emailDado: ForgotPassword, responde: 
         mensajeRetorno = 'CORREO ENVIADO CORRECTAMENTE!!'
 
         
-        db.query(User).filter_by(email=emailDado.email).update(dict(password=newPBcrypt))
+        db.query(User).filter_by(correo=emailDado.email).update(dict(contra=newPBcrypt))
         db.commit()
         #db.session.commit()
     else:

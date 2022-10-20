@@ -1,0 +1,64 @@
+<!--invalid-token.html-->
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta2
+* @link https://tabler.io
+* Copyright 2018-2021 The Tabler Authors
+* Copyright 2018-2021 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Sites RUTA-TEC</title>
+    <!-- CSS files -->
+    <link href="/dist/iconfont/tabler-icons.min.css" rel="stylesheet">
+    <link href="/dist/css/tabler.min.css" rel="stylesheet"/>
+ 
+  </head>
+  <body class="antialiased border-top-wide border-primary d-flex flex-column">
+    <div class="page page-center">
+      <div class="container-tight py-4">
+        
+        <div class="empty">
+            <div class="empty-icon"><!-- Download SVG icon from http://tabler-icons.io/i/mood-sad -->
+              <!-- SVG icon code -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alert-triangle" width="128" height="128" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M12 9v2m0 4v.01"></path>
+                    <path d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75"></path>
+                </svg>
+            </div>
+            <p class="empty-title">
+                ACCESSO DENEGADO
+            </p>
+            <p class="empty-subtitle text-muted">
+              {{message}}
+            </p>
+            <div class="empty-action">
+              <a href="/login" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <line x1="5" y1="12" x2="11" y2="18"></line>
+                    <line x1="5" y1="12" x2="11" y2="6"></line>
+                 </svg>
+                Inicio
+              </a>
+            </div>
+          </div>
+      </div>
+    </div>
+    <!-- Libs JS -->
+    <script src="/dist/libs/jquery/jquery.min.js"></script>
+    <!-- Tabler Core -->
+    <script src="/dist/js/tabler.min.js"></script>
+    <script src="/dist/libs/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="/dist/js/scripts.js"></script>
+
+
+  </body>
+</html>

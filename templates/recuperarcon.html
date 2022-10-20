@@ -28,18 +28,18 @@
     <div class="page page-center">
       <div class="container-tight py-4">
         
-        <form id="createform" name="main-form" class="bg-white shadow p-3 rounded-3 needs-validation" autocomplete="off" novalidate>
+        <form id="fp-form" class="bg-white shadow p-3 rounded-3 needs-validation" novalidate>
           <div class="card-body">
             <div class="text-center mb-2" id="empresa">
                 <!-- <img src="/static/logoutselva.png" width="140" height="42" alt="logoutselva" class=""> -->
-                <img src="logourutatec.png" width="140" height="140">
+                <img src="sites.png" width="140" height="140">
             </div>
             <div class="hr-text" id="app">
               <h2>Recupera tu Contraseña </h2>
             </div>
               <div class="">
                 <center>
-                  <h4>Se enviara un corre a su cuenta con la clave de recupercación de su corre de RUTA-TEC</h4>
+                  <h4>Se enviara un correo a su email con la clave de recupercación de su cuenta de RUTA-TEC</h4>
                 </center>
               <div class="mb-3 form-group">
                 <label class="form-label">Correo</label>
@@ -47,13 +47,14 @@
                   <span class="input-icon-addon">
                     <i class="ti ti-mail"></i>
                   </span>
-                  <input type="email" id="username" name="correo" class="form-control" value=""  placeholder="Capture su correo" required/>
+                  <input type="email" id="username" name="email" class="form-control" value=""  placeholder="Capture su correo" required/>
                   <div class="invalid-feedback">Ingresa un correo, ej: example@gmail.com</div>
                 </div>   
               </div>
             <div class="form-footer">
               <div id="smsInvali"></div>
-              <button type="submit" id="btnAddCuenta" class="btn btn-success w-100 mb-2">Enviar</button>
+              <button type="submit" id="btnFP" class="btn btn-success w-100 mb-2">Enviar</button>
+              <button type="button" id="btniniciar" class="btn btn-light w-100">Regresar a Iniciar Sesión</button>
             </div>
           </div>
         </form>
@@ -61,34 +62,47 @@
     </div>
     <!-- Libs JS -->
     <!-- <script src="/dist/libs/jquery/jquery.min.js"></script> -->
-    <script src="/dist/libs/bootstrap/jquery.min.js"></script>
-    <script src="/dist/libs/bootstrap/popper.min.js"></script>
-    <script src="/dist/libs/bootstrap/bootstrap.min.js"></script>
+    <script src="/dist/libs/jquery/jquery.min.js"></script>
+    <script src="/dist/libs/serializejson/jquery.serializejson.js"></script>    
+    <script src="/dist/libs/sweetalert2/sweetalert2.all.min.js"></script>
     <!-- Tabler Core -->
     <script src="/dist/js/tabler.min.js"></script>
-    <script src="/dist/libs/sweetalert2/sweetalert2.all.min.js"></script>
+    <!-- Own JS -->
     <script src="/dist/js/scripts.js"></script>
-    <script src="/dist/js/login.js"></script>
-    <script src="/dist/js/indexbasesidebar.js"></script>
-    <script src="/dist/libs/serializejson/jquery.serializejson.js"></script>
 
     <script>
-      $(document).ready(function(){
-        // Test de apertura de popups y mensaje para activar popups
-        resp = testPopupsAlertaNavegacion();
-      });
-      
+
       $("#btniniciar").click(function (e) {
         // limpiar los datos...
         window.location.replace('/login')
-        console.log("crear nuevo usuario");
+        // showrutas();
+        // console.log("crear nuevo usuario");
       });
 
-      $("#createform").submit(function(e) {
+      function MGPassword(){
+        var templateSSP= `
+        <br>
+        <div class="alert alert-success" role="alert">
+            <div class="d-flex">
+              <div>
+                <h4 class="alert-title">Estamos gestionando su nueva contraseña!</h4>
+                <div class="text-muted mb-2">Cargando...</div>
+                <div class="progress progress-sm ">
+                  <div class="progress-bar progress-bar-indeterminate bg-green"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        $('#SPP').html(templateSSP);
+        $("#btnFP").addClass('disabled');
+      };
+      
+      $("#fp-form").submit(function (e) {
           // preventing from page reload and default actions
           e.preventDefault();
-          $("#createform").addClass("was-validated");
-          formDado = "createform";
+          $("#fp-form").addClass("was-validated");
+          formDado = "fp-form";
           if (!$(this)[0].checkValidity()){
               $('#' + formDado + ' .invalid-feedback').each(function () {
                   if ($(this)[0].offsetParent){
@@ -98,21 +112,52 @@
               });
               return;
           }
-          let referencia = "Registrar.html_createform"
-          let typeSubmit = "POST";
-          let url = "/api/usuario/registrar?ret={{ret}}";
-          let msg = "Se agregó correctamente el usuario"
-          let ret = "{{ret}}"
-
-          serializedData = JSON.stringify($(this).serializeJSON());
-          sendDatosToServer(referencia, url, typeSubmit, ret, serializedData).then((jqXHR) => {
-              showMsg(jqXHR[0], referencia, url, ret).then((result) => {
-                  if (jqXHR[0].status == 200){
-                      window.location.replace('/login');
+          MGPassword();
+          referencia = "recuperarcon.html_foForm";
+          url = "/api/forgotPassword?ret=/login";
+          typeSubmit = "POST";
+          ret = "/login";
+          serializedData = JSON.stringify( $(this).serializeJSON());
+          $.ajax({
+              type: typeSubmit,
+              url: url,
+              contentType: 'application/json',
+              data: serializedData,
+              success: function (data, textStatus, jqXHR) {
+                  //console.log(jqXHR); console.log(textStatus); console.log(data);
+                  $("#fp-form").trigger('reset');
+                  if(data.Existe == 'si'){
+                      $('#SPP').remove();
+                      //$("#btnFP").removeClass("disabled");
+                      showMsgToastTemp('top-end', 5000, 'success', 'Se ha generado un token para cambiar su contraseña! revise su correo. Enseguida será redireccionado al login...');
+                      setTimeout(function(){                        
+                          location.replace("/login");
+                      },5000);
+                  }else{
+                    $('#SPP').remove();
+                    $("#btnFP").removeClass("disabled");
+                    $("#email").focus();
+                    showMsgToastTemp('top-end', 3000, 'error', data.message);
+                    // setTimeout(function(){         
+                    //   window.location.reload()
+                    // },3000);
                   }
-                  return true;
-              });
-          });
+              }, error: function(jqXHR, textStatus, error) {
+                // console.log(jqXHR); console.log(textStatus); console.log(error);
+                // console.log( jqXHR.responseJSON.detail );
+                $('#SPP').remove();
+                $("#btnFP").removeClass("disabled");
+                if ( jqXHR.status == 500 && textStatus == "error" ){
+                  // showMsgTemporal(4000, 'error', 'Se presentó el ERROR siguiente', "Falló la conexión con el servidor... Reintente mas tarde");
+                  showMsgToastTemp('top-center', 6000, 'error', "Falló la conexión con el servidor... Reintente mas tarde");
+                  $("#email").focus();
+                } else{
+                  // Mostrar el mensaje de error personalizado del servidor
+                  showMsgTemporal(4000, 'error', 'Se presentó el ERROR siguiente', jqXHR.responseJSON.detail)
+                }
+              }
+          })
+          
       })
     </script>
   </body>

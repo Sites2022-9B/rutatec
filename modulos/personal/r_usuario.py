@@ -1,10 +1,10 @@
-from fastapi import APIRouter, Request, Depends
+from fastapi import APIRouter, Request, Depends, Response
 from modulos.seguridad.models import User
 from modulos.seguridad.r_authentication import SessionData, test_session, validarSessionforApis 
 from typing import List, Tuple
 from sqlalchemy.orm import Session
 from db import database
-from modulos.seguridad.schemas import Addusuario
+from modulos.seguridad.schemas import Addusuario, ForgotPassword
 from modulos.seguridad.sec.sec_hashing import Hash
 from modulos.shared_schemas import BusquedaYPaginacion
 from routers.plantillas import templates, fastapi
@@ -44,3 +44,5 @@ async def getrutas(session: Tuple[SessionData, str] = Depends(test_session), db:
     print('rutas', rows)
     return {"metadata" : metadatas, "data": rows}
     # raiseExceptionNoAuth(f"Permiso denegado")
+    raiseExceptionDataErr(observa)
+
