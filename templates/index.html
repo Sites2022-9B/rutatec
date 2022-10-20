@@ -14,7 +14,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title></title>
+    <title>RUTA-TEC Visualiza tu ruta, visualiza tu destino</title>
     <!-- <link rel="preload" href="/dist/libs/bootstrap-table/all.css" as="style"> -->
     <link href="/dist/css/indexbasesidebar.css" rel="stylesheet" />
     <link href="/dist/libs/jquery-treetable-master/jquery-treetable.css" rel="stylesheet" />
@@ -122,15 +122,15 @@
       .form-label { 
         margin-bottom: 0rem;
       }
-      #search-by {
+      #buscadorR {
         width: 180px; 
-        height: 30px; 
+        height: 40px; 
         left: 40px; 
         position: relative;
       }
       /*Animacion de despliegue*/
       #root li ul{
-      	transition: all 0.5s ease-out;
+      	transition: all 0.3s ease-out;
       }
 	    /*Animación de los iconos*/
 	    @keyframes swing {
@@ -178,12 +178,12 @@
 	      color: #ffff;
 	      font-size: 14px;
 	      padding: 8px 5px;
-	      background: #0982bb;/*rgb(0, 177, 136); #00546F*/
+	      background: #00546f;/*rgb(0, 177, 136); #00546F*/
 	    }
 	    /*Animacion para los agrupadores*/
 	    .contenedor  #agrup:hover{
 	      padding: 8px 12px;
-        background-color: #e2f01c95;
+        background-color: #ecfd00;
 	    }
 	    /*Cambiar de fondo a los módulos*/
 	    #root .sidebar-dropdown a {
@@ -191,12 +191,10 @@
 	      color: #454546;
 	    }
 	    #root .sidebar-dropdown:hover a {
-	      background: #00B188; /*#00B188 rgb(0, 177, 136)*/
+	      background: #00546f; /*#00B188 rgb(0, 177, 136)*/
 	      color: #ffff;
 	      padding: 6px 25px;
 	    }
-	    /*Home*/
-
 
       /*Elimina los botones del input tipo number*/
       .ExepbtnNumber::-webkit-inner-spin-button{
@@ -211,14 +209,9 @@
       .opcionActRegresar {
         color: #7F7C7C!important;
       }
-      #Tour{
-        font-style: bold;
-        font-weight: 700;
-        color: #206bc4!important;
-        border-color: rgb(0, 177, 136) !important;
-      }
+
       #btnproy, #btnindi, #btnres, #btnact, #btnppto, #btnProy{
-        color: #206bc4!important;
+        color: #00546f!important;
         border-color: rgb(0, 177, 136) !important;
       }
       .icon{
@@ -250,17 +243,18 @@
             <div class="container-fluid">
                 <h6 class="logo active text-dark">
                   <a href="/">
-                    <img src="/logourutatec.png" width="100" height="100">
+                    <img src="/sites.png" width="100" height="100" style="position: relative; left: 25%;">
                   </a>
-                  <div> <label></label></div>
+                  <div> <label>RUTA-TEC Visualiza tu ruta, visualiza tu destino</label></div>
                   <!-- <div class="col-12">Two <input type="button" class="btn btn-outline-primary float-right" value=".float-right"></div> -->
                 </h6>
-                <form class="d-flex">
-                  <input id="search" class="form-control me-2" type="text" placeholder="Search">
-                </form>
+                <!-- <form class="d-flex" >
+                  <input id="Buscar" class="form-control me-2" type="text" placeholder="Busca una ruta">
+                </form> -->
                <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="ti ti-line-height h1"></span>
                 </button> -->
+                
                 <div class="navbar-nav flex-row order-md-last" id="navbarText">
                     <div id="fotoram" name="fotoram" class="agrupador dropdown mx-2">
                       <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown">
@@ -307,15 +301,15 @@
               </div>
               <div class="sidebar-menu" id="accordion">
                 <div class="conteiner-fluid" >
-                    <input class="form-control me-2 search" id="search-by" type="text" placeholder="ruta a buscar"/>
+                    <input class="form-control me-2 search" id="buscadorR" type="text" placeholder="Buscar una ruta"/>
                     <br>
                   </div>
                   <ul id="ulMenuMain"></ul><br>      
                   <ul id="root" class="contenedor">
-                    <li class="nav-item" id="clon_ruta">
+                    <!-- <li class="nav-item" id="clon_ruta">
                       <input type="hidden" class="idruta" id="ruta_id" required disabled style="display:none;">
                       <input type="text" class="form-control Ruta" id="ruta_n" required disabled style="display:none;">
-                    </li>
+                    </li> -->
                   </ul>
               </div>
               <!-- sidebar-menu  -->
@@ -335,10 +329,12 @@
           </div>
       </nav>  
         <!-- sidebar-wrapper  -->
-        <main class="page-content" style="height: auto; min-height: 80vh; ">
+        <main id="mapaG" class="page-content" style="height: auto; min-height: 80vh; ">
             <div class="container-fluid">
                 <!--Google map-->
                 <div id="map" class="z-depth-1-half map-container" style="height: 500px">
+                  
+                </div>
         </main>
         <style>
           .map-container{
@@ -373,16 +369,6 @@
                   <i class="ti ti-home h2 me-2"></i>
                   Mi Cuenta</a>
                 </li>
-                <li class="agrupador">
-                <a href="#tabs-personal" class="nav-link" data-bs-toggle="tab">
-                  <i class="ti ti-user h2 me-2"></i>
-                  Datos Personales</a>
-                </li>
-                <li class="agrupador">
-                <a href="#tabs-laboral" class="nav-link" data-bs-toggle="tab">
-                  <i class="ti ti-briefcase h2 me-2"></i>
-                  Datos Laborales</a>
-                </li>
               </ul>
               <div class="card-body">
                 <div class="tab-content card-body">
@@ -397,13 +383,7 @@
                         </div>
                         <div class="card-body">
                           <form id="formfotoemp" enctype="multipart/form-data" method="post" >
-                            <img id="mimagen" class="fotoperfil">
-                            <div class="input-file-container">  
-                              <label for="">La importación se realizará automáticamente después de 
-                                  <b>arrastrar o seleccionar</b> su archivo:
-                              </label><br>
-                              <input class="input-files filepond" name="files" id="files" type="file">
-                            </div> 
+                            <img id="mimagen" class="fotoperfil"> 
                             <!-- <label class="invisible">Seleccione su archivo</label><br>
                             <input name="files" id="files" type="file">
                             <input type="submit" value="Actualizar" class="btn btn-primary w-100" style="margin-top: 15px; margin-bottom: 1px;" />
@@ -420,7 +400,6 @@
                           </div>
                           <div class="card-body">
                             
-                          
                           </div>
                         </div>
                         <div class="card mb-3">
@@ -551,14 +530,16 @@
                 </div>
                 <div class="col-lg-3">
                     <center>
-                        <div class="hr-text text-primary">Dirección</div>
-                        <p>Entronque Toniná kilómetro 0.5, Carretera Ocosingo - Altamirano</p>
+                        <div class="hr-text text-primary">Nombre de la empresa</div>
+                        <p>Sistemas Tecnológicos de la Selva</p>
                     </center>
                 </div>
                 <div class="col-lg-3">
                     <center>
                         <div class="hr-text text-primary">Contacto</div>
-                        <p>Ocosingo, Chiapas, México. C.P. 29950,2</p>
+                        <p>Ocosingo, Chiapas, México. C.P. 29950</p>
+                        <p>Sites2022GyDS@gmail.com</p>
+
                     </center>
                 </div>
                 <div class="col-lg-3">
@@ -598,7 +579,6 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
       -->
-    
     <script src="/dist/libs/bootstrap/jquery.min.js"></script>
     <script src="/dist/libs/bootstrap/popper.min.js"></script>
     <script src="/dist/libs/bootstrap/bootstrap.min.js"></script>
@@ -648,31 +628,36 @@
 
     <script>
       $(document).ready(function(){
-        showrutas()
+        showrutas();
+        initMap();
+        // datosusuario();
       });
+
       function showrutas(){
         $.ajax({
           type: 'GET',
           url: '/api/sidebar',
           contentType: 'application/json',
           success: function (data, textStatus, jqXHR) {
-            //console.log(data.data[0]);
-            //console.log(data.data[1]);
-          $.each(data.data, function(index, campo){
-              console.log(campo[0]);
-              //clonarrutas(campo[0]);
-              $('#root').append(`
-        <li class="mnuRaiz nav-item" id="mnuRaiz_${campo[0]}">
-          <a href="#catgrupo_id_${campo[0]}" id="agrup" class="accordion-collapse collapse" data-toggle="collapse" aria-expanded="true">
-          ${campo[1]}
-          <i id="icono1" class="ti ti-chevron-right"></i>
-          </a>
-            <ul class="subMenusRoot collapse list-unstyled"  id="catgrupo_id_${campo[2]}" data-parent="#accordion">
-              ${campo[2]}
-            </ul> 
-        </li>
-      `);
+            // Se mandan a llamar las funciones del Sidebar para las rutas.
+            menuappendmenu(data.data);
+            subrutas('#sub_id_', data.data);
+            $('#buscadorR').keyup(function(){
+              listaR = data.data;
+              if($('#buscadorR').val().length >= 1){
+                console.log('se está escribiendo');
+                var similar = listaR.filter(function(objeto){
+                  return objeto[1].normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes($('#buscadorR').val().trim().toLowerCase());
+                });
+                $('#root').empty();
+                subrutas('#root', similar, true);
+              }else{
+                $('#root').empty();
+                menuappendmenu(data.data);
+                subrutas('#sub_id_', data.data);
+              }
             });
+            // showGoogleMaps();
           },
           error: function (jqXHR, textStatus, error) {
                 console.log(jqXHR); console.log(textStatus); console.log(error);
@@ -683,22 +668,46 @@
                     showMsgTemporal(4000, 'error', 'ERROR', jqXHR.responseJSON.detail);
                 }
             }
-            
-        });
-      }
+        });
+      }
 
-  function clonarrutas(id){
-    let navfila = $('#root').clone(true,true);
-    navfila.attr('id','ul_'+ id);
-    $('#root').find("ul:last").after(navfila);
+      function menuappendmenu(rutas){
+        $.each(rutas, function(index, ruta){
+          console.log(ruta[0], ruta[1], ruta[2]);
+          $('#root').append(`
+            <li class="mnuRaiz nav-item" id="rutaP_${ruta[0]}">
+              <a href="#sub_id_${ruta[0]}" id="agrup" class="accordion-collapse collapse" data-toggle="collapse" aria-expanded="true">
+              ${ruta[1]}
+              <i id="icono1" class="ti ti-chevron-right"></i>
+              </a>
+                <ul class="subMenusRoot collapse list-unstyled" id="sub_id_${ruta[0]}" data-parent="#accordion">
+                </ul>
+            </li>
+          `);
+        });
+      }
 
-    navfila.find('.idruta').attr('id','ruta_id'+id);
-    navfila.find('.Ruta').attr('id','ruta_n'+id);
-    navfila.show();
-
-    $('#ul_'+id).addClass('clonado');
-
-  }
+      function subrutas(idItemUL, listado, soloMenus){
+        $.each(listado, function(index, valor) {
+          var idmen = idItemUL + valor[0];
+          if ( soloMenus ){
+            idmen = idItemUL;
+          }
+          $(idmen).append(`
+            <li id="ruta" class="sidebar-dropdown">
+              <a href="#">
+                <i class="ti ti-car"></i>
+                Ver ${valor[1]}
+              </a>
+            </li>
+            <li class="sidebar-dropdown">
+              <a href="#">
+                ${valor[2]}
+              </a>
+            </li>
+          `); 
+        });
+      }
     </script>
     <script>
 

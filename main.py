@@ -43,10 +43,6 @@ app.include_router(r_index.router)
 
 
 
- 
-@app.get('/logourutatec.png', include_in_schema=False)
-def logoutselva():
-    return RedirectResponse(url='/static/sites.png')
 
 @app.get('/perfil.png', include_in_schema=False)
 def perfil():
@@ -91,9 +87,9 @@ async def show_Main_Test_Popups():
 def page_forgot_password(request:Request):
     return templates.TemplateResponse( name="recuperarcon.html", context={ "request": request } )
 
-@app.get('/logoutselva.png', include_in_schema=False)
+@app.get('/sites.png', include_in_schema=False)
 def logoutselva():
-    return RedirectResponse(url='/static/logoutselva.png')
+    return RedirectResponse(url='/static/sites.png')
 
 HOST="127.0.0.1"
 PORT=8000

@@ -32,7 +32,7 @@
           <div class="card-body">
             <div class="text-center mb-2" id="empresa">
                 <!-- <img src="/static/logoutselva.png" width="140" height="42" alt="logoutselva" class=""> -->
-                <img src="logourutatec.png" width="140" height="140">
+                <img src="sites.png" width="140" height="140">
             </div>
             <div class="hr-text" id="app">
               <h2>Registrarte a RUTATEC</h2>
@@ -48,8 +48,8 @@
                 <span class="input-icon-addon">
                   <i class="ti ti-user"></i>
                 </span>
-                <input type="text" id="name" name="nombre" class="form-control" value=""  placeholder="Capture su Nombre" required/>
-                <div class="invalid-feedback">Ingrese su Nombre</div>
+                <input type="text" id="name" name="nombre" class="form-control" value=""  placeholder="Capture su Nombre" pattern="[A-Z][a-z]{1,15}" required/>
+                <div class="invalid-feedback">Ingrese su Nombre sin caracteres especiales. ( ), [ ], { }...</div>
               </div>   
             </div>
 
@@ -60,8 +60,8 @@
                   <span class="input-icon-addon">
                     <i class="ti ti-user"></i>
                   </span>
-                  <input type="text" id="Apellido" name="apellidos" class="form-control" value=""  placeholder="Capture su Apellido" required/>
-                  <div class="invalid-feedback">Ingrese su Apellido</div>
+                  <input type="text" id="Apellido" name="apellidos" class="form-control" value=""  placeholder="Capture su Apellido " pattern="[A-Z][a-z]{1,15}" required/>
+                  <div class="invalid-feedback">Ingrese su Apellido sin caracteres especiales. ( ), [ ], { }...</div>
                 </div>   
               </div>
 
@@ -71,7 +71,7 @@
                   <span class="input-icon-addon">
                     <i class="ti ti-mail"></i>
                   </span>
-                  <input type="email" id="username" name="correo" class="form-control" value=""  placeholder="Capture su cuenta" required/>
+                  <input type="email" id="username" name="correo" class="form-control" value=""  placeholder="Capture su cuenta" pattern="[A-Z][a-z]{1,15}" required/>
                   <div class="invalid-feedback">Ingresa un correo, ej: example@gmail.com</div>
                 </div>   
               </div>
@@ -85,7 +85,7 @@
                       <i class="ti ti-lock"></i>
                     </span>
                     <input type="password" id="password" name="contra" value="" class="form-control" minlength="3"  placeholder="Capture su Password" required/>
-                    <div class="invalid-feedback">Se deben de introducir mínimo 3 caracteres</div>
+                    <div class="invalid-feedback">Se deben de introducir mínimo 3 caracteres y sin caracteres especiales</div>
                   </div>
                 </div>
                 <div class="col-auto">
@@ -172,7 +172,8 @@
       $("#btniniciar").click(function (e) {
         // limpiar los datos...
         window.location.replace('/login')
-        console.log("crear nuevo usuario");
+        // showrutas();
+        // console.log("crear nuevo usuario");
       });
 
       $("#createform").submit(function(e) {
@@ -204,7 +205,30 @@
                   return true;
               });
           });
-      })
+      });
+      // function showrutas(){
+      //   $.ajax({
+      //     type: 'GET',
+      //     url: '/api/sidebar',
+      //     contentType: 'application/json',
+      //     success: function (data, textStatus, jqXHR) {
+      //       console.log(data);
+      //     $.each(data.data, function(index, ruta){
+      //       console.log(ruta);
+      //     });
+      //     },
+      //     error: function (jqXHR, textStatus, error) {
+      //           console.log(jqXHR); console.log(textStatus); console.log(error);
+      //           if (jqXHR.status == 406) {
+      //               showMsgTemporal(4000, 'warning', 'ATENCIÓN', jqXHR.responseJSON.detail);
+      //           }
+      //           else {
+      //               showMsgTemporal(4000, 'error', 'ERROR', jqXHR.responseJSON.detail);
+      //           }
+      //       }
+
+      //   });
+      // }
     </script>
   </body>
 </html>

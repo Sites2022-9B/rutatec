@@ -1,13 +1,14 @@
 from fastapi import APIRouter, Request, Depends
 from modulos.seguridad.models import User
-from modulos.seguridad.r_authentication import SessionData, test_session 
+from modulos.seguridad.r_authentication import SessionData, test_session, validarSessionforApis 
 from typing import List, Tuple
 from sqlalchemy.orm import Session
 from db import database
 from modulos.seguridad.schemas import Addusuario
 from modulos.seguridad.sec.sec_hashing import Hash
+from modulos.shared_schemas import BusquedaYPaginacion
 from routers.plantillas import templates, fastapi
-from modulos.shared_defs import getSettingsNombreEnvActivo, raiseExceptionDataErr, raiseExceptionNoAuth
+from modulos.shared_defs import getSettingsNombreEnvActivo, prepParam, raiseExceptionDataErr, raiseExceptionNoAuth
 
 
 router = APIRouter( tags=['registrar'] )
@@ -34,3 +35,12 @@ async def addusuario(usuDado: Addusuario , session: Tuple[SessionData, str] = De
             return {"message": "Success!!!"}
         raiseExceptionDataErr(f"El correo ya existe, favor de verificar")
     raiseExceptionDataErr(observa)
+
+@router.get("/api/sidebar")
+async def getrutas(session: Tuple[SessionData, str] = Depends(test_session), db: Session = Depends(database.get_db)):
+    sql = f"""SELECT * FROM rutas"""
+    sqlParams = {}
+    metadatas,rows = database.execSql(sql, sqlParams, False, True)
+    print('rutas', rows)
+    return {"metadata" : metadatas, "data": rows}
+    # raiseExceptionNoAuth(f"Permiso denegado")

@@ -222,7 +222,9 @@ async def authenticate_User(userDado : Login, response: Response, ret: str = "/"
         test_user = SessionData(username=userDado.username, id=userinDB.id)
         
         await test_session.start_and_set_session(test_user, response)
+        print(test_user)
         return {"message": "Welcome!!!", "user": test_user}
+        
     else:
         # TODO: borrar cualquier cookie de sesión existente, si se desea emplear el api/login
         #await test_session.end_and_delete_session(session, response)

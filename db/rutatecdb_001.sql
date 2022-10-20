@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS usuario (
 CREATE TABLE IF NOT EXISTS rutas (
 	id SERIAL NOT NULL,
 	nombre VARCHAR (30),
-	descripcion VARCHAR (100),
+	descripcion VARCHAR (500),
 	PRIMARY KEY(id)
 );
 
@@ -99,4 +99,11 @@ insert into "usuario" values (1,'Pablo','Ruiz', 'pablofabianruizconstantino@gmai
 --Usuarios de Unidades Responsables
 insert into "usuario" values (2,'Henry','Lopez', 'henry@gmail.com', '1234',false);
 insert into "usuario" values (3,'Eduardo','Gutierrez', 'quique@gmail.com', '1234',false);
+
+INSERT INTO rutas VALUES(1,'RUTA1', 'ISJISJNCSIJNSICJNSICJSNIENCISE')
+INSERT INTO rutas VALUES(2,'RUTA2', 'ISJISJNCSIJNSICJNSICJSNIENCISE')
+INSERT INTO rutas VALUES(3,'RUTA3', 'ISJISJNCSIJNSICJNSICJSNIENCISE')
+INSERT INTO rutas VALUES(4,'RUTA4', 'ISJISJNCSIJNSICJNSICJSNIENCISE')
+INSERT INTO rutas VALUES(5,'RUTA5', 'ISJISJNCSIJNSICJNSICJSNIENCISE')
+
 SELECT setval ('usuario_id_seq', 3, true);
