@@ -329,30 +329,15 @@
           </div>
       </nav>  
         <!-- sidebar-wrapper  -->
-        <main id="mapaG" class="page-content" style="height: auto; min-height: 80vh; ">
-            <div class="container-fluid">
-                <!--Google map-->
-                <div id="map" class="z-depth-1-half map-container" style="height: 500px">
+        <div id="map"></div>
+
                   
                 </div>
         </main>
-        <style>
-          .map-container{
-          overflow:hidden;
-          padding-bottom:56.25%;
-          position:relative;
-          height:0;
-        }
-        .map-container iframe{
-          left:0;
-          top:0;
-          height:100%;
-          width:100%;
-          position:absolute;
-        }
-        </style>
-        <!--Google Maps-->
+
+        
         <!-- page-content" -->
+
         
     <div class="modal modal-blur fade" id="modal-editarperfil" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-xl" role="document">
@@ -516,7 +501,7 @@
 </div>
 
     <!-- </div> -->
-    
+
     <!-- </div> -->
 
     <footer class="footer bg-white" style="padding: 0rem 0;">
@@ -618,13 +603,47 @@
     <script src="/dist/js/counter.js"></script>
     <script src="/dist/libs/numeral-2.0.6/numeral.min.js"></script>
     <script src="/dist/libs/jquery-treetable-master/jquery-treetable.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtYfFGOjdpabTQ6Gnfktn0P6UyObPpvAs&callback=initMap"></script>
-   <script>   
-    $('#Historial').attr('onClick','abrimodal()');
-    function abrimodal(){
-      $('#modal').modal('show');    
-    }
-    </script>
+    <style>
+
+      #map {
+	height: 695px;
+	width: 100%;
+
+
+         background-color: grey;
+     
+     }
+     
+     </style>
+    <script>
+
+      function initMap() {
+
+        var macc = {lat:16.90864465926933, lng: -92.08949481639918};
+  
+        var map = new google.maps.Map(
+  
+            document.getElementById('map'), {zoom: 16, center: macc});
+  
+        var marker = new google.maps.Marker({position: macc, map: map});
+  
+      }
+  
+   </script>
+
+<script async defer
+
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSG6rPxXP8g92omTJIJg1qCM2vUD_vK4o&callback=initMap">
+
+</script>
+
+</script>
+    <script> 
+      $('#Historial').attr('onClick','abrimodal()');
+      function abrimodal(){
+        $('#modal').modal('show');    
+      }
+      </script>
 
     <script>
       $(document).ready(function(){
@@ -708,24 +727,7 @@
           `); 
         });
       }
-    </script>
-    <script>
-
-      function initMap() {
-  
-        var macc = {lat: 42.1382114, lng: -71.5212585};
-  
-        var map = new google.maps.Map(
-  
-            document.getElementById('map'), {zoom: 15, center: macc});
-  
-        var marker = new google.maps.Marker({position: macc, map: map});
-  
-      }
-  
-   </script>
-    
-    
+    </script>    
 {% endblock jsfiles %}
 </body>
 </html>
