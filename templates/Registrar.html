@@ -48,7 +48,7 @@
                 <span class="input-icon-addon">
                   <i class="ti ti-user"></i>
                 </span>
-                <input type="text" id="name" name="nombre" class="form-control" value=""  placeholder="Capture su Nombre" pattern="[A-Z][a-z]{1,15}" required/>
+                <input type="text" id="name" name="nombre" class="form-control" value=""  placeholder="Capture su Nombre" pattern="[A-Za-z0-9ÁÉÍÓÚáéíóúñÑÜü^,^.\s]{3,100}" required/>
                 <div class="invalid-feedback">Ingrese su Nombre sin caracteres especiales. ( ), [ ], { }...</div>
               </div>   
             </div>
@@ -60,7 +60,7 @@
                   <span class="input-icon-addon">
                     <i class="ti ti-user"></i>
                   </span>
-                  <input type="text" id="Apellido" name="apellidos" class="form-control" value=""  placeholder="Capture su Apellido " pattern="[A-Z][a-z]{1,15}" required/>
+                  <input type="text" id="Apellido" name="apellidos" class="form-control" value="" minlength="3" placeholder="Capture su Apellido " pattern="[A-Za-z0-9ÁÉÍÓÚáéíóúñÑÜü^,^.\s]{3,100}" required/>
                   <div class="invalid-feedback">Ingrese su Apellido sin caracteres especiales. ( ), [ ], { }...</div>
                 </div>   
               </div>
@@ -71,7 +71,7 @@
                   <span class="input-icon-addon">
                     <i class="ti ti-mail"></i>
                   </span>
-                  <input type="email" id="username" name="correo" class="form-control" value=""  placeholder="Capture su cuenta" pattern="[A-Z][a-z]{1,15}" required/>
+                  <input type="email" id="username" name="correo" class="form-control" value=""  placeholder="Capture su cuenta" required/>
                   <div class="invalid-feedback">Ingresa un correo, ej: example@gmail.com</div>
                 </div>   
               </div>
@@ -84,7 +84,7 @@
                     <span class="input-icon-addon">
                       <i class="ti ti-lock"></i>
                     </span>
-                    <input type="password" id="password" name="contra" value="" class="form-control" minlength="3"  placeholder="Capture su Password" required/>
+                    <input type="password" id="password" name="contra" value="" class="form-control"  minlength="3" placeholder="Capture su Password" required/>
                     <div class="invalid-feedback">Se deben de introducir mínimo 3 caracteres y sin caracteres especiales</div>
                   </div>
                 </div>
