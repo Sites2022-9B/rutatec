@@ -15,19 +15,14 @@ from base64 import b64encode, b64decode
 from db import database
 from fastapi import APIRouter, Depends, HTTPException, FastAPI, Request, Response
 from sqlalchemy.orm import Session
-from modulos.shared_defs import getSettingsName, getSettingsNombreEnvActivo, is_SuperUser, raiseExceptionDataErr, raiseExceptionExpired
+from modulos.shared_defs import getSettingsNombreEnvActivo, is_SuperUser, raiseExceptionDataErr, raiseExceptionExpired
 from starlette.types import Message
 import datetime 
-
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-
-
 from random import randrange
-
 from routers.plantillas import templates, fastapi
-
 from starlette.responses import RedirectResponse
 
 router = APIRouter(tags=['Authentication'])
@@ -327,7 +322,6 @@ async def reset_password(request: Request, emailDado: ForgotPassword, responde: 
             activado = False
         )
 
-
         UserReset.create(db)
         db.commit()
 
@@ -375,14 +369,11 @@ async def reset_password(request: Request, emailDado: ForgotPassword, responde: 
             </body>
         </html>
         """
-
         #part1 = MIMEText(text, 'plain')
         part2 = MIMEText(html, 'html')
 
         #msg.attach(part1)
         msg.attach(part2)
-
-
         #sms = 'HOLA! SU NUEVA CONTRASEÑA ES: '+ newPassword +' FAVOR DE INGRESAR Y CAMBIAR NUEVAMENTE SU CONTRASEÑA'
         #encabezado = 'Contraseña nueva para SISUTS'
         #sms = 'Subject: {}\n\n{}'.format(encabezado, sms)
@@ -394,10 +385,8 @@ async def reset_password(request: Request, emailDado: ForgotPassword, responde: 
         #server.quit()
         s.sendmail(EMAIL_CUENTA, emailDado.email, msg.as_string())
         s.quit()
-
         mensajeRetorno = 'CORREO ENVIADO CORRECTAMENTE!!'
 
-        
         db.query(User).filter_by(correo=emailDado.email).update(dict(contra=newPBcrypt))
         db.commit()
         #db.session.commit()

@@ -1,10 +1,4 @@
-from typing import Optional
-from sqlalchemy import inspect
-from sqlalchemy.orm import backref
-
-from modulos.shared_schemas import BusquedaYPaginacion
 from ..shared_models import *
-
 
 class Settings(Base):
     __tablename__ = 'settings'
@@ -23,36 +17,6 @@ class User(Base):
     contra = Column(String, nullable=False)
     isEncrypted = Column(Boolean(), nullable=False)
 
-
-class Rol(Base):
-    __tablename__ = 'rol'
-
-    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    rol = Column(String, index=True)
-
-
-
-class Cat(Base):
-    __tablename__ = "cat"
-    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-
-
-
-class CatUser(Base):
-    __tablename__ = "catuser"
-    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    #llaves foraneas
-
-    
-class CatRol(Base):
-    __tablename__ = "catrol"
-    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    #llaves foraneas
-    fechaini = Column(DateTime, nullable=False)
-    fechafin = Column(DateTime, nullable=True)
-
-
-
 class UserResetPwd(Base):
     __tablename__ = 'userreset'
 
@@ -63,10 +27,3 @@ class UserResetPwd(Base):
     fechafin = Column(DateTime)
     confirmacion = Column(Boolean(), default=False)
     activado = Column(Boolean(), default=False)
-
-
-class Catgrupo(Base):
-    __tablename__ = 'catgrupo'
-    id = Column (Integer, primary_key=True, index=True, autoincrement=True)
-    grupo = Column(String, index=True, nullable=False)
-    posicion = Column(Integer, index=True, nullable=False)

@@ -1,5 +1,4 @@
 from typing import Tuple
-from xml.etree.ElementInclude import include
 from db.database import createLastChangesInDB
 from sqlalchemy.orm import Session
 from db import database
@@ -11,15 +10,11 @@ from starlette.responses import RedirectResponse
 from starlette.exceptions import HTTPException
 from fastapi.encoders import jsonable_encoder
 from modulos.seguridad.r_authentication import SessionData, test_session
-from modulos.seguridad import r_authentication, r_user, initBDSeguridad
+from modulos.seguridad import r_authentication, initBDSeguridad
 from modulos.personal import r_usuario, r_index
-from modulos.shared_defs import getAnioFiscalActual, getAreaActual2, getEmpleadoId, getPermisos, getSettingsNombreEnvActivo, is_SuperUser
-from modulos import shared_routers
-
-
+from modulos.shared_defs import getAnioFiscalActual, getAreaActual2, getEmpleadoId, getSettingsNombreEnvActivo
 # Cargar en memoria todos los modelos para su creación automática
 from modulos.seguridad.models import *
-
 
 # Crear las tablas en BD según los modelos previamente cargados
 #Base.metadata.create_all(engine)
@@ -37,12 +32,8 @@ app.mount("/dist", StaticFiles(directory="dist"), name="dist")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.include_router(r_authentication.router)
-app.include_router(r_user.router)
 app.include_router(r_usuario.router)
 app.include_router(r_index.router)
-
-
-
 
 @app.get('/perfil.png', include_in_schema=False)
 def perfil():
@@ -92,6 +83,7 @@ def page_pruebas_html(request:Request):
     return templates.TemplateResponse( name="pruebas.html", context={ "request": request } )
 
 @app.get('/sites.png', include_in_schema=False)
+
 def logoutselva():
     return RedirectResponse(url='/static/sites.png')
 

@@ -1,14 +1,13 @@
-from fastapi import APIRouter, Request, Depends, Response
+from fastapi import APIRouter, Request, Depends
 from modulos.seguridad.models import User
-from modulos.seguridad.r_authentication import SessionData, test_session, validarSessionforApis 
+from modulos.seguridad.r_authentication import SessionData, test_session
 from typing import List, Tuple
 from sqlalchemy.orm import Session
 from db import database
-from modulos.seguridad.schemas import Addusuario, ForgotPassword
+from modulos.seguridad.schemas import Addusuario
 from modulos.seguridad.sec.sec_hashing import Hash
-from modulos.shared_schemas import BusquedaYPaginacion
 from routers.plantillas import templates, fastapi
-from modulos.shared_defs import getSettingsNombreEnvActivo, prepParam, raiseExceptionDataErr, raiseExceptionNoAuth
+from modulos.shared_defs import getSettingsNombreEnvActivo, raiseExceptionDataErr, raiseExceptionNoAuth
 
 
 router = APIRouter( tags=['registrar'] )
