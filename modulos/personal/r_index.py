@@ -4,8 +4,6 @@ from typing import Tuple
 from sqlalchemy.orm import Session
 from db import database
 
-
-
 router = APIRouter( tags=['registrar'] )
 
 @router.get('/api/sidebar')

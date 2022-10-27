@@ -12,7 +12,7 @@ from fastapi.encoders import jsonable_encoder
 from modulos.seguridad.r_authentication import SessionData, test_session
 from modulos.seguridad import r_authentication, initBDSeguridad
 from modulos.personal import r_usuario, r_index
-from modulos.shared_defs import getAnioFiscalActual, getAreaActual2, getEmpleadoId, getSettingsNombreEnvActivo
+from modulos.shared_defs import getSettingsNombreEnvActivo
 # Cargar en memoria todos los modelos para su creación automática
 from modulos.seguridad.models import *
 

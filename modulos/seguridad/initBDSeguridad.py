@@ -1,13 +1,8 @@
-from pydantic.types import Json
-from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 from db.database import get_db
-from typing import List, Tuple
+from typing import List
 from modulos.seguridad.models import User
 from .sec.sec_hashing import Hash
-
-from typing import Optional
-from pydantic import BaseModel, EmailStr
 
 #Inicializar la cuenta de usuario inicial
 FIRST_SUPERUSER : str = "pablofabianruizconstantino@gmail.com"

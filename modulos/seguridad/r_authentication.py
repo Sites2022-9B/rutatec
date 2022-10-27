@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from pydantic.networks import EmailStr
 from sqlalchemy.sql.expression import null
 from .sec.sec_hashing import Hash
-from modulos.seguridad.models import *
+from modulos.seguridad.models import User
 from modulos.seguridad.schemas import Login, UpdatePassword, ForgotPassword
 from typing import Type, Optional, Dict, Any, Tuple
 from uuid import uuid4
@@ -13,16 +13,14 @@ from itsdangerous import TimestampSigner
 from itsdangerous.exc import SignatureExpired
 from base64 import b64encode, b64decode
 from db import database
-from fastapi import APIRouter, Depends, HTTPException, FastAPI, Request, Response
+from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from sqlalchemy.orm import Session
 from modulos.shared_defs import getSettingsNombreEnvActivo, is_SuperUser, raiseExceptionDataErr, raiseExceptionExpired
-from starlette.types import Message
-import datetime 
 import smtplib
 from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+from email.mime.text import MIMEText    
 from random import randrange
-from routers.plantillas import templates, fastapi
+from routers.plantillas import templates
 from starlette.responses import RedirectResponse
 
 router = APIRouter(tags=['Authentication'])
@@ -275,7 +273,7 @@ async def update_password( request: Request, datosUpdate: UpdatePassword, respon
 
 
 @router.post("/api/forgotPassword")
-async def reset_password(request: Request, emailDado: ForgotPassword, responde: Response,  ret: str = "/ForgotPassword", db: Session = Depends(database.get_db)):
+async def forgot_password(request: Request, emailDado: ForgotPassword, responde: Response,  ret: str = "/ForgotPassword", db: Session = Depends(database.get_db)):
     #return templates.TemplateResponse( name="forgot-password.html", context={ "request": "correo", "ret": ret } )
     siExiste = ''
     mensajeRetorno = ''

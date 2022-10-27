@@ -14,7 +14,6 @@ class Base:
     def __tablename__(cls) -> str:
         return cls.__name__.lower()
 
-
     def addtrans(self, db: Session):
         trans2 = db.begin_nested()
         db.add(self)

@@ -1,6 +1,6 @@
-from datetime import date, datetime
+from datetime import datetime
 from typing import Optional
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
 
 class BusquedaYPaginacion(BaseModel):
     search : Optional[str] = None

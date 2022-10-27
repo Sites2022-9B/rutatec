@@ -1,4 +1,6 @@
-from ..shared_models import *
+from db.base_class import Base
+from sqlalchemy import Boolean, Column, Integer, String, ForeignKey
+from sqlalchemy.sql.sqltypes import  DateTime
 
 class Settings(Base):
     __tablename__ = 'settings'

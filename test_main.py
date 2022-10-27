@@ -2,10 +2,6 @@
 # Para realizar depuraciones https://fastapi.tiangolo.com/tutorial/debugging/
 # Una vez instalado: pip install pytest
 # ejecutar: cls; pytest -vv
-import pytest
-import json
-from pydantic.types import Json
-from requests import cookies
 from fastapi.testclient import TestClient
 from fastapi import status
 from modulos.seguridad.schemas import Login

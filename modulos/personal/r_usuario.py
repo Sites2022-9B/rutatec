@@ -6,8 +6,8 @@ from sqlalchemy.orm import Session
 from db import database
 from modulos.seguridad.schemas import Addusuario
 from modulos.seguridad.sec.sec_hashing import Hash
-from routers.plantillas import templates, fastapi
-from modulos.shared_defs import getSettingsNombreEnvActivo, raiseExceptionDataErr, raiseExceptionNoAuth
+from routers.plantillas import templates
+from modulos.shared_defs import getSettingsNombreEnvActivo, raiseExceptionDataErr
 
 
 router = APIRouter( tags=['registrar'] )
@@ -43,5 +43,5 @@ async def getrutas(session: Tuple[SessionData, str] = Depends(test_session), db:
     print('rutas', rows)
     return {"metadata" : metadatas, "data": rows}
     # raiseExceptionNoAuth(f"Permiso denegado")
-    raiseExceptionDataErr(observa)
+    # raiseExceptionDataErr(observa)
 

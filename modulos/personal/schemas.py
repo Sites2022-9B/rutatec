@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Optional
 from modulos.shared_schemas import BusquedaYPaginacion
 
 

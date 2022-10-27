@@ -1,13 +1,11 @@
 from datetime import datetime
-from genericpath import exists
 from sqlalchemy.schema import DDL
 from sqlalchemy.exc import OperationalError, ProgrammingError
 from sqlalchemy.sql.sqltypes import Boolean
 from sqlalchemy.sql import text
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-from pathlib import Path
+from sqlalchemy.orm import sessionmaker 
 import os
 from db.base_class import Base
 
@@ -20,7 +18,6 @@ Base = declarative_base()
 engine = create_engine(SQLALCHEMY_DATABASE_URL, pool_pre_ping=True, echo = False)
 SessionLocal = sessionmaker( bind=engine, autocommit=False, autoflush=False)
 
-Base = declarative_base()
                 
 def get_db():
     db = SessionLocal()
@@ -53,10 +50,6 @@ def createLastChangesInDB():
             scriptsqlyaEjecutado = f"Select * from controlversionbd where archivo_tecnico = '{fileScriptSql}'"
             regs = execSql(scriptsqlyaEjecutado,{}, False)    
             if regs == None or len(regs) == 0:
-                # ref. https://newbedev.com/execute-sql-from-file-in-sqlalchemy
-                # print("scriptsqlyaEjecutado",scriptsqlyaEjecutado)
-                # sql_file = open(f"{wd}{os.sep}{fileScriptSql}",'r', encoding='utf-8' )
-                # print("sql_file",sql_file)
                 numErrs = 0
                 try :
                     conn = engine.connect()
