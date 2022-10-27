@@ -13,13 +13,11 @@ from modulos.seguridad.r_authentication import SessionData, test_session
 from modulos.seguridad import r_authentication, initBDSeguridad
 from modulos.personal import r_usuario, r_index
 from modulos.shared_defs import getSettingsNombreEnvActivo
-# Cargar en memoria todos los modelos para su creación automática
-from modulos.seguridad.models import *
+from modulos.seguridad.models import User, UserResetPwd, Settings
+from modulos.personal.schemas import BusqFecha, lugarAdd, lugarUpdate
 
-# Crear las tablas en BD según los modelos previamente cargados
-#Base.metadata.create_all(engine)
 
-# Ejecutar los archivos de scritps de sql de cambios sobre estructuras y datos de la base de datos
+
 if not createLastChangesInDB():
     print('Se presentaron errores de conexión con el servidor de base de datos y con los scripts de actualizaciones')
 else:

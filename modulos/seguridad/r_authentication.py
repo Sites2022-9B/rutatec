@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from pydantic.networks import EmailStr
 from sqlalchemy.sql.expression import null
 from .sec.sec_hashing import Hash
-from modulos.seguridad.models import User
+from modulos.seguridad.models import User, UserResetPwd
 from modulos.seguridad.schemas import Login, UpdatePassword, ForgotPassword
 from typing import Type, Optional, Dict, Any, Tuple
 from uuid import uuid4

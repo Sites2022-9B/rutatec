@@ -1,23 +1,18 @@
 import os
 import json
-from os.path import exists
 import sys
 import traceback
 from typing import List
 from fastapi.encoders import jsonable_encoder
 from fastapi.param_functions import Depends
-import pandas as pd
 from sqlalchemy.orm.session import Session
-from sqlalchemy.orm.util import aliased
-from sqlalchemy.sql.elements import and_, between, or_
-from sqlalchemy.sql.functions import coalesce
 from modulos.seguridad.models import Settings
 # from modulos.shared_models import Settings
 # Importar losschemas del PIDE a pesar de que no se utilicen de forma directa, sino mas bien de forma indirecta por
 # la importación desde archivos de excel
 from db import database
 from routers.plantillas import templates
-from datetime import date, datetime
+from datetime import datetime
 from fastapi import status, HTTPException
 from fastapi.responses import FileResponse
 import logging
