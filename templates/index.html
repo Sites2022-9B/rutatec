@@ -27,8 +27,6 @@
     <link href="/dist/libs/select2-4.0.13/css/select2-bootstrap.min.css" rel="stylesheet" />
     <link href="/dist/libs/filepond/filepond.min.css" rel="stylesheet" />
     <link href="/dist/libs/filepond/filepond-plugin-get-file.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/5.1.0/introjs.min.css" integrity="sha512-iaYE9B9u4GU8+KkRTOdRdZuzKdYw1X0hOAa4GwDV/uwdXgoX/ffT3ph1+HG1m4LPZD/HV+dkuHvWFLZtPviylQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <style>
           /*Head del sidebar*/
         .verticalText {
@@ -69,7 +67,7 @@
             max-height: 99% !important;
         }
 
-        /* FilePond Custom Styles */
+        /* FilePond Custom Styles
        .filepondAbilitado{
             background-color: #2FB344;
             color: white;
@@ -77,12 +75,12 @@
         /* .filepond--drop-label{
             background-color: #06D497;
             color: white;
-        } */
+        } 
         .filepondDisabled{
           background-color: #4e3bfd;
           color: gray;
           font-weight: bold;
-        }
+        } */
         .select2-search__field {
           width: 100%!important;
         }
@@ -233,6 +231,11 @@
         font-size: 12px; 
         background-color: white;
       }
+      #map {
+	      height: 695px;
+	      width: 100%;
+        background-color: grey;
+     }
     </style>
     {% endblock %}
 </head>
@@ -286,9 +289,9 @@
         <a id="show-sidebar" class="text-dark" href="#">
             <i class="navbar-toggler-icon"></i>
         </a>
-        <nav id="sidebar" class="sidebar-wrapper">
+        <nav id="sidebar" class="sidebar-wrapper" >
           <div class="sidebar-content">
-              <div class="sidebar-brand head">
+              <div class="sidebar-brand head" style="background-color: #00546f;">
                   <div id="close-sidebar">
                       <i class="ti ti-x"></i>
                   </div>
@@ -329,16 +332,8 @@
           </div>
       </nav>  
         <!-- sidebar-wrapper  -->
-        <div id="map"></div>
-
-                  
-                </div>
-        </main>
-
-        
+        <div id="map"></div>        
         <!-- page-content" -->
-
-        
     <div class="modal modal-blur fade" id="modal-editarperfil" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
@@ -499,12 +494,7 @@
     </div>
   </div>
 </div>
-
-    <!-- </div> -->
-
-    <!-- </div> -->
-
-    <footer class="footer bg-white" style="padding: 0rem 0;">
+  <footer class="footer bg-white" style="padding: 0rem 0;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-2">
@@ -555,19 +545,15 @@
               <p class="h5 text-dark">Copyright &copy; 2021 Sites Rutatec</p>
           </div>
         </div>
-    </footer>
+  </footer>
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     {% block jsfiles %}
-    <!--   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-      -->
     <script src="/dist/libs/bootstrap/jquery.min.js"></script>
     <script src="/dist/libs/bootstrap/popper.min.js"></script>
     <script src="/dist/libs/bootstrap/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/5.1.0/intro.min.js" integrity="sha512-B0B1bdTGi9XHtoCINbtR6z9Vi8IYvvtImIE8KWMtqWAVUt2Wn2k69GxM7ya/3rQcz/Pgm/o1WcDU347/5k202A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/5.1.0/intro.min.js" integrity="sha512-B0B1bdTGi9XHtoCINbtR6z9Vi8IYvvtImIE8KWMtqWAVUt2Wn2k69GxM7ya/3rQcz/Pgm/o1WcDU347/5k202A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
     <!-- <script src="/dist/libs/jquery/jquery.min.js"></script> -->
     <!-- <script src="/dist/libs/apexcharts/dist/apexcharts.min.js"></script> -->
@@ -579,7 +565,7 @@
     
     <script src="/dist/libs/d3.v5.min.js"></script>
 
-    <script src="/dist/libs/bootstrap-table/tableExport.min.js"></script>
+
     <script src="/dist/libs/bootstrap-table/jspdf.min.js"></script>
     <script src="/dist/libs/bootstrap-table/jspdf.plugin.autotable.js"></script>
     <script src="/dist/libs/bootstrap-table/bootstrap-table.min.js"></script>
@@ -590,65 +576,48 @@
     <script src="/dist/libs/bootstrap-table/bootstrap-table-es-MX.js"></script>
     <script src="/dist/libs/bootpag/jquery.bootpag.min.js"></script>
 
-    <script src="/dist/libs/moment/moment-with-locales.min.js"></script>
-    <script src="/dist/libs/filepond/filepond.min.js"></script>
-    <script src="/dist/libs/filepond/filepond.jquery.js"></script>
-    <script src="/dist/libs/filepond/filepond-plugin-file-validate-type.min.js"></script>
-    <script src="/dist/libs/filepond/filepond-plugin-get-file.min.js"></script>
-    <!-- <script src="/dist/libs/filepond/filepond-plugin-image-preview.min.js"></script> -->
-    
     <script src="/dist/js/indexbasesidebar.js"></script>
     <script src="/dist/js/login.js"></script>
     <script src="/dist/js/scripts.js"></script>
     <script src="/dist/js/counter.js"></script>
     <script src="/dist/libs/numeral-2.0.6/numeral.min.js"></script>
-    <script src="/dist/libs/jquery-treetable-master/jquery-treetable.js"></script>
-    <style>
+    <script async defer 
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSG6rPxXP8g92omTJIJg1qCM2vUD_vK4o&callback=initMap">
+    </script>
+<script>
 
-      #map {
-	height: 695px;
-	width: 100%;
+  var path = [];
+  var polyline;
 
-
-         background-color: grey;
-     
-     }
-     
-     </style>
-    <script>
-
-      function initMap() {
-
-        var macc = {lat:16.90864465926933, lng: -92.08949481639918};
-  
-        var map = new google.maps.Map(
-  
-            document.getElementById('map'), {zoom: 16, center: macc});
-  
-        var marker = new google.maps.Marker({position: macc, map: map});
-  
+      function initMap(data){
+        var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 16,
+        center: { lat: 16.90864465926933, lng: -92.08949481639918},
+        });
+        $.each(data, function(index, cord){
+          path.push({lat: parseFloat(cord[0]), lng: parseFloat(cord[1])});
+          
+        });
+        var color = "#" + Math.random().toString(16).slice(-3);
+        console.log('Coordenadas', path);
+        polyline = new google.maps.Polyline({
+            path: path,
+            geodesic: true,
+            strokeColor: color,
+            strokeOpacity: 2.0,
+            strokeWeight: 7,
+        });
+        polyline.setMap(map);
+        path = [];
       }
-  
-   </script>
 
-<script async defer
-
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSG6rPxXP8g92omTJIJg1qCM2vUD_vK4o&callback=initMap">
-
-</script>
-
-</script>
-    <script> 
       $('#Historial').attr('onClick','abrimodal()');
       function abrimodal(){
         $('#modal').modal('show');    
       }
-      </script>
 
-    <script>
       $(document).ready(function(){
         showrutas();
-        initMap();
         // datosusuario();
       });
 
@@ -664,19 +633,18 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSG6rPxXP8g92omTJIJg1qCM2
             $('#buscadorR').keyup(function(){
               listaR = data.data;
               if($('#buscadorR').val().length >= 1){
-                console.log('se está escribiendo');
                 var similar = listaR.filter(function(objeto){
                   return objeto[1].normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes($('#buscadorR').val().trim().toLowerCase());
                 });
                 $('#root').empty();
-                subrutas('#root', similar, true);
+                rutconsult('#root', similar, true);
               }else{
                 $('#root').empty();
                 menuappendmenu(data.data);
                 subrutas('#sub_id_', data.data);
               }
+              
             });
-            // showGoogleMaps();
           },
           error: function (jqXHR, textStatus, error) {
                 console.log(jqXHR); console.log(textStatus); console.log(error);
@@ -692,7 +660,6 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSG6rPxXP8g92omTJIJg1qCM2
 
       function menuappendmenu(rutas){
         $.each(rutas, function(index, ruta){
-          console.log(ruta[0], ruta[1], ruta[2]);
           $('#root').append(`
             <li class="mnuRaiz nav-item" id="rutaP_${ruta[0]}">
               <a href="#sub_id_${ruta[0]}" id="agrup" class="accordion-collapse collapse" data-toggle="collapse" aria-expanded="true">
@@ -708,13 +675,15 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSG6rPxXP8g92omTJIJg1qCM2
 
       function subrutas(idItemUL, listado, soloMenus){
         $.each(listado, function(index, valor) {
+          // console.log(valor);
+          // console.log('id de la ruta', valor[0]);
           var idmen = idItemUL + valor[0];
           if ( soloMenus ){
             idmen = idItemUL;
           }
           $(idmen).append(`
-            <li id="ruta" class="sidebar-dropdown">
-              <a href="#">
+            <li id="ruta" class="sidebar-dropdown" >
+              <a href="#" id="verruta" onclick="verrutas(${valor[0]})">
                 <i class="ti ti-car"></i>
                 Ver ${valor[1]}
               </a>
@@ -727,7 +696,45 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSG6rPxXP8g92omTJIJg1qCM2
           `); 
         });
       }
-    </script>    
+
+      function rutconsult(idItemUL, listado, soloMenus){
+        $.each(listado, function(index, valor) {
+          var idmen = idItemUL + valor[0];
+          if ( soloMenus ){
+            idmen = idItemUL;
+          }
+          $(idmen).append(`
+            <li id="ruta" class="sidebar-dropdown" onclick="verrutas(${valor[0]})">
+              <a href="#">
+                <i class="ti ti-car"></i>
+                Ver ${valor[1]}
+              </a>
+            </li>
+          `); 
+        });
+      }
+      
+      function verrutas(id) {
+        $.ajax({
+          type: 'GET',
+          url: '/api/puntrutas/'+ id,
+          contentType: 'application/json',
+          success: function (data, textStatus, jqXHR) {
+            // console.log(data.data[1]);
+              initMap(data.data[1]);
+          },
+          error: function (jqXHR, textStatus, error) {
+                console.log(jqXHR); console.log(textStatus); console.log(error);
+                if (jqXHR.status == 406) {
+                    showMsgTemporal(4000, 'warning', 'ATENCIÓN', jqXHR.responseJSON.detail);
+                }
+                else {
+                    showMsgTemporal(4000, 'error', 'ERROR', jqXHR.responseJSON.detail);
+                }
+            }
+        });
+      }
+</script>    
 {% endblock jsfiles %}
 </body>
 </html>

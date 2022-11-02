@@ -98,7 +98,9 @@
                 </div>
               </div>              
             </div>
+            <input id="Aprivac" type="checkbox" >
             <div class="mb-2">
+              
               <span class="form-label-description" data-bs-toggle="modal" data-bs-target="#aviso">
                 <a href="#">Aviso de privacidad</a>
               </span>
@@ -120,32 +122,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p style="font-family: Sans-serif; text-align: justify;">El sitio web RUTA-TEC es propiedad de SITES, que es un controlador de datos de tus datos personales.
-            Hemos adoptado esta Política de privacidad, que determina cómo procesamos la información recopilada por RUTA-TEC, que también proporciona las razones por las que debemos recopilar ciertos datos personales sobre ti. Por lo tanto, debes leer esta Política de privacidad antes de usar el sitio web de RUTA-TEC.
-            Cuidamos tus datos personales y nos comprometemos a garantizar su confidencialidad y seguridad.</p>
-            <h3>Información personal que recopilamos:</h3>
-            <p style="font-family: Sans-serif;  text-align: justify;">
-              Cuando visitas RUTA-TEC, recopilamos automáticamente cierta información sobre tu dispositivo, 
-              incluida información sobre tu navegador web, dirección IP, zona horaria y algunas de las cookies 
-              instaladas en tu dispositivo. Además, a medida que navegas, recopilamos información sobre las páginas 
-              web individuales o los productos que ves, qué sitios web o términos de búsqueda te remitieron a la web y 
-              cómo interactúas. Nos referimos a esta información recopilada automáticamente como "Información del dispositivo". 
-              Además, podemos recopilar los datos personales que nos proporcionas (incluidos, entre otros, nombre, apellido, dirección, 
-              información de pago, etc.) durante el registro para poder cumplir con el acuerdo.
-            </p>
-            <h3>¿Por qué procesamos tus datos?</h3>
-            <p style="font-family: Sans-serif;  text-align: justify;">
-              Nuestra máxima prioridad es la seguridad de los datos del cliente y, como tal, podemos procesar solo los datos mínimos del 
-              usuario, solo en la medida en que sea absolutamente necesario para mantener el sitio web. La información recopilada automáticamente 
-              se utiliza solo para identificar casos potenciales de abuso y establecer información estadística sobre el uso del sitio web. Esta información estadística 
-              no se agrega de tal manera que identifique a ningún usuario en particular del sistema.
-              Puedes visitar la web sin decirnos quién eres ni revelar ninguna información por la cual alguien pueda identificarte como una persona específica. Sin embargo, 
-              si deseas utilizar algunas de las funciones del sitio web, o deseas recibir nuestro boletín informativo o proporcionar otros detalles al completar un formulario, 
-              puedes proporcionarnos datos personales, como tu correo electrónico, nombre, apellido, ciudad de residencia, organización y número de teléfono. Puedes optar por 
-              no proporcionar tus datos personales, pero es posible que no puedas aprovechar algunas de las funciones del sitio web. Por ejemplo, no podrás recibir nuestro boletín ni 
-              contactarnos directamente desde el sitio web. Los usuarios que no estén seguros de qué información es obligatoria pueden ponerse en contacto con nosotros a través de 
-              lopezvazquezhenry@gmail.com.
-            </p>
+            
           </div>
         </div>
       </div>
@@ -171,7 +148,11 @@
       
       $("#btniniciar").click(function (e) {
         // limpiar los datos...
-        window.location.replace('/login')
+        if( $('#Aprivac').prop('checked') ) {
+          alert('checkbox1 esta Seleccionado,');
+        }
+
+        // window.location.replace('/login');
         // showrutas();
         // console.log("crear nuevo usuario");
       });
@@ -196,39 +177,24 @@
           let msg = "Se agregó correctamente el usuario"
           let ret = "{{ret}}"
 
-          serializedData = JSON.stringify($(this).serializeJSON());
-          sendDatosToServer(referencia, url, typeSubmit, ret, serializedData).then((jqXHR) => {
-              showMsg(jqXHR[0], referencia, url, ret).then((result) => {
-                  if (jqXHR[0].status == 200){
-                      window.location.replace('/login');
-                  }
-                  return true;
-              });
-          });
+          if( $('#Aprivac').prop('checked') ) {
+            serializedData = JSON.stringify($(this).serializeJSON());
+            sendDatosToServer(referencia, url, typeSubmit, ret, serializedData).then((jqXHR) => {
+                showMsg(jqXHR[0], referencia, url, ret).then((result) => {
+                    if (jqXHR[0].status == 200){
+                        window.location.replace('/login');
+                    }
+                    return true;
+                });
+            });
+          }else{
+            swal.fire({
+              icon: 'warning',
+              title: "Debes aceptar el aviso de privacidad para continuar",
+              showConfirmButton: true
+            });
+          }
       });
-      // function showrutas(){
-      //   $.ajax({
-      //     type: 'GET',
-      //     url: '/api/sidebar',
-      //     contentType: 'application/json',
-      //     success: function (data, textStatus, jqXHR) {
-      //       console.log(data);
-      //     $.each(data.data, function(index, ruta){
-      //       console.log(ruta);
-      //     });
-      //     },
-      //     error: function (jqXHR, textStatus, error) {
-      //           console.log(jqXHR); console.log(textStatus); console.log(error);
-      //           if (jqXHR.status == 406) {
-      //               showMsgTemporal(4000, 'warning', 'ATENCIÓN', jqXHR.responseJSON.detail);
-      //           }
-      //           else {
-      //               showMsgTemporal(4000, 'error', 'ERROR', jqXHR.responseJSON.detail);
-      //           }
-      //       }
-
-      //   });
-      // }
     </script>
   </body>
 </html>
