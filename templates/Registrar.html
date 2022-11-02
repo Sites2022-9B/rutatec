@@ -48,7 +48,7 @@
                 <span class="input-icon-addon">
                   <i class="ti ti-user"></i>
                 </span>
-                <input type="text" id="name" name="nombre" class="form-control" value=""  placeholder="Capture su Nombre" pattern="[A-Za-z0-9ÁÉÍÓÚáéíóúñÑÜü^,^.\s]{3,100}" required/>
+                <input type="text" id="name" name="nombre" class="form-control" value=""  placeholder="Capture su Nombre" pattern="[A-Za-z-ÁÉÍÓÚáéíóúñÑÜü^,^.\s]{3,100}" required/>
                 <div class="invalid-feedback">Ingrese su Nombre sin caracteres especiales. ( ), [ ], { }...</div>
               </div>   
             </div>
@@ -60,7 +60,7 @@
                   <span class="input-icon-addon">
                     <i class="ti ti-user"></i>
                   </span>
-                  <input type="text" id="Apellido" name="apellidos" class="form-control" value="" minlength="3" placeholder="Capture su Apellido " pattern="[A-Za-z0-9ÁÉÍÓÚáéíóúñÑÜü^,^.\s]{3,100}" required/>
+                  <input type="text" id="Apellido" name="apellidos" class="form-control" value="" minlength="3" placeholder="Capture su Apellido " pattern="[A-Za-z-ÁÉÍÓÚáéíóúñÑÜü^,^.\s]{3,100}" required/>
                   <div class="invalid-feedback">Ingrese su Apellido sin caracteres especiales. ( ), [ ], { }...</div>
                 </div>   
               </div>
@@ -84,8 +84,8 @@
                     <span class="input-icon-addon">
                       <i class="ti ti-lock"></i>
                     </span>
-                    <input type="password" id="password" name="contra" value="" class="form-control"  minlength="3" placeholder="Capture su Password" required/>
-                    <div class="invalid-feedback">Se deben de introducir mínimo 3 caracteres y sin caracteres especiales</div>
+                    <input type="password" id="password" name="contra" value="" class="form-control"  minlength="8" placeholder="Capture su Password" required/>
+                    <div class="invalid-feedback">Se deben de introducir mínimo 8 caracteres.</div>
                   </div>
                 </div>
                 <div class="col-auto">
@@ -98,12 +98,35 @@
                 </div>
               </div>              
             </div>
-            <input id="Aprivac" type="checkbox" >
-            <div class="mb-2">
-              
-              <span class="form-label-description" data-bs-toggle="modal" data-bs-target="#aviso">
-                <a href="#">Aviso de privacidad</a>
-              </span>
+
+            <div class="mb-3 form-group">
+              <label class="form-label">Password</label>
+              <div class="row">
+                <div class="col">
+                  <div class="input-icon">
+                    <span class="input-icon-addon">
+                      <i class="ti ti-lock"></i>
+                    </span>
+                    <input type="password" id="RepPassword" name="contra" value="" class="form-control"  minlength="8" placeholder="Repita su Password" required/>
+                    <div class="invalid-feedback">La contraseña debe ser igual a la ingresada anteriormente</div>
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <span class="input-group-text btn-show-pass bg-white">
+                    <a style="text-decoration: none;" onclick="passwordShowHidde('RepPassword')" href="#" class="link-secondary"
+                      title="Show password" data-bs-toggle="tooltip">
+                      <i id="password-eye" class="ti ti-eye"></i>
+                    </a>
+                  </span>
+                </div>
+              </div>              
+            </div>
+
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="Aprivac" style="border-color: black;">
+              <label class="form-check-label" for="flexSwitchCheckChecked" data-bs-toggle="modal" data-bs-target="#aviso">
+                Aviso de Privacidad
+              </label>
             </div>
             <div class="form-footer">
               <div id="smsInvali"></div>
@@ -122,7 +145,60 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            
+            <h1 style="text-align: center;   font-family: Arial; font-weight: 50%;">Aviso de privacidad integral</h1>
+            <hr>
+            <p style="text-align: justify;font-size: 15px; font-family: Arial;">
+              Sistemas Tecnológicos de la Selva mejor conocido como RUTA-TEC, con domicilio en Barrio Benito Juárez, Calle Venustiano Carranza, S/N. Ocosingo, Chiapas. 
+              y portal de internet www.RUTA-TEC.com, es el responsable del uso y protección de sus datos personales, y al respecto le informamos lo siguiente:
+            </p>
+            <h3 style="text-align: center; font-family: Arial; font-weight: 50%;">¿Para qué fines utilizaremos sus datos personales?</h3>
+            <p style="text-align: justify;font-size: 15px; font-family: Arial;">
+              Los datos personales que recabamos de usted, los utilizaremos para las siguientes finalidades que son necesarias para el servicio que solicita:
+              Prestación de cualquier servicio solicitado
+            </p>
+            <h3 style="text-align: center; font-family: Arial; font-weight: 50%;">¿Qué datos personales utilizaremos para estos fines?</h3>
+            <p style="text-align: justify;font-size: 15px; font-family: Arial;">
+              Para llevar a cabo las finalidades descritas en el presente aviso de privacidad, utilizaremos los siguientes datos personales:
+              Datos de identificación y contacto              
+            </p>
+            <h3 style="text-align: center; font-family: Arial; font-weight: 50%;">¿Cómo puede acceder, rectificar o cancelar sus datos personales, u oponerse a su uso o ejercer la revocación de consentimiento?</h3>
+            <p style="text-align: justify;font-size: 15px; font-family: Arial;">
+              Usted tiene derecho a conocer qué datos personales tenemos de usted, para qué los utilizamos y las condiciones del uso que les damos (Acceso). Asimismo, es su derecho solicitar la corrección de su información personal en caso de que esté desactualizada, sea inexacta o incompleta (Rectificación); que la eliminemos de nuestros registros o 
+              bases de datos cuando considere que la misma no está siendo utilizada adecuadamente (Cancelación); así como oponerse al uso de sus datos personales para fines específicos (Oposición). Estos derechos se conocen como derechos ARCO.
+              Para el ejercicio de cualquiera de los derechos ARCO, debe enviar una petición vía correo electrónico a Sites2022GYDS@gmail.com y deberá contener:
+
+              Nombre completo del titular.
+              Domicilio.
+              Teléfono.
+              Correo electrónico usado en este sitio web.
+              Copia de una identificación oficial adjunta.
+              Asunto «Derechos ARCO»
+              Descripción el objeto del escrito, los cuales pueden ser de manera enunciativa más no limitativa los siguientes: Revocación del consentimiento para tratar sus datos personales; y/o Notificación del uso indebido del tratamiento de sus datos personales; y/o Ejercitar sus Derechos ARCO, con una descripción clara y precisa de los datos a Acceder, Rectificar, Cancelar o bien, Oponerse. En caso de Rectificación de datos personales, deberá indicar la modificación exacta y anexar la documentación soporte; es importante en caso de revocación del consentimiento, que tenga en cuenta que no en todos los casos podremos atender su solicitud o concluir el uso de forma inmediata, ya que es posible que por alguna obligación legal requiramos seguir tratando sus datos personales. Asimismo, usted deberá considerar que para ciertos fines, la revocación de su consentimiento implicará que no le podamos seguir prestando el servicio que nos solicitó, o la conclusión de su relación con nosotros.
+
+              ¿En cuántos días le daremos respuesta a su solicitud?
+              5 días
+
+              d) ¿Por qué medio le comunicaremos la respuesta a su solicitud?
+              Sites2022GYDS@gmail.com
+            </p>
+            <h3 style="text-align: center; font-family: Arial; font-weight: 50%;">El uso de tecnologías de rastreo en nuestro portal de internet</h3>
+            <p style="text-align: justify;font-size: 15px; font-family: Arial;">
+              Le informamos que en nuestra página de internet utilizamos cookies, web beacons u otras tecnologías, a través de las cuales es posible monitorear su comportamiento como usuario de internet, así como brindarle un mejor servicio y experiencia al navegar en nuestra página. Los datos personales que obtenemos de estas tecnologías de rastreo son los siguientes:
+
+              Identificadores, nombre de usuario y contraseñas de sesión, Fecha y hora del inicio y final de una sesión de un usuario, Publicidad revisada por un usuario
+              
+              Estas cookies, web beacons y otras tecnologías pueden ser deshabilitadas. Para conocer cómo hacerlo, consulte el menú de ayuda de su navegador. Tenga en cuenta que, en caso de desactivar las cookies, es posible que no pueda acceder a ciertas funciones personalizadas en nuestros sitio web.
+            </p>
+            <h3 style="text-align: center; font-family: Arial; font-weight: 50%;">¿Cómo puede conocer los cambios en este aviso de privacidad?</h3>
+            <p style="text-align: justify;font-size: 15px; font-family: Arial;">
+              El presente aviso de privacidad puede sufrir modificaciones, cambios o actualizaciones derivadas de nuevos requerimientos 
+              legales; de nuestras propias necesidades por los productos o servicios que ofrecemos; de nuestras prácticas de privacidad; 
+              de cambios en nuestro modelo de negocio, o por otras causas. Nos comprometemos a mantener actualizado este aviso de privacidad 
+              sobre los cambios que pueda sufrir y siempre podrá consultar las actualizaciones que existan en el sitio web www.RUTA-TEC.com.
+            </p>
+            <p style="text-align: justify;font-size: 15px; font-family: Arial;">
+              Última actualización de este aviso de privacidad: 02/11/2022
+            </p>
           </div>
         </div>
       </div>
@@ -147,14 +223,21 @@
       });
       
       $("#btniniciar").click(function (e) {
-        // limpiar los datos...
-        if( $('#Aprivac').prop('checked') ) {
-          alert('checkbox1 esta Seleccionado,');
-        }
+        window.location.replace('/login');
+      });
 
-        // window.location.replace('/login');
-        // showrutas();
-        // console.log("crear nuevo usuario");
+      $('#RepPassword').keyup(function(){
+        var password = $('#password').val();
+        var Rpassword = $('#RepPassword').val();
+
+        if( password != Rpassword || $('#Aprivac').prop('checked')){
+          $('#RepPassword').addClass('is-invalid');
+          $('#btnAddCuenta').prop('disabled', true);
+        }else{
+          $('#RepPassword').removeClass('is-invalid');
+          $('#RepPassword').addClass('is-valid');
+          $('#btnAddCuenta').prop('disabled', false);
+        }
       });
 
       $("#createform").submit(function(e) {
@@ -177,7 +260,7 @@
           let msg = "Se agregó correctamente el usuario"
           let ret = "{{ret}}"
 
-          if( $('#Aprivac').prop('checked') ) {
+          if( $('#Aprivac').prop('checked')) {
             serializedData = JSON.stringify($(this).serializeJSON());
             sendDatosToServer(referencia, url, typeSubmit, ret, serializedData).then((jqXHR) => {
                 showMsg(jqXHR[0], referencia, url, ret).then((result) => {
