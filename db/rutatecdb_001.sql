@@ -110,10 +110,11 @@ CREATE INDEX IF NOT EXISTS ix_userreset_referencia ON "userreset" ("referencia")
 
 
 insert into "usuario" values (1,'Pablo','Ruiz', 'pablo@gmail.com', '1234',false);
+insert into "usuario" values (2,'admin','pruebas', 'pablofabianruizconstantino@gmail.com', '1234',false);
 --Usuarios de Unidades Responsables
-insert into "usuario" values (2,'Henry','Lopez', 'henry@gmail.com', '1234',false);
-insert into "usuario" values (3,'Eduardo','Gutierrez', 'quique@gmail.com', '1234',false);
-SELECT setval ('usuario_id_seq', 3, true);
+insert into "usuario" values (3,'Henry','Lopez', 'henry@gmail.com', '1234',false);
+insert into "usuario" values (4,'Eduardo','Gutierrez', 'quique@gmail.com', '1234',false);
+SELECT setval ('usuario_id_seq', 4, true);
 
 INSERT INTO rutas VALUES(1,'RUTA1', 'ISJISJNCSIJNSICJNSICJSNIENCISE');
 INSERT INTO rutas VALUES(2,'RUTA2', 'ISJISJNCSIJNSICJNSICJSNIENCISE');
@@ -122,7 +123,6 @@ INSERT INTO rutas VALUES(4,'RUTA4', 'ISJISJNCSIJNSICJNSICJSNIENCISE');
 INSERT INTO rutas VALUES(5,'RUTA5', 'ISJISJNCSIJNSICJNSICJSNIENCISE');
 SELECT setval ('rutas_id_seq',5,true);
 
-SELECT setval ('usuario_id_seq', 3, true);
 
 INSERT INTO historial(user_id, rutas_id, fecha) VALUES (1, 2, '25/10/2022');
 INSERT INTO historial(user_id, rutas_id, fecha) VALUES (1, 3, '25/10/2022');

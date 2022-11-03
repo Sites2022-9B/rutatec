@@ -347,132 +347,161 @@
                 <li class="agrupador">
                 <a href="#tabs-micuenta" class="nav-link active" data-bs-toggle="tab">
                   <i class="ti ti-home h2 me-2"></i>
-                  Mi Cuenta</a>
+                  Mi cuenta</a>
+                </li>
+                <li class="agrupador">
+                <a href="#tabs-contraseña" class="nav-link" data-bs-toggle="tab">
+                  <i class="ti ti-user h2 me-2"></i>
+                  Actualizar Contraseña</a>
                 </li>
               </ul>
               <div class="card-body">
                 <div class="tab-content card-body">
                   <!-- tab de datos de cuenta-->
                   <div class="tab-pane show active" id="tabs-micuenta">
-                    <div class="row mb-3">
-                      <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
-                       <!------------------------>
-                       <div class="card">
-                        <div class="card-header">
-                          <h3 class="card-title">Cuenta de Usuario</h3>
-                        </div>
-                        <div class="card-body">
-                          <form id="formfotoemp" enctype="multipart/form-data" method="post" >
-                            <img id="mimagen" class="fotoperfil"> 
-                            <!-- <label class="invisible">Seleccione su archivo</label><br>
-                            <input name="files" id="files" type="file">
-                            <input type="submit" value="Actualizar" class="btn btn-primary w-100" style="margin-top: 15px; margin-bottom: 1px;" />
-                          -->
-                          </form>
+                    <form id="form_perfil_edit" class="needs-validation" autocomplete="off" novalidate>
+                      <div class="mb-3 form-group">
+                        <div class="input-icon mb-3">
+                          <input type="hidden" id="id_user" name="id" required>
+                        </div>   
+                      </div>
+                      <div class="mb-3 form-group">
+                        <label class="form-label">Nombre</label>
+                        <div class="input-icon mb-3">
+                          <span class="input-icon-addon">
+                            <i class="ti ti-user"></i>
+                          </span>
+                          <input type="text" id="name_ed" name="nombre" class="form-control" value=""  placeholder="Capture su Nombre" pattern="[A-Za-zÁÉÍÓÚáéíóúñÑÜü^,^.\s]{3,100}" required disabled/>
+                          <div class="invalid-feedback">Ingrese su Nombre sin caracteres especiales. ( ), [ ], { }...</div>
+                        </div>   
+                      </div>
+                      <div class="mb-3 form-group">
+                        <label class="form-label">Apellido</label>
+                        <div class="input-icon mb-3">
+                          <span class="input-icon-addon">
+                            <i class="ti ti-user"></i>
+                          </span>
+                          <input type="text" id="apellido_ed" name="apellidos" class="form-control" placeholder="Capture su Apellido " pattern="[A-Za-zÁÉÍÓÚáéíóúñÑÜü^,^.\s]{3,100}" required disabled/>
+                          <div class="invalid-feedback">Ingrese su Apellido sin caracteres especiales. ( ), [ ], { }...</div>
+                        </div>   
+                      </div>
+                      <div class="mb-3 form-group">
+                        <label class="form-label">Cuenta</label>
+                        <div class="input-icon mb-3">
+                          <span class="input-icon-addon">
+                            <i class="ti ti-mail"></i>
+                          </span>
+                          <input type="email" id="correo_ed" name="correo" class="form-control" value=""  placeholder="Capture su cuenta" required disabled/>
+                          <div class="invalid-feedback">Ingresa un correo, ej: example@gmail.com</div>
+                        </div>   
+                      </div>
+                      <div class="mb-3 form-group">
+                        <div class="row">
+                          <div class="col">
+                            <button id="edit_true" name="editar_true" type="button" class="btn btn-primary w-100 edit_true">
+                            Editar Usuario
+                            </button>
+                          </div>
+                          <div class="col">
+                            <button id="edit_user" type="submit" class="btn btn-success w-100 edit_user" disabled>
+                              Guardar
+                            </button>
+                          </div>
                         </div>
                       </div>
-                       <!------------------------> 
+                    </form>
+                  </div>
+                  <div class="tab-pane" id="tabs-contraseña">
+                    <form id="perfil_password" class="card-body needs-validation" autocomplete="off" novalidate>
+                      <div class="mb-3 form-group">
+                        <div class="input-icon mb-3">
+                          <input type="hidden" id="id_userp" name="id" required>
+                        </div>   
                       </div>
-                      <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
-                        <div class="card mb-3">
-                          <div class="card-header">
-                            <h3 class="card-title">Cuenta de Usuario</h3>
-                          </div>
-                          <div class="card-body">
-                            
-                          </div>
-                        </div>
-                        <div class="card mb-3">
-                          <div class="card-header">
-                            <h3 class="card-title">Actualizar contraseña</h3>
-                          </div>
-                          <form id="perfil_password" class="card-body needs-validation" autocomplete="off" novalidate>
-                           
-                            <div class="form-footer">
-                              <button id="guardar_password_1" name="guardar_password" type="submit" class="btn btn-primary w-100">
-                              Aplicar cambios
-                              </button>
+                      <div class="mb-3 form-group">
+                        <label class="form-label">Password Actual</label>
+                        <div class="row">
+                          <div class="col">
+                            <div class="input-icon">
+                              <span class="input-icon-addon">
+                                <i class="ti ti-lock"></i>
+                              </span>
+                              <input type="password" id="passwordactual" name="passwordactual" value="" class="form-control"  minlength="3" placeholder="Capture su Password" required/>
+                              <div class="invalid-feedback">Se deben de introducir mínimo 3 caracteres y sin caracteres especiales</div>
                             </div>
-                          </form>
-                        </div>
+                          </div>
+                          <div class="col-auto">
+                            <span class="input-group-text btn-show-pass bg-white">
+                              <a style="text-decoration: none;" onclick="passwordShowHidde('passwordactual')" href="#" class="link-secondary"
+                                title="Show password" data-bs-toggle="tooltip">
+                                <i id="password-eye" class="ti ti-eye"></i>
+                              </a>
+                            </span>
+                          </div>
+                        </div>              
                       </div>
-                    </div>
-                  </div>
-                  <!-- tab para datos personales-->
-                  <div class="tab-pane" id="tabs-personal">
+
+                      <div class="mb-3 form-group">
+                        <label class="form-label">Nuevo Password</label>
+                        <div class="row">
+                          <div class="col">
+                            <div class="input-icon">
+                              <span class="input-icon-addon">
+                                <i class="ti ti-lock"></i>
+                              </span>
+                              <input type="password" id="passwordnvo" name="passwordnvo" value="" class="form-control"  minlength="3" placeholder="Capture su Password" required/>
+                              <div class="invalid-feedback">Se deben de introducir mínimo 3 caracteres y sin caracteres especiales</div>
+                            </div>
+                          </div>
+                          <div class="col-auto">
+                            <span class="input-group-text btn-show-pass bg-white">
+                              <a style="text-decoration: none;" onclick="passwordShowHidde('passwordnvo')" href="#" class="link-secondary"
+                                title="Show password" data-bs-toggle="tooltip">
+                                <i id="password-eye" class="ti ti-eye"></i>
+                              </a>
+                            </span>
+                          </div>
+                        </div>              
+                      </div>
                       
-                  </div>
-                  <!-- tab para datos laborales-->
-                  <div class="tab-pane" id="tabs-laboral">
-                    <div class="card row mb-3">
-                      <div class="card-header">
-                        <h3 class="card-title">Área de adscripción actual</h3>
+                      <div class="mb-3 form-group">
+                        <label class="form-label">Repetir Nuevo Password</label>
+                        <div class="row">
+                          <div class="col">
+                            <div class="input-icon">
+                              <span class="input-icon-addon">
+                                <i class="ti ti-lock"></i>
+                              </span>
+                              <input type="password" id="passwordnvo2" name="passwordnvo2" value="" class="form-control"  minlength="3" placeholder="Capture su Password" required/>
+                              <div class="invalid-feedback">Se deben de introducir mínimo 3 caracteres y sin caracteres especiales</div>
+                            </div>
+                          </div>
+                          <div class="col-auto">
+                            <span class="input-group-text btn-show-pass bg-white">
+                              <a style="text-decoration: none;" onclick="passwordShowHidde('passwordnvo2')" href="#" class="link-secondary"
+                                title="Show password" data-bs-toggle="tooltip">
+                                <i id="password-eye" class="ti ti-eye"></i>
+                              </a>
+                            </span>
+                          </div>
+                        </div>              
                       </div>
-                      <div class="card-body table-responsive">
-                        <table class="table card-table table-vcenter text-nowrap datatable">
-                          <thead>
-                              <tr>
-                                  <th>ID</th>
-                                  <th>Código</th>
-                                  <th>Nombre</th>
-                                  <th>Fecha de Inicio</th>
-                                  <th>Fecha de Fin</th>
-                              </tr>
-                          </thead>
-                          <tbody id="t_areaact_perfil">
-
-                          </tbody>
-                        </table>
+                      <div class="form-footer">
+                        <button id="update_password" name="update_password" type="submit" class="btn btn-success w-100">
+                        Guardar Cambios
+                        </button>
                       </div>
-                    </div>
-                    <div class="card row mb-3">
-                        <div class="card-header">
-                          <h3 class="card-title">Puestos actuales</h3>
-                        </div>
-                        <div class="card-body table-responsive">
-                            <table class="table card-table table-vcenter text-nowrap datatable">
-                                <thead>
-                                    <tr>
-                                        <th>Clave</th>
-                                        <th>Etiqueta</th>
-                                        <th>Nombre</th>
-                                        <th>Fecha de Inicio</th>
-                                        <th>Fecha de Fin</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="t_puestosact_perfil">
+                    </form>
 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="card row mb-3">
-                      <div class="card-header">
-                        <h3 class="card-title">Roles actuales</h3>
-                      </div>
-                      <div class="card-body table-responsive">
-                        <table class="table card-table table-vcenter text-nowrap datatable">
-                          <thead>
-                              <tr>
-                                  <th>Nombre</th>
-                                  <th>Fecha de Inicio</th>
-                                  <th>Fecha de Fin</th>
-                              </tr>
-                          </thead>
-                          <tbody id="t_rolesact_perfil">
-
-                          </tbody>
-                        </table>
-                    </div>
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+
         </div>
       </div>
-    </div>
     </div>
     <!-- Modal -->
 <div class="modal fade" id="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -549,7 +578,7 @@
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    {% block jsfiles %}
+{% block jsfiles %}
     <script src="/dist/libs/bootstrap/jquery.min.js"></script>
     <script src="/dist/libs/bootstrap/popper.min.js"></script>
     <script src="/dist/libs/bootstrap/bootstrap.min.js"></script>
@@ -580,104 +609,171 @@
     <script async defer 
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSG6rPxXP8g92omTJIJg1qCM2vUD_vK4o&callback=initMap">
     </script>
+
 <script>
 
   var path = [];
   var polyline;
 
-      function initMap(data){
-        var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 16,
-        center: { lat: 16.90864465926933, lng: -92.08949481639918},
-        });
-        $.each(data, function(index, cord){
-          path.push({lat: parseFloat(cord[0]), lng: parseFloat(cord[1])});
-          
-        });
-        var color = "#" + Math.random().toString(16).slice(-3);
-        console.log('Coordenadas', path);
-        polyline = new google.maps.Polyline({
-            path: path,
-            geodesic: true,
-            strokeColor: color,
-            strokeOpacity: 2.0,
-            strokeWeight: 7,
-        });
-        polyline.setMap(map);
-        path = [];
-      }
+  function initMap(data){
+    var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 16,
+    center: { lat: 16.90864465926933, lng: -92.08949481639918},
+    });
+    $.each(data, function(index, cord){
+      path.push({lat: parseFloat(cord[0]), lng: parseFloat(cord[1])});
+      
+    });
+    var color = "#" + Math.random().toString(16).slice(-3);
+    console.log('Coordenadas', path);
+    polyline = new google.maps.Polyline({
+        path: path,
+        geodesic: true,
+        strokeColor: color,
+        strokeOpacity: 2.0,
+        strokeWeight: 7,
+    });
+    polyline.setMap(map);
+    path = [];
+  }
 
-      $('#Historial').attr('onClick','abrimodal()');
-      function abrimodal(){
-        $('#modal').modal('show');    
-      }
+  $('#Historial').attr('onClick','abrimodal()');
 
-      $(document).ready(function(){
+  function abrimodal(){
+    $('#modal').modal('show');    
+  }
+
+	$(document).ready(function(){
         showrutas();
         // datosusuario();
       });
 
-      function showrutas(){
-        $.ajax({
-          type: 'GET',
-          url: '/api/sidebar',
-          contentType: 'application/json',
-          success: function (data, textStatus, jqXHR) {
-            // Se mandan a llamar las funciones del Sidebar para las rutas.
-            menuappendmenu(data.data);
-            subrutas('#sub_id_', data.data);
-            $('#buscadorR').keyup(function(){
-              listaR = data.data;
-              if($('#buscadorR').val().length >= 1){
-                var similar = listaR.filter(function(objeto){
-                  return objeto[1].normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes($('#buscadorR').val().trim().toLowerCase());
-                });
-                $('#root').empty();
-                rutconsult('#root', similar, true);
-              }else{
-                $('#root').empty();
-                menuappendmenu(data.data);
-                subrutas('#sub_id_', data.data);
-              }
-              
-            });
-          },
-          error: function (jqXHR, textStatus, error) {
-                console.log(jqXHR); console.log(textStatus); console.log(error);
-                if (jqXHR.status == 406) {
-                    showMsgTemporal(4000, 'warning', 'ATENCIÓN', jqXHR.responseJSON.detail);
-                }
-                else {
-                    showMsgTemporal(4000, 'error', 'ERROR', jqXHR.responseJSON.detail);
-                }
+  function verMiPerfil(){
+    $.ajax({
+      type: 'GET',
+      url:"api/user/perfil",
+      contentType: 'aplication/json',
+
+      success:function (data,textStatus,jqXHR){
+        // 
+        $('#edit_user').prop('disabled', true);
+        $('#name_ed').prop('disabled', true);
+        $('#apellido_ed').prop('disabled', true);
+        $('#correo_ed').prop('disabled', true);
+
+
+        $('#id_user').val(data["id"]);
+        $('#id_userp').val(data["id"]);
+        $('#name_ed').val(data["nombre"]);
+        $('#apellido_ed').val(data["apellidos"]);
+        $('#correo_ed').val(data["correo"]);
+        
+
+      },
+      error: function(jqXHR, textStatus, error) {
+          console.log(jqXHR); console.log(textStatus); console.log(error);
+          showMsgTemporal(4000, 'error', 'ERROR', jqXHR.responseJSON.detail);
+        }
+    })
+    
+  }
+
+  $('.edit_true').click(function( event ) {
+    console.log("presiono editar");
+    $('#edit_user').prop('disabled', false);
+    $('#name_ed').prop('disabled', false);
+    $('#apellido_ed').prop('disabled', false);
+    $('#correo_ed').prop('disabled', false);
+      
+  });
+  
+  $("#form_perfil_edit").submit(function(e){
+
+    e.preventDefault();
+    $("#form_perfil_edit").addClass("was-validated");
+    formDado = "form_perfil_edit";
+    if (!$(this)[0].checkValidity()){
+        $('#' + formDado + ' .invalid-feedback').each(function () {
+            if ($(this)[0].offsetParent){
+                $(this).parent().find("select, input, textarea").first().focus();
+                return false; // exit each
             }
         });
-      }
+        return;
+    }
+    let referencia = "index.html_form_perfil_edit";
+    let url = "/api/user/updateuser";
+    let typeSubmit = "POST";
+    let ret = "{{ret}}";
+    let msg = "Se actualizaron los datos correctamente";
 
-      function menuappendmenu(rutas){
-        $.each(rutas, function(index, ruta){
-          $('#root').append(`
-            <li class="mnuRaiz nav-item" id="rutaP_${ruta[0]}">
-              <a href="#sub_id_${ruta[0]}" id="agrup" class="accordion-collapse collapse" data-toggle="collapse" aria-expanded="true">
-              ${ruta[1]}
-              <i id="icono1" class="ti ti-chevron-right"></i>
-              </a>
-                <ul class="subMenusRoot collapse list-unstyled" id="sub_id_${ruta[0]}" data-parent="#accordion">
-                </ul>
-            </li>
-          `);
-        });
-      }
-
-      function subrutas(idItemUL, listado, soloMenus){
-        $.each(listado, function(index, valor) {
-          // console.log(valor);
-          // console.log('id de la ruta', valor[0]);
-          var idmen = idItemUL + valor[0];
-          if ( soloMenus ){
-            idmen = idItemUL;
+    serializedData = JSON.stringify($(this).serializeJSON());
+    sendDatosToServer(referencia, url, typeSubmit, ret, serializedData).then((jqXHR) => {
+      showMsg(jqXHR[0], referencia, url, ret).then((result) => {
+          if (jqXHR[0].status == 200){
+            verMiPerfil()
           }
-          $(idmen).append(`
+          return true;
+      });
+    });
+  })
+    
+
+  function menuappendmenu(rutas){
+    $.each(rutas, function(index, ruta){
+      $('#root').append(`
+        <li class="mnuRaiz nav-item" id="rutaP_${ruta[0]}">
+          <a href="#sub_id_${ruta[0]}" id="agrup" class="accordion-collapse collapse" data-toggle="collapse" aria-expanded="true">
+          ${ruta[1]}
+          <i id="icono1" class="ti ti-chevron-right"></i>
+          </a>
+            <ul class="subMenusRoot collapse list-unstyled" id="sub_id_${ruta[0]}" data-parent="#accordion">
+            </ul>
+        </li>
+      `);
+    });
+  };
+    
+  $("#perfil_password").submit(function(e){
+    e.preventDefault();
+    $("#perfil_password").addClass("was-validated");
+    formDado = "perfil_password";
+    if (!$(this)[0].checkValidity()){
+        $('#' + formDado + ' .invalid-feedback').each(function () {
+            if ($(this)[0].offsetParent){
+                $(this).parent().find("select, input, textarea").first().focus();
+                return false; // exit each
+            }
+        });
+        return;
+    }
+    let referencia = "index.html_perfil_password";
+    let url = "/api/user/updatepass";
+    let typeSubmit = "PUT";
+    let ret = "{{ret}}";
+    let msg = "Se actualizo correctamente la contraseña";
+
+    serializedData = JSON.stringify($(this).serializeJSON());
+    sendDatosToServer(referencia, url, typeSubmit, ret, serializedData).then((jqXHR) => {
+      showMsg(jqXHR[0], referencia, url, ret).then((result) => {
+          if (jqXHR[0].status == 200){
+            
+          }
+          return true;
+      });
+    });
+
+  })
+
+  function subrutas(idItemUL, listado, soloMenus){
+    $.each(listado, function(index, valor) {
+      // console.log(valor);
+      // console.log('id de la ruta', valor[0]);
+      var idmen = idItemUL + valor[0];
+      if ( soloMenus ){
+        idmen = idItemUL;
+		}
+        $(idmen).append(`
             <li id="ruta" class="sidebar-dropdown" >
               <a href="#" id="verruta" onclick="verrutas(${valor[0]})">
                 <i class="ti ti-car"></i>
@@ -689,47 +785,88 @@
                 ${valor[2]}
               </a>
             </li>
-          `); 
-        });
-      }
+          `);
+    });
+  }
+</script>
+  
 
-      function rutconsult(idItemUL, listado, soloMenus){
-        $.each(listado, function(index, valor) {
-          var idmen = idItemUL + valor[0];
-          if ( soloMenus ){
-            idmen = idItemUL;
+<script>
+  function showrutas(){
+    $.ajax({
+      type: 'GET',
+      url: '/api/sidebar',
+      contentType: 'application/json',
+      success: function (data, textStatus, jqXHR) {
+        // Se mandan a llamar las funciones del Sidebar para las rutas.
+        menuappendmenu(data.data);
+        subrutas('#sub_id_', data.data);
+        $('#buscadorR').keyup(function(){
+          listaR = data.data;
+          if($('#buscadorR').val().length >= 1){
+            console.log('se está escribiendo');
+            var similar = listaR.filter(function(objeto){
+              return objeto[1].normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes($('#buscadorR').val().trim().toLowerCase());
+            });
+            $('#root').empty();
+            subrutas('#root', similar, true);
+          }else{
+            $('#root').empty();
+            menuappendmenu(data.data);
+            subrutas('#sub_id_', data.data);
           }
-          $(idmen).append(`
-            <li id="ruta" class="sidebar-dropdown" onclick="verrutas(${valor[0]})">
-              <a href="#">
-                <i class="ti ti-car"></i>
-                Ver ${valor[1]}
-              </a>
-            </li>
-          `); 
         });
-      }
-      
-      function verrutas(id) {
-        $.ajax({
-          type: 'GET',
-          url: '/api/puntrutas/'+ id,
-          contentType: 'application/json',
-          success: function (data, textStatus, jqXHR) {
-            // console.log(data.data[1]);
-              initMap(data.data[1]);
-          },
-          error: function (jqXHR, textStatus, error) {
-                console.log(jqXHR); console.log(textStatus); console.log(error);
-                if (jqXHR.status == 406) {
-                    showMsgTemporal(4000, 'warning', 'ATENCIÓN', jqXHR.responseJSON.detail);
-                }
-                else {
-                    showMsgTemporal(4000, 'error', 'ERROR', jqXHR.responseJSON.detail);
-                }
+        // showGoogleMaps();
+      },
+      error: function (jqXHR, textStatus, error) {
+            console.log(jqXHR); console.log(textStatus); console.log(error);
+            if (jqXHR.status == 406) {
+                showMsgTemporal(4000, 'warning', 'ATENCIÓN', jqXHR.responseJSON.detail);
             }
-        });
+            else {
+                showMsgTemporal(4000, 'error', 'ERROR', jqXHR.responseJSON.detail);
+            }
+        }
+    });
+  }
+
+  function rutconsult(idItemUL, listado, soloMenus){
+    $.each(listado, function(index, valor) {
+      var idmen = idItemUL + valor[0];
+      if ( soloMenus ){
+        idmen = idItemUL;
       }
+      $(idmen).append(`
+        <li id="ruta" class="sidebar-dropdown" onclick="verrutas(${valor[0]})">
+          <a href="#">
+            <i class="ti ti-car"></i>
+            Ver ${valor[1]}
+          </a>
+        </li>
+      `); 
+    });
+  }
+  
+  function verrutas(id) {
+    $.ajax({
+      type: 'GET',
+      url: '/api/puntrutas/'+ id,
+      contentType: 'application/json',
+      success: function (data, textStatus, jqXHR) {
+        // console.log(data.data[1]);
+          initMap(data.data[1]);
+      },
+      error: function (jqXHR, textStatus, error) {
+        console.log(jqXHR); console.log(textStatus); console.log(error);
+        if (jqXHR.status == 406) {
+            showMsgTemporal(4000, 'warning', 'ATENCIÓN', jqXHR.responseJSON.detail);
+        }
+        else {
+            showMsgTemporal(4000, 'error', 'ERROR', jqXHR.responseJSON.detail);
+        }
+      }
+    });
+  }
 </script>    
 {% endblock jsfiles %}
 </body>
