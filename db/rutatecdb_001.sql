@@ -39,19 +39,6 @@ CREATE TABLE IF NOT EXISTS rutas (
 	PRIMARY KEY(id)
 );
 
-CREATE TABLE IF NOT EXISTS rutguardadas (
-	id SERIAL NOT NULL,
-	user_id INT NOT NULL,
-	rutas_id INT NOT NULL,
-	PRIMARY KEY (id),
-	CONSTRAINT rutguardadas_user_id_fkey 
-	FOREIGN KEY (user_id) REFERENCES usuario (id)
-    ON UPDATE CASCADE ON DELETE RESTRICT,
-	CONSTRAINT rutguardadas_rutas_id_fkey 
-	FOREIGN KEY (rutas_id)REFERENCES rutas (id)
-    ON UPDATE CASCADE ON DELETE RESTRICT
-);
-
 CREATE TABLE IF NOT EXISTS puntrutas (
 	id SERIAL NOT NULL,
 	rutas_id INT NOT NULL,
@@ -59,7 +46,7 @@ CREATE TABLE IF NOT EXISTS puntrutas (
 	latitud VARCHAR (30),
 	PRIMARY KEY (id),
 	CONSTRAINT puntrutas_rutas_id_fkey 
-	FOREIGN KEY (rutas_id)REFERENCES rutas (id)
+	FOREIGN KEY (rutas_id) REFERENCES rutas (id)
     ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
@@ -127,8 +114,12 @@ SELECT setval ('rutas_id_seq',5,true);
 INSERT INTO historial(user_id, rutas_id, fecha) VALUES (1, 2, '25/10/2022');
 INSERT INTO historial(user_id, rutas_id, fecha) VALUES (1, 3, '25/10/2022');
 INSERT INTO historial(user_id, rutas_id, fecha) VALUES (1, 4, '25/10/2022');
+INSERT INTO historial(user_id, rutas_id, fecha) VALUES (6, 2, '25/10/2022');
+INSERT INTO historial(user_id, rutas_id, fecha) VALUES (6, 3, '25/10/2022');
+INSERT INTO historial(user_id, rutas_id, fecha) VALUES (6, 4, '25/10/2022');
 
--- Coordenadas de la RUTA 1
+
+-- Coordenadas de la RUTA 1 (Lng -Lat)
 INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.107379, 16.911392);
 INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.106655, 16.910853);
 INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.106601, 16.910771);

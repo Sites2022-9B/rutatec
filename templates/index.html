@@ -42,11 +42,6 @@
             color: black;
         }
         
-        .card-header,
-        .card-title {
-            font-weight: bold;
-            background: #467ae4;
-        }
         .hr-text {
           margin: .8rem 0;
         }
@@ -272,7 +267,7 @@
                         <!-- </button> -->
                       </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <a class="dropdown-item" id="Historial" href="#" ">
+                            <a class="dropdown-item" id="Historial" href="#" data-bs-toggle="modal" data-bs-target="#modal-historial" onclick="historial()">
                                 Historial
                             </a>  
                             <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-editarperfil" onclick="verMiPerfil()">
@@ -504,21 +499,59 @@
       </div>
     </div>
     <!-- Modal -->
-<div class="modal fade" id="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal fade bd-example-modal-lg" id="modal-historial" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel"> Historial de Rutas</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        <button type="button" id="Cmodal" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
         </button>
       </div>
-      <div class="modal-body">
-        <nav class="nav flex-column">
-          <a class="nav-link active" href="#">Rutas</a>
-        </nav>
-      </div>
-      <div class="modal-footer" id="cerrar">
-        <button type="button" class="btn btn-primary">Actualizar</button>
+      <div class="modal-body" id="Hbody">
+        <form id="form_elimH" class="needs-validation" autocomplete="off" novalidate>
+          <div class="table-responsive">
+            <table class="table table-vcenter">
+              <thead>
+                <tr class="text-center">
+                  <th>Borrar/Regresar</td>
+                  <th></th>
+                  <th></th>
+                  <th>Nombre de la ruta</td>
+                  <th>Fecha de consulta</td>
+                  <th>Ver ruta</td>
+                </tr>
+              </thead>
+              <tbody id="tabla-historial">
+                <tr id="ultima-fila-historial">
+                  <td>
+                      <button class="btn btn-danger btnDel_pas ti ti-trash" type="button" id="btnDel_pas" style="display:none"></button>  
+                      <button class="btn btn-warning  ti ti-arrow-back btnBack_pas" type="button" id="btnBack_pas" style="display:none"></button>         
+                  </td>
+                  <td>
+                    <input type="hidden" class="form-control oper" id="h_operacion" name="operacion[]" disabled value="BD" style="display:none">
+                  </td>
+                  <td>
+                    <input type="hidden" class="form-control id" id="id" name="id[]" disabled value="0" style="display:none">
+                  </td>
+                  <td>
+                    <input class="form-control  Rnombre text-center" type="text" id="h_nombre" name="nombre[]" disabled style="display:none">
+                  </td>
+                  <td>
+                    <input type="date" class="form-control fecha text-center" id="h_fecha" name="fecha[]" disabled style="display:none">
+                  </td>
+                  <td>
+                    <button class="btn btn-success btnVer_pas ti ti-car" type="button" id="btnVer_pas" style="display:none"></button>  
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="form-footer">
+              <button id="btnGuardarHistorial" name="btnGuardarHistorial" type="submit" class="btn btn-success w-10" disabled>
+              Guardar
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -622,10 +655,9 @@
     });
     $.each(data, function(index, cord){
       path.push({lat: parseFloat(cord[0]), lng: parseFloat(cord[1])});
-      
     });
     var color = "#" + Math.random().toString(16).slice(-3);
-    console.log('Coordenadas', path);
+    // console.log('Coordenadas', path);
     polyline = new google.maps.Polyline({
         path: path,
         geodesic: true,
@@ -637,15 +669,12 @@
     path = [];
   }
 
-  $('#Historial').attr('onClick','abrimodal()');
-
   function abrimodal(){
     $('#modal').modal('show');    
   }
 
 	$(document).ready(function(){
         showrutas();
-        // datosusuario();
       });
 
   function verMiPerfil(){
@@ -767,8 +796,6 @@
 
   function subrutas(idItemUL, listado, soloMenus){
     $.each(listado, function(index, valor) {
-      // console.log(valor);
-      // console.log('id de la ruta', valor[0]);
       var idmen = idItemUL + valor[0];
       if ( soloMenus ){
         idmen = idItemUL;
@@ -792,6 +819,9 @@
   
 
 <script>
+  var numRfilas = 0;
+  var idR = 0;
+
   function showrutas(){
     $.ajax({
       type: 'GET',
@@ -816,20 +846,10 @@
             subrutas('#sub_id_', data.data);
           }
         });
-        // showGoogleMaps();
-      },
-      error: function (jqXHR, textStatus, error) {
-            console.log(jqXHR); console.log(textStatus); console.log(error);
-            if (jqXHR.status == 406) {
-                showMsgTemporal(4000, 'warning', 'ATENCIÓN', jqXHR.responseJSON.detail);
-            }
-            else {
-                showMsgTemporal(4000, 'error', 'ERROR', jqXHR.responseJSON.detail);
-            }
-        }
+      }
     });
   }
-
+  
   function rutconsult(idItemUL, listado, soloMenus){
     $.each(listado, function(index, valor) {
       var idmen = idItemUL + valor[0];
@@ -853,7 +873,6 @@
       url: '/api/puntrutas/'+ id,
       contentType: 'application/json',
       success: function (data, textStatus, jqXHR) {
-        // console.log(data.data[1]);
           initMap(data.data[1]);
       },
       error: function (jqXHR, textStatus, error) {
@@ -867,6 +886,124 @@
       }
     });
   }
+  
+  function historial() {
+    $.ajax({
+      type: 'GET',
+      url: '/api/historial',
+      contentType: 'application/json',
+      success: function (data, textStatus, jqXHR) {
+        numRfilas = 0;
+        console.log(data.historial[1]);
+        $('.clonadoH').each(function(){$(this).remove();})
+        $.each(data.historial[1], function(index, valor){
+          ClonarH('BD');
+          $('#h_id'+numRfilas).val(valor[0]);
+          $('#h_oper'+numRfilas).val('BD');
+          $('#h_nombre'+numRfilas).val(valor[1]);
+          $('#h_fecha'+numRfilas).val(valor[2]);
+        });
+        
+      },
+      error: function (jqXHR, textStatus, error) {
+        console.log(jqXHR); console.log(textStatus); console.log(error);
+        if (jqXHR.status == 406) {
+            showMsgTemporal(4000, 'warning', 'ATENCIÓN', jqXHR.responseJSON.detail);
+        }
+        else {
+            showMsgTemporal(4000, 'error', 'ERROR', jqXHR.responseJSON.detail);
+        }
+      }
+    });
+  }
+
+  function ClonarH(nodb){
+    numRfilas ++;
+    let nvafilaPas = $('#ultima-fila-historial').clone(true, true);
+    nvafilaPas.attr('id', 'tr_'+ numRfilas);
+    $('#tabla-historial').find("tr:last").before(nvafilaPas); // Añadir nueva fila despues de la ultima
+    //Campos dentro de la tabla para clonar
+    nvafilaPas.find('.btnDel_pas').attr('id','btnDel_pas_'+numRfilas);
+    nvafilaPas.find('.btnBack_pas').attr('id','btnBack_pas_'+numRfilas);
+
+    nvafilaPas.find('.id').attr('id','h_id'+numRfilas);
+    nvafilaPas.find('.oper').attr('id','h_oper'+numRfilas);
+    nvafilaPas.find('.Rnombre').attr('id','h_nombre'+numRfilas);
+    nvafilaPas.find('.fecha').attr('id','h_fecha'+numRfilas);
+    nvafilaPas.find('.btnVer_pas').attr('id','btnVer_pas_'+numRfilas);
+
+    nvafilaPas.show(); // mostrar la fila
+
+    $('#h_id'+numRfilas).show().prop('disabled', false);
+    $('#h_oper'+numRfilas).show().prop('disabled', false);
+    $('#h_nombre'+numRfilas).show().prop('disabled', false);
+    $('#h_fecha'+numRfilas).show().prop('disabled', false);
+    $('#tr_'+numRfilas).addClass('clonadoH');
+
+    if (nobd = 'BD'){
+        $('#btnDel_pas_'+numRfilas).show();
+        $('#btnVer_pas_'+numRfilas).show();
+        $('#btnEliminar_pas_'+numRfilas).remove();
+    }
+  }
+  $('.btnVer_pas').click(function(e){
+    var idR = $(this).attr('id');
+    let numH = idR.substring(idR.lastIndexOf('_')+1);
+    var idH = $('#h_id'+ numH).val();
+    console.log('id del registro ', idH);
+    verrutas(idH);
+  });
+
+  $('.btnDel_pas').click(function(e){
+    let idBtnDelp = $(this).attr('id');
+    let numFilap = idBtnDelp.substring(idBtnDelp.lastIndexOf('_')+1);
+    $('#h_oper'+numFilap).val('Delete');
+    $('#btnDel_pas_'+numFilap).hide();
+    $('#btnBack_pas_'+numFilap).show();
+    $('#btnGuardarHistorial').prop('disabled', false);
+  });
+
+  $('.btnBack_pas').click(function( event ) {
+    let idBtnBackp = $(this).attr('id');
+    let numFilap = idBtnBackp.substring(idBtnBackp.lastIndexOf('_')+1);
+    $('#h_oper'+numFilap).val('BD');
+    $('#btnDel_pas_'+numFilap).show();
+    $('#btnBack_pas_'+numFilap).hide();
+    $('#btnGuardarHistorial').prop('disabled', true);
+  });
+
+  $("#form_elimH").submit(function(e) {
+          // preventing from page reload and default actions
+          e.preventDefault();
+          $("#form_elimH").addClass("was-validated");
+          formDado = "form_elimH";
+          if (!$(this)[0].checkValidity()){
+              $('#' + formDado + ' .invalid-feedback').each(function () {
+                  if ($(this)[0].offsetParent){
+                      $(this).parent().find("select, input, textarea").first().focus();
+                      return false; // exit each
+                  }
+              });
+              return;
+          }
+          let referencia = "Registrar.html_form_elimH"
+          let typeSubmit = "POST";
+          let url = "/api/historial/delete";
+          let msg = "Se eliminó correctamente la ruta"
+          let ret = "{{ret}}"
+
+            serializedData = JSON.stringify($(this).serializeJSON());
+            sendDatosToServer(referencia, url, typeSubmit, ret, serializedData).then((jqXHR) => {
+                showMsg(jqXHR[0], referencia, url, ret).then((result) => {
+                    if (jqXHR[0].status == 200){
+                        $("#form_elimH").removeClass("was-validated");
+                        $("#form_elimH").trigger('reset');
+                        historial();
+                    }
+                    return true;
+                });
+            });
+      });
 </script>    
 {% endblock jsfiles %}
 </body>
