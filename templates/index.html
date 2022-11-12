@@ -669,10 +669,6 @@
     path = [];
   }
 
-  function abrimodal(){
-    $('#modal').modal('show');    
-  }
-
 	$(document).ready(function(){
         showrutas();
       });
@@ -786,7 +782,9 @@
     sendDatosToServer(referencia, url, typeSubmit, ret, serializedData).then((jqXHR) => {
       showMsg(jqXHR[0], referencia, url, ret).then((result) => {
           if (jqXHR[0].status == 200){
-            
+            $("#perfil_password").removeClass("was-validated");
+            $('#perfil_password').trigger('reset');
+            // verMiPerfil()
           }
           return true;
       });
@@ -998,6 +996,7 @@
                     if (jqXHR[0].status == 200){
                         $("#form_elimH").removeClass("was-validated");
                         $("#form_elimH").trigger('reset');
+                        $('#btnGuardarHistorial').prop('disabled', true);
                         historial();
                     }
                     return true;

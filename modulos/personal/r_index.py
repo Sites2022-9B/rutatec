@@ -38,21 +38,13 @@ async def getrutas(session: Tuple[SessionData, str] = Depends(test_session), db:
 
 @router.post('/api/historial/delete')
 async def getrutas(Hdado: historialadd, session: Tuple[SessionData, str] = Depends(test_session), db: Session = Depends(database.get_db)):
-    trans = db.begin_nested()
-    try:
-        for i in range(len(Hdado.nombre)):
-            print('id registro', Hdado.id[i])
-            if(Hdado.operacion[i] == 'Delete'):
-                eliminarInst = db.query(Historial).filter(Historial.rutas_id == Hdado.id[i]).first()
-                print('Eliminar', eliminarInst.id, eliminarInst.user_id, eliminarInst.rutas_id, eliminarInst.fecha)
-                db.delete(eliminarInst)
-        trans.commit()
-        db.commit()
-    except BaseException as err: 
-        trans.rollback()
-        db.commit()
-        print(err)
-        raiseExceptionDataErr(f"Error al eliminar la ruta")
+
+    for i in range(len(Hdado.nombre)):
+        print('id registro', Hdado.id[i])
+        if(Hdado.operacion[i] == 'Delete'):
+            eliminarInst = db.query(Historial).filter(Historial.rutas_id == Hdado.id[i]).first()
+            print('Eliminar', eliminarInst.id, eliminarInst.user_id, eliminarInst.rutas_id, eliminarInst.fecha)
+            eliminarInst.delete(db)
     return {"message": "Success!!!"}  
 
 

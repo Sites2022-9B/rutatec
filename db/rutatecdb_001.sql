@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS historial (
 	CONSTRAINT historial_rutas_id_fkey 
 	FOREIGN KEY (rutas_id)REFERENCES rutas (id)
     ON UPDATE CASCADE ON DELETE RESTRICT,
-	CONSTRAINT rutguardadas_user_id_fkey 
+	CONSTRAINT historial_user_id_fkey 
 	FOREIGN KEY (user_id) REFERENCES usuario (id)
     ON UPDATE CASCADE ON DELETE RESTRICT
 );
@@ -114,9 +114,9 @@ SELECT setval ('rutas_id_seq',5,true);
 INSERT INTO historial(user_id, rutas_id, fecha) VALUES (1, 2, '25/10/2022');
 INSERT INTO historial(user_id, rutas_id, fecha) VALUES (1, 3, '25/10/2022');
 INSERT INTO historial(user_id, rutas_id, fecha) VALUES (1, 4, '25/10/2022');
-INSERT INTO historial(user_id, rutas_id, fecha) VALUES (6, 2, '25/10/2022');
-INSERT INTO historial(user_id, rutas_id, fecha) VALUES (6, 3, '25/10/2022');
-INSERT INTO historial(user_id, rutas_id, fecha) VALUES (6, 4, '25/10/2022');
+INSERT INTO historial(user_id, rutas_id, fecha) VALUES (3, 2, '25/10/2022');
+INSERT INTO historial(user_id, rutas_id, fecha) VALUES (3, 3, '25/10/2022');
+INSERT INTO historial(user_id, rutas_id, fecha) VALUES (3, 4, '25/10/2022');
 
 
 -- Coordenadas de la RUTA 1 (Lng -Lat)
