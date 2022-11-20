@@ -119,7 +119,7 @@ INSERT INTO historial(user_id, rutas_id, fecha) VALUES (3, 3, '25/10/2022');
 INSERT INTO historial(user_id, rutas_id, fecha) VALUES (3, 4, '25/10/2022');
 
 
--- Coordenadas de la RUTA 1 (Lng -Lat)
+-- Coordenadas de la RUTA 1 (Lng - Lat)
 INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.107379, 16.911392);
 INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.106655, 16.910853);
 INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.106601, 16.910771);
@@ -168,8 +168,48 @@ INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.095084, 16.90
 INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.093265, 16.909087);
 INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.091296, 16.909739);
 INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.090840, 16.908867);
-
-INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES (2, -92.105914, 16.912515);
-INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES (2, -92.105184, 16.912977);
-INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES (2, -92.105093, 16.912972);
-INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES (2, -92.104648, 16.912463);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.091950, 16.908487);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.094026, 16.907763);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.093822, 16.907207);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.093814, 16.907158);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.093709, 16.906912);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.093642, 16.906702);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.093516, 16.906370);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.093505, 16.906311);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.093369, 16.905988);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.093288, 16.905775);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.093124, 16.905346);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.093046, 16.905164);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.093025, 16.905097);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.092598, 16.903886);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.092572, 16.903825);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.092188, 16.902783);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.092094, 16.902608);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.091791, 16.902233);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.091448, 16.902046);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.091268, 16.901969);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.090995, 16.901884);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.090587, 16.901923);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.090000, 16.901938);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.089286, 16.901931);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.088793, 16.901902);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.088506, 16.901805);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.088015, 16.901471);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.087747, 16.901325);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.087607, 16.901297);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.087497, 16.901304);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.086062, 16.901515);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.085740, 16.901584);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.085123, 16.901689);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.084831, 16.901800);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.084434, 16.902013);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.084354, 16.902051);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.083993, 16.902094);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.083722, 16.902068);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.083362, 16.901958);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.083075, 16.901791);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.082233, 16.900900);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.082110, 16.900805);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.080715, 16.900343);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.080426, 16.900197);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.079524, 16.900648);

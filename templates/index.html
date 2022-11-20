@@ -650,7 +650,7 @@
 
   function initMap(data){
     var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 16,
+    zoom: 15,
     center: { lat: 16.90864465926933, lng: -92.08949481639918},
     });
     $.each(data, function(index, cord){
@@ -662,7 +662,7 @@
         path: path,
         geodesic: true,
         strokeColor: color,
-        strokeOpacity: 2.0,
+        strokeOpacity: .8,
         strokeWeight: 7,
     });
     polyline.setMap(map);
@@ -826,6 +826,7 @@
       url: '/api/sidebar',
       contentType: 'application/json',
       success: function (data, textStatus, jqXHR) {
+        console.log(data.data);
         // Se mandan a llamar las funciones del Sidebar para las rutas.
         menuappendmenu(data.data);
         subrutas('#sub_id_', data.data);
@@ -834,10 +835,10 @@
           if($('#buscadorR').val().length >= 1){
             console.log('se está escribiendo');
             var similar = listaR.filter(function(objeto){
-              return objeto[1].normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes($('#buscadorR').val().trim().toLowerCase());
+              return objeto[2].normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes($('#buscadorR').val().trim().toLowerCase());
             });
             $('#root').empty();
-            subrutas('#root', similar, true);
+            rutconsult('#root', similar, true);
           }else{
             $('#root').empty();
             menuappendmenu(data.data);
@@ -872,6 +873,8 @@
       contentType: 'application/json',
       success: function (data, textStatus, jqXHR) {
           initMap(data.data[1]);
+          showMsgToastTemp('top-end', 5000, 'success', 'Mostrando la ruta');
+          $('#close-sidebar').trigger('click');
       },
       error: function (jqXHR, textStatus, error) {
         console.log(jqXHR); console.log(textStatus); console.log(error);
@@ -944,6 +947,7 @@
         $('#btnEliminar_pas_'+numRfilas).remove();
     }
   }
+
   $('.btnVer_pas').click(function(e){
     var idR = $(this).attr('id');
     let numH = idR.substring(idR.lastIndexOf('_')+1);
@@ -1003,6 +1007,7 @@
                 });
             });
       });
+
 </script>    
 {% endblock jsfiles %}
 </body>
