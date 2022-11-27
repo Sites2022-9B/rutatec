@@ -645,15 +645,33 @@
     </script>
 
 <script>
-
   var path = [];
   var polyline;
 
-  function initMap(data){
+  $(document).ready(function(){
+    showrutas();
+    terminales();
+  });
+
+  function initMap(data, terminales){
     var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 15,
     center: { lat: 16.90864465926933, lng: -92.08949481639918},
     });
+    
+    $.each(terminales, function(index, termin){
+      latLng = new google.maps.LatLng(parseFloat(termin[1]), parseFloat(termin[2]));
+      var marker = new google.maps.Marker({
+        position: latLng,
+        map: map,
+        icon: {
+          url: '/static/autobus.png',
+          scaledSize:new google.maps.Size(32, 32)
+        },
+        title: termin[0]
+      });
+    });
+
     $.each(data, function(index, cord){
       path.push({lat: parseFloat(cord[0]), lng: parseFloat(cord[1])});
     });
@@ -670,9 +688,21 @@
     path = [];
   }
 
-	$(document).ready(function(){
-        showrutas();
-      });
+  function terminales(){
+    $.ajax({
+      type: 'GET',
+      url:"api/terminales",
+      contentType: 'aplication/json',
+      success:function (data, textStatus, jqXHR){
+        // console.log(data.data[0][0]);
+        initMap('', data.data);
+      },
+      error: function(jqXHR, textStatus, error) {
+          console.log(jqXHR); console.log(textStatus); console.log(error);
+          showMsgTemporal(4000, 'error', 'ERROR', jqXHR.responseJSON.detail);
+        }
+    })
+  }
 
   function verMiPerfil(){
     $.ajax({
@@ -700,7 +730,7 @@
           console.log(jqXHR); console.log(textStatus); console.log(error);
           showMsgTemporal(4000, 'error', 'ERROR', jqXHR.responseJSON.detail);
         }
-    })
+    });
     
   }
 
@@ -744,7 +774,6 @@
     });
   })
     
-
   function menuappendmenu(rutas){
     $.each(rutas, function(index, ruta){
       $('#root').append(`
@@ -816,7 +845,6 @@
   }
 </script>
   
-
 <script>
   var numRfilas = 0;
   var idR = 0;

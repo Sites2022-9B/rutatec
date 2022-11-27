@@ -18,6 +18,14 @@ async def getrutas(session: Tuple[SessionData, str] = Depends(test_session), db:
     print('rutas',rows)
     return{"metadata": metadata, "data": rows}
 
+@router.get('/api/terminales')
+async def getrutas(session: Tuple[SessionData, str] = Depends(test_session), db: Session = Depends(database.get_db)):
+    sql = """SELECT nombre, latitud, longitud FROM terminales"""
+    sqlParams = {}
+    metadata,rows = database.execSql(sql, sqlParams, False, True)
+    print('rutas',rows)
+    return{"metadata": metadata, "data": rows}
+
 @router.get('/api/puntrutas/{id_ruta}')
 async def getrutas(id_ruta: str ,session: Tuple[SessionData, str] = Depends(test_session), db: Session = Depends(database.get_db)):
     sql = 'SELECT latitud, longitud FROM puntrutas Where rutas_id =' + id_ruta

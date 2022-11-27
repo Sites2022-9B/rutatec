@@ -100,6 +100,15 @@ INSERT INTO municipio(nombre) VALUES ('Yajalón');
 INSERT INTO municipio(nombre) VALUES ('San Cristobal');
 INSERT INTO municipio(nombre) VALUES ('Tuxtla Gutiérrez');
 
+-- Datos de las terminales conforme a su municipio
+INSERT INTO terminales (munic_id, nombre, longitud, latitud) VALUES ( 1, 'ADO', -92.099955, 16.909281);
+INSERT INTO terminales (munic_id, nombre, longitud, latitud) VALUES ( 1, 'Ocosingo - San cristobal', -92.099759, 16.908794);
+INSERT INTO terminales (munic_id, nombre, longitud, latitud) VALUES ( 1, 'Ocosingo - Tonina', -92.089376, 16.908687);
+INSERT INTO terminales (munic_id, nombre, longitud, latitud) VALUES ( 1, 'Ocosingo - Oxchuc', -92.098484, 16.907435);
+INSERT INTO terminales (munic_id, nombre, longitud, latitud) VALUES ( 1, 'Ocosingo - Bachajón', -92.099884, 16.914542);
+INSERT INTO terminales (munic_id, nombre, longitud, latitud) VALUES ( 1, 'Ocosingo - Altamirano', -92.089208, 16.908727);
+INSERT INTO terminales (munic_id, nombre, longitud, latitud) VALUES ( 1, 'Ocosingo - Playas', -92.098480, 16.907823);
+
 --Usuarios de Unidades Responsables
 insert into "usuario" values (1,'Pablo','Ruiz', 'pablo@gmail.com', 'pablofabian123',false);
 insert into "usuario" values (2,'admin','pruebas', 'pablofabianruizconstantino@gmail.com', 'admin123',false);
@@ -110,16 +119,16 @@ SELECT setval ('usuario_id_seq', 4, true);
 -- Nombre y descripción de las rutas registradas
 INSERT INTO rutas VALUES(1,'RUTA1', 'Barrio Benito Juárez, Mercado centro, Ganadera, Deportiva, Magisterial');
 INSERT INTO rutas VALUES(2,'RUTA2', 'Mercado centro, Agroveterinaria Victoria, Escuela Primaria Felipe Carrillo Puerto, Hotel Posada San Luis, Secundaria Merie Curie, INE ocosingo, ADO, Soluciones integrales en Sistemas, La casa de las llantas, Barrio Primavera');
-INSERT INTO rutas VALUES(3,'RUTA3', 'Hotel imperial,  Parque central,  Hotel zepeda, Secundaria Merie Curie, INE ocosingo, ADO, Barrio San Sebastian.');
-SELECT setval ('rutas_id_seq'3,true);
+INSERT INTO rutas VALUES(3,'RUTA3', 'Mercado centro,  Parque central,  Hotel zepeda, Secundaria Merie Curie, INE ocosingo, ADO, Barrio San Sebastian.');
+SELECT setval ('rutas_id_seq', 3,true);
 
 -- Datos de prueba para la tabla historial
-INSERT INTO historial(user_id, rutas_id, fecha) VALUES (1, 2, '25/10/2022');
-INSERT INTO historial(user_id, rutas_id, fecha) VALUES (1, 3, '25/10/2022');
-INSERT INTO historial(user_id, rutas_id, fecha) VALUES (1, 4, '25/10/2022');
-INSERT INTO historial(user_id, rutas_id, fecha) VALUES (3, 2, '25/10/2022');
-INSERT INTO historial(user_id, rutas_id, fecha) VALUES (3, 3, '25/10/2022');
-INSERT INTO historial(user_id, rutas_id, fecha) VALUES (3, 4, '25/10/2022');
+INSERT INTO historial(user_id, rutas_id, fecha) VALUES (1, 2, '21/10/2022');
+INSERT INTO historial(user_id, rutas_id, fecha) VALUES (2, 3, '23/11/2022');
+INSERT INTO historial(user_id, rutas_id, fecha) VALUES (1, 1, '25/10/2022');
+INSERT INTO historial(user_id, rutas_id, fecha) VALUES (3, 2, '26/10/2022');
+INSERT INTO historial(user_id, rutas_id, fecha) VALUES (1, 3, '29/11/2022');
+INSERT INTO historial(user_id, rutas_id, fecha) VALUES (3, 1, '28/11/2022');
 
 -- Coordenadas de la RUTA 1 (Lng - Lat)
 INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.107379, 16.911392);
@@ -216,7 +225,7 @@ INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.080715, 16.90
 INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.080426, 16.900197);
 INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.079524, 16.900648);
 
--- coordenadas de la RUTA 2
+-- Coordenadas de la RUTA 2 (Lng - Lat)
 INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 2, -92.090258, 16.908437);
 INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 2, -92.090000, 16.908550);
 INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 2, -92.090247, 16.909125);
@@ -266,4 +275,29 @@ INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 2, -92.111914, 16.90
 INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 2, -92.112654, 16.906463);
 INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 2, -92.112912, 16.906422);
 INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 2, -92.113352, 16.906083);
+
+-- Coordenadas de la RUTA 3 (Lng - Lat)
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.090017, 16.909178);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.090262, 16.909075);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.090833, 16.908867);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.091992, 16.908488);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.094033, 16.907762);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.096229, 16.907031);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.096803, 16.908658);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.098633, 16.907960);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.097957, 16.906423);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.097882, 16.906146);
+
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.097850, 16.905946);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.097856, 16.905772);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.098828, 16.905439);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.099134, 16.906291);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.099617, 16.906158);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.100663, 16.905814);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.101634, 16.905454);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.103850, 16.904671);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.104676, 16.904507);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.105287, 16.904199);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.106559, 16.903932);
+INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 3, -92.106789, 16.903789);
 
