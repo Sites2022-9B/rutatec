@@ -639,6 +639,7 @@
     <script src="/dist/js/scripts.js"></script>
     <script src="/dist/js/counter.js"></script>
     <script src="/dist/libs/numeral-2.0.6/numeral.min.js"></script>
+    
     <script async defer 
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSG6rPxXP8g92omTJIJg1qCM2vUD_vK4o&callback=initMap">
     </script>
@@ -872,9 +873,9 @@
       url: '/api/puntrutas/'+ id,
       contentType: 'application/json',
       success: function (data, textStatus, jqXHR) {
-          initMap(data.data[1]);
-          showMsgToastTemp('top-end', 5000, 'success', 'Mostrando la ruta');
-          $('#close-sidebar').trigger('click');
+        initMap(data.data[1]);
+        showMsgToastTemp('top-end', 2000, 'success','Cargando la ruta');
+        $('#close-sidebar').trigger('click');
       },
       error: function (jqXHR, textStatus, error) {
         console.log(jqXHR); console.log(textStatus); console.log(error);
@@ -954,6 +955,7 @@
     var idH = $('#h_id'+ numH).val();
     console.log('id del registro ', idH);
     verrutas(idH);
+    $('#Cmodal').trigger('click');
   });
 
   $('.btnDel_pas').click(function(e){

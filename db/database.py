@@ -133,25 +133,25 @@ def execSql(sqlText: str, sqlParams={}, getCamposYValores: Boolean = False, getM
         print("Error de conexión con el servidor de BD:")
         print(err2)
 
-# Función para generar datos de prueba al iniciar la aplicación
-def execFirst(sqlText: str, table: str):
-    sqlText = sqlText.strip().replace("\n", " ")
-    with engine.connect() as con:
-        try:
-            if(table == 'procexeccont'):
-                validateQuery = 'SELECT COUNT(*) FROM ' + table
-                validateResp = con.execute(validateQuery).fetchone()
-                if(int(validateResp[0]) == 0):
-                    statement = text (sqlText)
-                    con.execute(statement)
-                    con.execute("INSERT INTO procexeccont(id, proc_id, numexec) VALUES(NULL, 1, 0)")
-            else:
-                validateQuery = 'SELECT * FROM ' + table + ' LIMIT 5'
-                validateResp = con.execute(validateQuery).fetchall()
-                # print(len(validateResp) < 10)
-                if (len(validateResp) < 5):
-                    statement = text (sqlText)
-                    con.execute(statement)
-            return table 
-        except  (OperationalError, ProgrammingError) as err :
-            print(err)
+# # Función para generar datos de prueba al iniciar la aplicación
+# def execFirst(sqlText: str, table: str):
+#     sqlText = sqlText.strip().replace("\n", " ")
+#     with engine.connect() as con:
+#         try:
+#             if(table == 'procexeccont'):
+#                 validateQuery = 'SELECT COUNT(*) FROM ' + table
+#                 validateResp = con.execute(validateQuery).fetchone()
+#                 if(int(validateResp[0]) == 0):
+#                     statement = text (sqlText)
+#                     con.execute(statement)
+#                     con.execute("INSERT INTO procexeccont(id, proc_id, numexec) VALUES(NULL, 1, 0)")
+#             else:
+#                 validateQuery = 'SELECT * FROM ' + table + ' LIMIT 5'
+#                 validateResp = con.execute(validateQuery).fetchall()
+#                 # print(len(validateResp) < 10)
+#                 if (len(validateResp) < 5):
+#                     statement = text (sqlText)
+#                     con.execute(statement)
+#             return table 
+#         except  (OperationalError, ProgrammingError) as err :
+#             print(err)

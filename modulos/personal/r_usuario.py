@@ -77,7 +77,7 @@ async def updateUserPwd(userDado:UserChangePwd, session: Tuple[SessionData, str]
     #solo el usuario logueado podrá modificar su cuenta.
     if (userAactualizar != None):
         if(Hash.verify(userAactualizar.contra, userDado.passwordactual)):
-            #si la contrasela actual en BD es igual a la del input
+            #si la contrasena actual en BD es igual a la del input
             if (len(userDado.passwordnvo) == 0 or userDado.passwordnvo != userDado.passwordnvo2):
                 raiseExceptionDataErr(f"Las contraseñas no coinciden")
             else:
