@@ -1,36 +1,121 @@
 <!DOCTYPE html>
-        <html lang="es">
-            <head>
-                <meta charset="utf-8">
-                <title>Sites RUETA-TEC</title>
-            </head>
-            <body style="background-color: #fff ">
-                <table style="max-width: 600px; padding: 10px; margin:0 auto; border-collapse: collapse;">
-                    <tr>
-                        <td style="background-color: #b7b7b7; text-align: left; padding: 0">
-                            <center>
-                                <img width="40%" style="display:block; margin: 1.5% 3%" src="../static/sites.png">
-                            </center>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="background-color: #002F5C">
-                            <div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif">
-                                <center><h2 style="color: #4edaf3; margin: 0 0 7px;">Solicitud para el cambio de contraseña</h2></center>
-                                <p style="color: #ffffff; margin: 2px; font-size: 15px"> Ha solicitado el cambio de contraseña para su cuenta de la plataforma RUTA-TEC, favor de <strong>confirmar</strong> en el siguiente botón y será redireccionado a un formulario.</p>
-                                <ul style="font-size: 15px;  margin: 10px 0; list-style:none; color: #ffffff">
-                                    <li>1. Cuenta con 10 minutos de valides para su token</li>
-                                    <li>2. Si usted no realizo esta acción ignore el correo</li>
-                                </ul>
-                                    <br>
-                                    <div style="width: 100%; text-align: center">
-                                        <a href="api/resetPassword/confirm-pwd/{emailDado.email}?referencia={newPBcrypt}" style="text-decoration: none; border-radius: 5px; padding: 11px 23px; color: white; background-color: #3498db">CONFIRMAR</a>	
-                                    </div><br>
-                                <p style="color: #b3b3b3; font-size: 12px; text-align: center; margin: 30px 0 0"> RUTA-TEC</p>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Geolocalizacion</title>
+	<style>
+        #map {
+          height: 100%;
+        }
+        html, body {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+      </style>
+</head>
+<body>
+    <!-- <button onclick="busqxPuntos()">Boton</button> -->
+    
+	<div id="map"></div>
+	<!-- <a class="" href="#" onclick="busqxPuntos()"> Buscar por puntos </a> -->
+    
+	<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSG6rPxXP8g92omTJIJg1qCM2vUD_vK4o&callback=initMap&v=weekly"></script>
+	<script>
 
-            </body>
-        </html>
+        function initMap(){
+            var puntos  = 0;
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 16,
+                center: { lat: 16.90864465926933, lng: -92.08949481639918},
+                // mapId:"6d19b279c4ce285c",
+            });
+
+            // function busqxPuntos(){
+                let infoWindow1 = new google.maps.InfoWindow({
+                    content: "Clic en el mapa para marcar origen",
+                    position: { lat: 16.90864465926933, lng: -92.08949481639918},
+                });
+                infoWindow1.open(map);
+                if (puntos < 2){
+                    map.addListener("click", (mapsMouseEvent) => {
+                        puntos+=1;
+                        console.log("puntos ", puntos);
+                        infoWindow1.close();
+                        infoWindow = new google.maps.InfoWindow({
+                            position: mapsMouseEvent.latLng,
+                        });
+                        marcarpunto(mapsMouseEvent.latLng);
+                    });
+                }
+
+                function marcarpunto(seleccion){
+                    console.log("lat", seleccion.lat());
+                    console.log("long", seleccion.lng());
+                    if (puntos == 1){
+                        infoWindow.setContent(
+                            "Origen"
+                        );
+                        infoWindow.open(map);
+
+                    }
+                    if (puntos==2){
+                        infoWindow.setContent(
+                            "Destino"
+                        );
+                        infoWindow.open(map);
+                        console.log("Buscando rutas");
+                        setTimeout(() => {
+                            // redireccionar a la página solicitada
+                            // initMap();
+                        }, 1000);
+                    }
+                }
+            // }
+        }
+
+
+                // const markerView = new google.maps.marker.AdvancedMarkerView({
+        //     map,
+        //     position: {lat: 16.90864465926933, lng: -92.08949481639918},
+        //     title: 'Mi ubicación',
+        // });
+
+        // markerView.addListener('click', ({domEvent, latLng}) => {
+        //     const {target} = domEvent;
+        //     // Handle the click event.
+        //     // ...
+        //     console.log("click a marker");
+        // });
+
+
+
+        // google.maps.event.addListener( map, "click", function(ele) {
+        //     // codigo que crea el marcador
+        //     new google.maps.Marker({
+        //         map: map
+        //     })
+        // });
+
+        
+
+        
+
+		// function cargarMap(){
+
+		// 	function localizacion(posicion){
+        //         var latitude = posicion.coords.latitude;
+        //         var longitude = posicion.coords.longitude;
+        //         console.log("longitud ", longitude);
+        //         console.log('latitud ', latitude)
+        //         var map = new google.maps.Map(document.getElementById('map'), {
+        //             zoom: 16,
+        //             center: { lat: latitude, lng: longitude},
+        //         });
+		// 	}
+        //     navigator.geolocation.getCurrentPosition(localizacion);
+        // }
+
+	</script>
+</body>
+</html>

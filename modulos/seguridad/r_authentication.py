@@ -341,9 +341,6 @@ async def forgot_password(request: Request, emailDado: ForgotPassword, responde:
                 <table style="max-width: 600px; padding: 10px; margin:0 auto; border-collapse: collapse;">
                     <tr>
                         <td style="background-color: #b7b7b7; text-align: left; padding: 0">
-                            <center>
-                                <img width="40%" style="display:block; margin: 1.5% 3%" src="https://drive.google.com/file/d/1s3Yc79ZueQz7mJpvMKgHaudNYFnTnP6G/view">
-                            </center>
                         </td>
                     </tr>
                     <tr>

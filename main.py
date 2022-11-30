@@ -81,7 +81,6 @@ def page_pruebas_html(request:Request):
     return templates.TemplateResponse( name="pruebas.html", context={ "request": request } )
 
 @app.get('/sites.png', include_in_schema=False)
-
 def logoutselva():
     return RedirectResponse(url='/static/sites.png')
 
