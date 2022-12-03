@@ -16,9 +16,7 @@ def initBDdatos():
         db : Session = next( get_db() )
         # Encriptar el pwd de todas las cuentas de usuario que no lo estén
         queryUsers = db.query(User).filter(User.isEncrypted == False)
-        print(queryUsers)
         listUsers : List[User] = queryUsers.all()
-        print("list user",listUsers)
         for user in listUsers:
             user.contra = Hash.bcrypt(user.contra)
             user.isEncrypted = True

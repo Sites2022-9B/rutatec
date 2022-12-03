@@ -15,6 +15,7 @@ from modulos.personal import r_usuario, r_index
 from modulos.shared_defs import getSettingsNombreEnvActivo
 from modulos.seguridad.models import User, UserResetPwd, Settings
 from modulos.personal.schemas import BusqFecha, lugarAdd, lugarUpdate
+import sentry_sdk
 
 
 
@@ -63,8 +64,6 @@ async def show_about_us(request:Request, session: Tuple[SessionData, str] = Depe
 
 @app.get("/popups")
 async def show_Main_Test_Popups():
-    # Esta prueba es una prueba sencilla para validar que es posible abrir nuevas ventanas 
-    # desde la página principal o subpáginas, en coordinación con el script
     html_content = """
     <html><body><h1>TEST: OK</h1></body>
         <script type="text/javascript">window.close();</script>
@@ -90,3 +89,12 @@ print (f"Presiona CTRL + click en: http://{HOST}:{PORT}")
 if __name__ == '__main__':
     import uvicorn
     uvicorn.run(app, host=HOST, port=PORT)
+
+sentry_sdk.init(
+    dsn="https://90a7cd6f5f104cffa312959b6c528f4e@o4504214988587008.ingest.sentry.io/4504214998614016",
+
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+    traces_sample_rate= 1.0
+)

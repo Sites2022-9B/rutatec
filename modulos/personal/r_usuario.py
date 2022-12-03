@@ -30,7 +30,6 @@ async def addusuario(usuDado: Addusuario , session: Tuple[SessionData, str] = De
                 correo = usuDado.correo,
                 contra = Hash.bcrypt(usuDado.contra)
             )
-            print('Datos registrados: ', datos.contra)
             datos.create(db)
             return {"message": "Success!!!"}
         raiseExceptionDataErr(f"El correo ya existe, favor de verificar")
@@ -41,17 +40,12 @@ async def getrutas(session: Tuple[SessionData, str] = Depends(test_session), db:
     sql = f"""SELECT * FROM rutas"""
     sqlParams = {}
     metadatas,rows = database.execSql(sql, sqlParams, False, True)
-    print('rutas', rows)
     return {"metadata" : metadatas, "data": rows}
-    # raiseExceptionNoAuth(f"Permiso denegado")
-    # raiseExceptionDataErr(observa)
 
 
 @router.get("/api/user/perfil")
 async def getPerfil(session: Tuple[SessionData, str] = Depends(test_session), db: Session = Depends(database.get_db)):
-    print("datos user",session[0])
     usuario =  db.query(User.id, User.nombre, User.correo, User.apellidos).filter(User.id == session[0].id).first()
-    print("usuario",usuario.correo)
     return usuario
 
 @router.post("/api/user/updateuser")
@@ -59,9 +53,7 @@ async def addusuario(userDado: UserUpdate , session: Tuple[SessionData, str] = D
     esValido, observa = userDado.isValid()
     if esValido:
         userAct = db.get(User, userDado.id)
-        print(userAct)
         existe_u = db.query(User).filter(or_(User.nombre == userDado.nombre, User.correo == userDado.correo)).filter(User.id != userDado.id).first()
-        print("existe usuario",existe_u)
         if existe_u == None: 
             datos = userDado.dict(exclude_unset=False)
             for key, value in datos.items():

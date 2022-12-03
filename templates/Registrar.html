@@ -22,6 +22,34 @@
     <style>
       #empresa * { color: rgb(238, 59, 46); }
       #app * { color: darkcyan; }
+
+    .Short, .NoPass {
+    width: 100%;
+    background-color: #dc3545;
+    margin-top: 5px;
+    height: 3px;
+    color: #dc3545;
+    font-weight: 500;
+    font-size: 12px;
+    }
+    .Weak {
+      width: 100%;
+      background-color: #ffc107;
+      margin-top: 5px;
+      height: 3px;
+      color: #ffc107;
+      font-weight: 500;
+      font-size: 12px;
+    }
+    .Strong, .Pass {
+      width: 100%;
+      background-color: #02fb13;
+      margin-top: 5px;
+      height: 3px;
+      color: #02fb13;
+      font-weight: 500;
+      font-size: 12px;
+    }
     </style>
   </head>
   <body class="antialiased border-top-wide border-primary d-flex flex-column">
@@ -85,7 +113,8 @@
                       <i class="ti ti-lock"></i>
                     </span>
                     <input type="password" id="password" name="contra" value="" class="form-control"  minlength="8" placeholder="Capture su Password" required/>
-                    <div class="invalid-feedback">Se deben de introducir mínimo 8 caracteres.</div>
+                    <!-- <div class="invalid-feedback">Se deben de introducir mínimo 8 caracteres.</div> -->
+                    <div id="strengthMessage"></div>
                   </div>
                 </div>
                 <div class="col-auto">
@@ -108,7 +137,7 @@
                       <i class="ti ti-lock"></i>
                     </span>
                     <input type="password" id="RepPassword" name="contra" value="" class="form-control"  minlength="8" placeholder="Repita su Password" required/>
-                    <div class="invalid-feedback">La contraseña debe ser igual a la ingresada anteriormente</div>
+                    <div id="mensaje_error"></div>
                   </div>
                 </div>
                 <div class="col-auto">
@@ -217,28 +246,74 @@
     <script src="/dist/libs/serializejson/jquery.serializejson.js"></script>
 
     <script>
+      var coincide;
+
       $(document).ready(function(){
-        // Test de apertura de popups y mensaje para activar popups
-        resp = testPopupsAlertaNavegacion();
+        resp = testPopupsAlertaNavegacion();  
       });
-      
+
+      var cambioDePass = function() {
+        var cont = $('#password').val();
+        var cont2 = $('#RepPassword').val();
+
+        if (cont !== cont2 || cont2.length == '' || cont.length == '') {
+          $('#mensaje_error').removeClass();
+          $('#mensaje_error').addClass('NoPass');
+          $('#mensaje_error').html('Las contraseñas no coinciden');
+          $('#RepPassword').removeClass('is-valid');
+          $('#RepPassword').addClass('is-invalid');
+          $('#btnAddCuenta').prop('disabled', true);
+        } else {
+          $('#mensaje_error').removeClass();
+          $('#RepPassword').removeClass('is-invalid');
+          $('#mensaje_error').addClass('Pass');
+          $('#RepPassword').addClass('is-valid');
+          $('#mensaje_error').html('Las contraseñas coinciden');
+          $('#btnAddCuenta').prop('disabled', false);
+        }
+
+      }
+
+      $("#password").on('keyup', cambioDePass);
+      $("#RepPassword").on('keyup', cambioDePass);
+
       $("#btniniciar").click(function (e) {
         window.location.replace('/login');
       });
 
-      $('#RepPassword').keyup(function(){
+      $('#password').keyup(function(){
         var password = $('#password').val();
-        var Rpassword = $('#RepPassword').val();
+        var strength = 0;
 
-        if( password != Rpassword || $('#Aprivac').prop('checked')){
-          $('#RepPassword').addClass('is-invalid');
-          $('#btnAddCuenta').prop('disabled', true);
-        }else{
-          $('#RepPassword').removeClass('is-invalid');
-          $('#RepPassword').addClass('is-valid');
-          $('#btnAddCuenta').prop('disabled', false);
+        if (password.length < 7) {
+          $('#strengthMessage').removeClass();
+          $('#strengthMessage').addClass('Short');
+          $('#strengthMessage').html('La contraseña es muy corta necesitas 8 caracteres');
+          $('#password').addClass('is-invalid');
+          return 'Too short'
+        }
+        if (password.length > 8 || password.length == 8) strength += 1
+        if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/)) strength += 1
+        if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
+        if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
+
+        if (strength < 2) {
+            $('#strengthMessage').removeClass();
+            $('#strengthMessage').addClass('Weak');
+            $('#strengthMessage').html('La contraseña es poco segura');
+            $('#password').addClass('is-invalid');
+            return 'Weak'
+        } else if (strength == 2) {
+            $('#strengthMessage').removeClass();
+            $('#strengthMessage').addClass('Strong');
+            $('#strengthMessage').html('La contraseña es segura');
+            $('#password').removeClass('is-invalid');
+            $('#password').addClass('is-valid');
+            return 'Strong'
         }
       });
+
+
 
       $("#createform").submit(function(e) {
           // preventing from page reload and default actions
