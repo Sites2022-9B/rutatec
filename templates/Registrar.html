@@ -157,6 +157,12 @@
                 Aviso de Privacidad
               </label>
             </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="terminC" style="border-color: black;">
+              <label class="form-check-label" for="flexSwitchCheckChecked" data-bs-toggle="modal" data-bs-target="#termino">
+                Términos y condiciones de uso
+              </label>
+            </div>
             <div class="form-footer">
               <div id="smsInvali"></div>
               <button type="submit" id="btnAddCuenta" class="btn btn-success w-100 mb-2">Registrate</button>
@@ -228,6 +234,47 @@
             <p style="text-align: justify;font-size: 15px; font-family: Arial;">
               Última actualización de este aviso de privacidad: 02/11/2022
             </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade modal-fade-scrollable" id="termino" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Términos y condiciones de uso del Software</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <h1 style="text-align: center;   font-family: Arial; font-weight: 50%;">Términos y Condiciones de uso del Software</h1>
+            <hr>
+            <p style="text-align: justify;font-size: 15px; font-family: Arial;">
+              Al acceder y utilizar este servicio, usted acepta y accede a estar obligado por los términos y disposiciones de este acuerdo. Asimismo, al utilizar estos servicios particulares, usted estará sujeto a toda regla o guía de uso correspondiente que se haya publicado para dichos servicios. Toda participación en este servicio constituirá la aceptación de este acuerdo. 
+              <br>
+              Esta página y sus componentes se ofrecen únicamente con fines informativos; esta página no se hace responsable de la exactitud, utilidad o disponibilidad de cualquier información que se transmita o ponga a disposición a través de la misma; no será responsable por cualquier error u omisión en dicha información.
+              <br>
+              Dentro de la aplicación se requieren algunos datos, como:<br>
+              - Datos personales de contacto
+              <br>
+              - Correo electrónico
+              <br>
+              Dichos serán utilizados para recabar información y hacer estadísticas de el uso de la aplicación en plazos cortos, medianos y largos, además de la total protección de dichos datos para evitar filtraciones o divulgaciones a agentes externos de la empresa.
+              <br>
+              <br>
+              La página y su contenido original, las características y la funcionalidad son propiedad de SITES (Sistemas Tecnológicos de la Selva) y están protegidos por derechos de autor internacionales, marcas registradas, patentes, secretos comerciales y demás leyes de propiedad intelectual o de derechos de propiedad.
+              <br>
+              Podemos cancelar su acceso a la página, sin causa o aviso, lo cual podrá resultar en la incautación y destrucción de toda la información que esté asociada con su cuenta. Todas las disposiciones de este acuerdo que, por su naturaleza, deban sobrevivir a la cancelación sobrevivirán a ella, incluyendo sin limitación, las disposiciones de propiedad, renuncias de garantía, indemnización y limitaciones de responsabilidad.
+              <br>
+              Podemos cancelar su acceso a la página, sin causa o aviso, lo cual podrá resultar en la incautación y destrucción de toda la información que esté asociada con su cuenta. Todas las disposiciones de este acuerdo que, por su naturaleza, deban sobrevivir a la cancelación sobrevivirán a ella, incluyendo sin limitación, las disposiciones de propiedad, renuncias de garantía, indemnización y limitaciones de responsabilidad.
+              <br>
+              La empresa se reserva el derecho de modificar estas condiciones de vez en cuando según lo considere oportuno; asimismo, el uso permanente de la página significa su aceptación de cualquier ajuste a tales términos. Si hay algún cambio en nuestra política de privacidad, anunciaremos en nuestra página principal y en otras páginas importantes de nuestro sitio que se han hecho tales cambios. Si hay algún cambio en nuestra página respecto a la manera en que usamos la información de identificación personal de nuestros clientes, enviaremos una notificación por correo electrónico o correo postal a aquellos que sean afectados por el cambio. Todo cambio en nuestra política de privacidad se publicará en nuestra página 30 días antes de que tales cambios ocurran. Por lo tanto, se le recomienda volver a leer esta declaración de manera regular.
+            </p>
+            <h4 style="text-align: center; font-family: Arial; font-weight: 50%;">El tipo de licencia de Software es libre</h4>
+            <br>
+            <h3 style="text-align: center; font-family: Arial; font-weight: 50%;"> Si no acepta cumplir con lo anterior, por favor, no lo utilice el sistema.</h3>
+            <br><br>
+            <h3 style="text-align: center; font-family: Arial; font-weight: 50%;">Atentamente Sistemas Tecnológicos de la Selva</h3>
+
           </div>
         </div>
       </div>
@@ -335,7 +382,7 @@
           let msg = "Se agregó correctamente el usuario"
           let ret = "{{ret}}"
 
-          if( $('#Aprivac').prop('checked')) {
+          if( $('#Aprivac').prop('checked') && $('#terminC').prop('checked')) {
             serializedData = JSON.stringify($(this).serializeJSON());
             sendDatosToServer(referencia, url, typeSubmit, ret, serializedData).then((jqXHR) => {
                 showMsg(jqXHR[0], referencia, url, ret).then((result) => {
@@ -348,7 +395,7 @@
           }else{
             swal.fire({
               icon: 'warning',
-              title: "Debes aceptar el aviso de privacidad para continuar",
+              title: "Debes aceptar el aviso de privacidad para continuar o los términos y condiciones de uso",
               showConfirmButton: true
             });
           }

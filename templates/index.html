@@ -796,7 +796,7 @@
         const horas    = (Math.floor(duration / 0xE10)).toString();
         const minutos  = (Math.floor(duration / 0x3C ) % 0x3C).toString();
         const tiempo = 'Llegarás a tu destino en: \n' + horas + ' Horas ' + minutos + ' Minutos '+ ' y ' + segundos + ' Segundos';
-        showMsgToastTemp('top-end', 6000, 'info', tiempo);
+        showMsgToastTemp('top-end', 3000, 'info', tiempo);
       }
     });
     polyline.setMap(map);
@@ -980,7 +980,8 @@
               return objeto[2].normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes($('#buscadorR').val().trim().toLowerCase());
             });
             $('#root').empty();
-            rutconsult('#root', similar, true);
+            menuappendmenu(similar);
+            subrutas('#sub_id_', similar);
           }else{
             $('#root').empty();
             menuappendmenu(data.data);
@@ -991,23 +992,6 @@
     });
   }
   
-  function rutconsult(idItemUL, listado, soloMenus){
-    $.each(listado, function(index, valor) {
-      var idmen = idItemUL + valor[0];
-      if ( soloMenus ){
-        idmen = idItemUL;
-      }
-      $(idmen).append(`
-        <li id="ruta" class="sidebar-dropdown" onclick="verrutas(${valor[0]})">
-          <a href="#">
-            <i class="ti ti-car"></i>
-            Ver ${valor[1]}
-          </a>
-        </li>
-      `); 
-    });
-  }
-  
   function verrutas(id) {
     $.ajax({
       type: 'GET',
@@ -1015,7 +999,6 @@
       contentType: 'application/json',
       success: function (data, textStatus, jqXHR) {
         initMap(data.data[1]);
-        // showMsgToastTemp('top-end', 2000, 'success','Cargando la ruta');
         $('#close-sidebar').trigger('click');
       },
       error: function (jqXHR, textStatus, error) {
