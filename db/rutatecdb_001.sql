@@ -110,11 +110,11 @@ INSERT INTO terminales (munic_id, nombre, longitud, latitud) VALUES ( 1, 'Ocosin
 INSERT INTO terminales (munic_id, nombre, longitud, latitud) VALUES ( 1, 'Ocosingo - Playas', -92.098480, 16.907823);
 
 --Usuarios de Unidades Responsables
-insert into "usuario" values (1,'Pablo','Ruiz', 'pablo@gmail.com', 'pablofabian123',false);
-insert into "usuario" values (2,'admin','pruebas', 'pablofabianruizconstantino@gmail.com', 'admin123',false);
-insert into "usuario" values (3,'Henry','Lopez', 'henry@gmail.com', 'HenryLV28',false);
-insert into "usuario" values (4,'Eduardo','Gutierrez', 'quique@gmail.com', 'EduardoG123',false);
-SELECT setval ('usuario_id_seq', 4, true);
+insert into "usuario" values (1,'Pablo','Ruiz', 'pablofabianruizconstantino@gmail.com', 'pablofabian123',false);
+-- insert into "usuario" values (2,'admin','pruebas', 'pablofabianruizconstantino@gmail.com', 'admin123',false);
+insert into "usuario" values (2,'Henry','Lopez', 'lopezvazquezhenry48@gmail.com', 'HenryLV28',false);
+insert into "usuario" values (3,'Eduardo','Gutierrez', 'eduardogutierrez3625@gmail.com', 'EduardoG123',false);
+SELECT setval ('usuario_id_seq', 3, true);
 
 -- Nombre y descripción de las rutas registradas
 INSERT INTO rutas VALUES(1,'RUTA 1', 'Barrio Benito Juárez, Mercado centro, Ganadera, Deportiva, Magisterial');
@@ -130,15 +130,15 @@ INSERT INTO rutas VALUES(10,'RUTA 10', 'Mercado centro, Pedal de Oro Chiapas, Ho
 INSERT INTO rutas VALUES(11,'RUTA 11', 'Mercado centro, Agroveterinaria Victoria, Escuela Primaria Felipe Carrillo Puerto, Hotel Posada San Luis, Secundaria Merie Curie, INE ocosingo, ADO, Soluciones integrales en Sistemas, La casa de las llantas, Barrio Primavera');
 
 
-SELECT setval ('rutas_id_seq', 10,true);
+SELECT setval ('rutas_id_seq', 11,true);
 
 -- Datos de prueba para la tabla historial
-INSERT INTO historial(user_id, rutas_id, fecha) VALUES (1, 2, '21/10/2022');
-INSERT INTO historial(user_id, rutas_id, fecha) VALUES (2, 3, '23/11/2022');
-INSERT INTO historial(user_id, rutas_id, fecha) VALUES (1, 1, '25/10/2022');
-INSERT INTO historial(user_id, rutas_id, fecha) VALUES (3, 2, '26/10/2022');
-INSERT INTO historial(user_id, rutas_id, fecha) VALUES (1, 3, '29/11/2022');
-INSERT INTO historial(user_id, rutas_id, fecha) VALUES (3, 1, '28/11/2022');
+INSERT INTO historial(user_id, rutas_id, fecha) VALUES (1, 2, '2022/10/21');
+INSERT INTO historial(user_id, rutas_id, fecha) VALUES (2, 3, '2022/10/23');
+INSERT INTO historial(user_id, rutas_id, fecha) VALUES (1, 1, '2022/10/25');
+INSERT INTO historial(user_id, rutas_id, fecha) VALUES (3, 2, '2022/10/26');
+INSERT INTO historial(user_id, rutas_id, fecha) VALUES (1, 3, '2022/10/29');
+INSERT INTO historial(user_id, rutas_id, fecha) VALUES (3, 1, '2022/10/28');
 
 -- Coordenadas de la RUTA 1 (Lng - Lat)
 INSERT INTO puntrutas(rutas_id, longitud, latitud) VALUES ( 1, -92.107379, 16.911392);

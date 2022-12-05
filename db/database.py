@@ -13,7 +13,8 @@ from db.base_class import Base
 # imported by Alembic
 #from modulos.seguridad.models import User, Rol, RolUser  # noqa
 
-SQLALCHEMY_DATABASE_URL = 'postgresql://rutatec:rutatec@localhost:5432/rutatec'
+# SQLALCHEMY_DATABASE_URL = 'postgresql://rutatec:rutatec@localhost:5432/rutatec'
+SQLALCHEMY_DATABASE_URL = 'postgresql://rutatec:Sites2022Ruta-Tec@181.215.242.86:10039/rutatec'
 Base = declarative_base()
 engine = create_engine(SQLALCHEMY_DATABASE_URL, pool_pre_ping=True, echo = False)
 SessionLocal = sessionmaker( bind=engine, autocommit=False, autoflush=False)

@@ -15,7 +15,8 @@ from modulos.personal import r_usuario, r_index
 from modulos.shared_defs import getSettingsNombreEnvActivo
 from modulos.seguridad.models import User, UserResetPwd, Settings
 from modulos.personal.schemas import BusqFecha, lugarAdd, lugarUpdate
-import sentry_sdk
+# import sentry_sdk
+
 
 
 
@@ -90,11 +91,11 @@ if __name__ == '__main__':
     import uvicorn
     uvicorn.run(app, host=HOST, port=PORT)
 
-sentry_sdk.init(
-    dsn="https://90a7cd6f5f104cffa312959b6c528f4e@o4504214988587008.ingest.sentry.io/4504214998614016",
+# sentry_sdk.init(
+#     dsn="https://90a7cd6f5f104cffa312959b6c528f4e@o4504214988587008.ingest.sentry.io/4504214998614016",
 
-    # Set traces_sample_rate to 1.0 to capture 100%
-    # of transactions for performance monitoring.
-    # We recommend adjusting this value in production.
-    traces_sample_rate= 1.0
-)
+#     # Set traces_sample_rate to 1.0 to capture 100%
+#     # of transactions for performance monitoring.
+#     # We recommend adjusting this value in production.
+#     traces_sample_rate= 1.0
+# )
