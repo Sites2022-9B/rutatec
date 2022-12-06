@@ -1,1 +1,1 @@
-gunicorn --worker-tmp-dir /dev/shm project.wsgiproject
+gunicorn --worker-tmp-dir /dev/shm project.wsgi project
