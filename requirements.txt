@@ -14,3 +14,4 @@ pandas
 xlrd
 xlwt
 flake8==3.8.4
+itsdangerous
